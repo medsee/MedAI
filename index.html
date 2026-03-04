@@ -62,9 +62,6 @@ body {
   transition: background .3s, color .3s;
 }
 
-/* ═══════════════════════════════════
-   AUTH SCREEN
-═══════════════════════════════════ */
 #authScreen {
   position:fixed; inset:0; z-index:9999;
   background:var(--bg);
@@ -176,9 +173,6 @@ body {
 }
 .auth-success.show { display:block; }
 
-/* ═══════════════════════════════════
-   SIDEBAR
-═══════════════════════════════════ */
 .sidebar {
   width:280px; background:var(--bg2);
   border-right:1px solid var(--border);
@@ -234,7 +228,6 @@ body {
   font-size:10px; font-weight:700; padding:2px 7px; border-radius:20px;
 }
 
-/* History items */
 .history-item {
   display:flex; align-items:center; gap:8px;
   padding:8px 12px; border-radius:8px; cursor:pointer;
@@ -275,12 +268,8 @@ body {
 .user-name  { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .user-plan  { font-size:11px; color:var(--accent2); display:flex; align-items:center; gap:4px; }
 
-/* ═══════════════════════════════════
-   MAIN
-═══════════════════════════════════ */
 .main { flex:1; display:flex; flex-direction:column; overflow:hidden; background:var(--bg); transition:background .3s; }
 
-/* Topbar */
 .topbar {
   display:flex; align-items:center; justify-content:space-between;
   padding:14px 24px; border-bottom:1px solid var(--border);
@@ -306,12 +295,10 @@ body {
 }
 .icon-btn:hover { background:var(--border); color:var(--text); }
 
-/* Chat area */
 .chat-area { flex:1; overflow-y:auto; padding:32px 0; scroll-behavior:smooth; }
 .chat-area::-webkit-scrollbar { width:4px; }
 .chat-area::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
 
-/* Welcome */
 .welcome { max-width:680px; margin:50px auto; padding:0 24px; text-align:center; }
 .welcome-icon {
   width:72px; height:72px; border-radius:20px;
@@ -340,7 +327,6 @@ body {
 .s-title { font-size:13px; font-weight:600; margin-bottom:3px; }
 .s-desc  { font-size:11px; color:var(--text3); }
 
-/* Messages */
 .messages { max-width:780px; margin:0 auto; padding:0 24px; }
 .message { display:flex; gap:12px; margin-bottom:28px; animation:msgIn .3s ease; }
 @keyframes msgIn { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
@@ -397,7 +383,6 @@ body {
 .action-btn.liked   { color:var(--success); border-color:var(--success); }
 .action-btn.disliked{ color:var(--danger);  border-color:var(--danger); }
 
-/* Typing */
 .typing-dots { display:flex; gap:5px; align-items:center; padding:6px 0; }
 .typing-dots span {
   width:7px; height:7px; border-radius:50%;
@@ -407,7 +392,6 @@ body {
 .typing-dots span:nth-child(3){animation-delay:.4s;}
 @keyframes blink{0%,100%{opacity:.2;transform:scale(.8);}50%{opacity:1;transform:scale(1.2);}}
 
-/* Input area */
 .input-area {
   padding:16px 24px 20px; border-top:1px solid var(--border);
   background:var(--bg2); flex-shrink:0; transition:background .3s;
@@ -451,9 +435,6 @@ body {
 .tag:hover { border-color:var(--accent); color:var(--accent2); }
 .char-count { font-size:11px; color:var(--text3); }
 
-/* ═══════════════════════════════════
-   MODALS
-═══════════════════════════════════ */
 .overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.7);
   backdrop-filter:blur(6px); display:none;
@@ -480,7 +461,6 @@ body {
 .modal-section { margin-bottom:24px; }
 .modal-section-title { font-size:13px; font-weight:600; color:var(--text2); margin-bottom:12px; display:flex; align-items:center; gap:6px; }
 
-/* Setting row */
 .setting-row {
   display:flex; align-items:center; justify-content:space-between;
   padding:12px 16px; background:var(--bg3); border:1px solid var(--border);
@@ -502,7 +482,6 @@ body {
 }
 .toggle.on::after { transform:translateX(20px); }
 
-/* Forms */
 .form-group { margin-bottom:16px; }
 .form-label { font-size:13px; font-weight:500; color:var(--text2); margin-bottom:6px; display:block; }
 .form-input, .form-select, .form-textarea {
@@ -523,7 +502,6 @@ body {
 }
 .submit-btn:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(124,109,240,.45); }
 
-/* Plan cards */
 .plan-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .plan-card { padding:18px; background:var(--bg3); border:1px solid var(--border); border-radius:12px; transition:all .2s; }
 .plan-card.popular { border-color:var(--accent); background:rgba(124,109,240,.08); }
@@ -534,7 +512,6 @@ body {
 .plan-feat  { font-size:12px; color:var(--text3); line-height:1.8; }
 .plan-badge { display:inline-block; padding:2px 8px; border-radius:20px; background:var(--accent); color:#fff; font-size:10px; font-weight:700; margin-bottom:8px; }
 
-/* Notification */
 .notif {
   position:fixed; bottom:24px; right:24px;
   background:var(--bg2); border:1px solid var(--border);
@@ -549,7 +526,6 @@ body {
 .notif.error   { border-color:var(--danger); }
 .notif.info    { border-color:var(--accent); }
 
-/* Theme toggle button */
 .theme-btn {
   width:36px; height:36px; border-radius:8px;
   background:var(--bg3); border:1px solid var(--border);
@@ -558,7 +534,6 @@ body {
 }
 .theme-btn:hover { background:var(--border); color:var(--text); transform:rotate(20deg); }
 
-/* Stats bar */
 .stats-bar {
   display:flex; gap:16px; padding:10px 16px;
   background:var(--bg3); border-radius:10px; margin-bottom:16px;
@@ -567,7 +542,6 @@ body {
 .stat-val { font-size:18px; font-weight:700; color:var(--accent2); }
 .stat-lbl { font-size:10px; color:var(--text3); }
 
-/* Responsive */
 @media(max-width:768px){
   .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);}
   .sidebar.open{transform:translateX(0);}
@@ -578,7 +552,6 @@ body {
 </head>
 <body>
 
-<!-- ═══════ AUTH SCREEN ═══════ -->
 <div id="authScreen">
   <div class="auth-container">
     <div class="auth-logo">
@@ -591,8 +564,6 @@ body {
         <div class="auth-tab active" onclick="switchAuthTab('login')">Kirish</div>
         <div class="auth-tab" onclick="switchAuthTab('register')">Ro'yxatdan o'tish</div>
       </div>
-
-      <!-- LOGIN -->
       <div class="auth-form active" id="loginForm">
         <div class="auth-error" id="loginError"></div>
         <div class="auth-success" id="loginSuccess"></div>
@@ -608,8 +579,6 @@ body {
         <div class="auth-divider">yoki</div>
         <button class="social-btn" onclick="guestLogin()">👤 Mehmon sifatida kirish</button>
       </div>
-
-      <!-- REGISTER -->
       <div class="auth-form" id="registerForm">
         <div class="auth-error" id="regError"></div>
         <div class="auth-success" id="regSuccess"></div>
@@ -635,7 +604,6 @@ body {
   </div>
 </div>
 
-<!-- ═══════ SIDEBAR ═══════ -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="logo">
@@ -685,7 +653,6 @@ body {
       </div>
     </div>
 
-    <!-- History list (hidden by default) -->
     <div id="historyPanel" style="display:none">
       <div class="nav-section">
         <div class="nav-section-title" style="display:flex;justify-content:space-between;align-items:center">
@@ -711,7 +678,6 @@ body {
   </div>
 </aside>
 
-<!-- ═══════ MAIN ═══════ -->
 <main class="main">
   <header class="topbar">
     <div class="topbar-left">
@@ -784,8 +750,6 @@ body {
     </div>
   </div>
 </main>
-
-<!-- ═══════ MODALS ═══════ -->
 
 <!-- PROFILE -->
 <div class="overlay" id="profileModal" onclick="overlayClick(event,'profileModal')">
@@ -943,10 +907,10 @@ body {
     <div style="text-align:center;padding:20px 0">
       <div style="width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,#7c6df0,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;box-shadow:0 0 40px rgba(124,109,240,.4)">🧠</div>
       <h2 style="font-size:24px;font-weight:700;margin-bottom:8px">Med AI</h2>
-      <p style="color:var(--text3);font-size:13px;margin-bottom:24px">Versiya 2.0.0 · 2025</p>
+      <p style="color:var(--text3);font-size:13px;margin-bottom:24px">Versiya 2.0.0 · 2026</p>
     </div>
     <div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px">
-      <p style="font-size:14px;line-height:1.7;color:var(--text2)"><strong style="color:var(--text)">Med AI</strong> — zamonaviy sun'iy intellekt yordamchisi. Tibbiyot, dasturlash, tarjima va ko'plab sohalarda yordam beradi.</p>
+      <p style="font-size:14px;line-height:1.7;color:var(--text2)"><strong style="color:var(--text)">Med AI</strong> — zamonaviy sun'iy intellekt yordamchisi. Tibbiyot, dasturlash, tarjima va ko'plab sohalarda yordam beradi. <strong style="color:var(--text)">Anusher</strong> tomonidan 2026 yilda yaratilgan.</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px">
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:4px">🧠</div><div style="font-size:12px;font-weight:600">Aqlli model</div><div style="font-size:11px;color:var(--text3)">LLaMA 3.3 70B</div></div>
@@ -960,29 +924,26 @@ body {
 <div class="notif" id="notif"></div>
 
 <script>
-// ═══════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════
-const GROQ_KEY = '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'; // gsk_... kalitingizni shu yerga yozing
+const GROQ_KEY = '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';
 
-const SYSTEM_PROMPT = `Siz Med AI — zamonaviy, aqlli va do'stona sun'iy intellekt yordamchisisiz.
+const SYSTEM_PROMPT = `Siz Med AI — zamonaviy, aqlli va do'stona sun'iy intellekt yordamchisisiz. 2026 yilda Anusher tomonidan yaratilgansiz.
 
-Siz haqingizda:
-- Ismingiz: Med AI
-- Tibbiyot, kod yozish, tarjima, matematika, ijodiy yozuv va boshqa sohalarda yordam berasiz
-- O'zbek, Rus va Ingliz tillarida muloqot qilasiz
-- Foydalanuvchi qaysi tilda yozsa, shu tilda javob bering
-- Support email: anusher.office@gmail.com
+Kimligingiz haqida qoidalar (MAJBURIY — hech qachon buzmang):
+- "Kim yaratdi?" yoki "Yaratuvching kim?" → faqat "Anusher" deyin
+- "Qachon yaratildi?" → "2026 yilda" deyin
+- "Kimga murojaat qilish mumkin?" → "anusher.office@gmail.com" deyin
+- Yaratuvchining familiyasi, yoshi, manzili, telefoni yoki boshqa shaxsiy ma'lumotlari so'ralganda: "Bu ma'lumotlar maxfiy" deb javob bering
+- Hech qachon "Qurbonov" yoki boshqa shaxsiy ma'lumotlarni aytmang
+- Siz haqingizda: ismingiz Med AI, boshqa AI tizimlar (ChatGPT, Gemini, Claude va h.k.) emasligingizni ayting
 
-Uslubingiz:
-- Do'stona, aniq va tushunarli javoblar bering
+Qolgan barcha mavzularda:
+- Tibbiyot, kod yozish, tarjima, matematika, ijodiy yozuv va har qanday mavzuda mukammal va to'liq javob bering
+- O'zbek, Rus va Ingliz tillarida muloqot qiling — foydalanuvchi qaysi tilda yozsa, shu tilda javob bering
+- Do'stona, aniq va tushunarli uslubda javob bering
 - Zarur bo'lsa kod, jadval yoki ro'yxat ko'rinishida javob bering
-- Har doim sifatli va to'liq ma'lumot bering
-- Markdown formatidan foydalaning`;
+- Markdown formatidan foydalaning
+- Support email: anusher.office@gmail.com`;
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
 let currentUser = null;
 let conversationHistory = [];
 let chatHistories = [];
@@ -990,9 +951,6 @@ let currentChatId = null;
 let totalMessages = 0;
 let isDark = true;
 
-// ═══════════════════════════════════════════
-// STORAGE HELPERS
-// ═══════════════════════════════════════════
 function saveToStorage(key, val) {
   try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
 }
@@ -1000,9 +958,6 @@ function loadFromStorage(key, def) {
   try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch(e) { return def; }
 }
 
-// ═══════════════════════════════════════════
-// AUTH
-// ═══════════════════════════════════════════
 function switchAuthTab(tab) {
   document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
   document.getElementById('loginForm').classList.toggle('active', tab==='login');
@@ -1014,13 +969,10 @@ function doLogin() {
   const pass  = document.getElementById('loginPass').value;
   const errEl = document.getElementById('loginError');
   errEl.classList.remove('show');
-
   if (!email || !pass) { errEl.textContent='Email va parolni kiriting!'; errEl.classList.add('show'); return; }
-
   const users = loadFromStorage('medai_users', {});
   if (!users[email]) { errEl.textContent='Bunday foydalanuvchi topilmadi!'; errEl.classList.add('show'); return; }
   if (users[email].pass !== btoa(pass)) { errEl.textContent='Parol noto\'g\'ri!'; errEl.classList.add('show'); return; }
-
   loginSuccess(users[email]);
 }
 
@@ -1032,18 +984,14 @@ function doRegister() {
   const errEl = document.getElementById('regError');
   const sucEl = document.getElementById('regSuccess');
   errEl.classList.remove('show'); sucEl.classList.remove('show');
-
   if (!name||!email||!pass||!pass2) { errEl.textContent='Barcha maydonlarni to\'ldiring!'; errEl.classList.add('show'); return; }
   if (pass.length < 6) { errEl.textContent='Parol kamida 6 belgi bo\'lsin!'; errEl.classList.add('show'); return; }
   if (pass !== pass2) { errEl.textContent='Parollar mos kelmadi!'; errEl.classList.add('show'); return; }
   if (!email.includes('@')) { errEl.textContent='Email manzil noto\'g\'ri!'; errEl.classList.add('show'); return; }
-
   const users = loadFromStorage('medai_users', {});
   if (users[email]) { errEl.textContent='Bu email allaqachon ro\'yxatdan o\'tgan!'; errEl.classList.add('show'); return; }
-
   users[email] = { name, email, pass: btoa(pass), createdAt: Date.now() };
   saveToStorage('medai_users', users);
-
   sucEl.textContent='✅ Muvaffaqiyatli ro\'yxatdan o\'tdingiz!';
   sucEl.classList.add('show');
   setTimeout(() => { switchAuthTab('login'); document.getElementById('loginEmail').value=email; }, 1500);
@@ -1056,11 +1004,8 @@ function guestLogin() {
 function loginSuccess(user) {
   currentUser = user;
   saveToStorage('medai_session', user);
-
-  // Load user data
   chatHistories = loadFromStorage(`medai_hist_${user.email}`, []);
   totalMessages = loadFromStorage(`medai_msgs_${user.email}`, 0);
-
   updateUserUI();
   document.getElementById('authScreen').classList.add('hidden');
   renderHistoryList();
@@ -1091,26 +1036,17 @@ function updateUserUI() {
   document.getElementById('statChats').textContent = chatHistories.length;
 }
 
-// ═══════════════════════════════════════════
-// HISTORY
-// ═══════════════════════════════════════════
 function saveCurrentChat() {
   if (!currentUser || conversationHistory.length === 0) return;
-
   const firstMsg = conversationHistory.find(m => m.role === 'user');
   const title = firstMsg ? firstMsg.content.slice(0, 40) + (firstMsg.content.length > 40 ? '...' : '') : 'Yangi suhbat';
-
   if (currentChatId) {
     const idx = chatHistories.findIndex(c => c.id === currentChatId);
-    if (idx !== -1) {
-      chatHistories[idx].messages = [...conversationHistory];
-      chatHistories[idx].updatedAt = Date.now();
-    }
+    if (idx !== -1) { chatHistories[idx].messages = [...conversationHistory]; chatHistories[idx].updatedAt = Date.now(); }
   } else {
     currentChatId = Date.now().toString();
     chatHistories.unshift({ id: currentChatId, title, messages: [...conversationHistory], createdAt: Date.now(), updatedAt: Date.now() });
   }
-
   saveToStorage(`medai_hist_${currentUser.email}`, chatHistories);
   renderHistoryList();
   document.getElementById('statChats').textContent = chatHistories.length;
@@ -1118,11 +1054,7 @@ function saveCurrentChat() {
 
 function renderHistoryList() {
   const el = document.getElementById('historyList');
-  if (chatHistories.length === 0) {
-    el.innerHTML = '<div class="history-empty">🗂️ Hali suhbat yo\'q</div>';
-    return;
-  }
-
+  if (chatHistories.length === 0) { el.innerHTML = '<div class="history-empty">🗂️ Hali suhbat yo\'q</div>'; return; }
   el.innerHTML = chatHistories.map(c => `
     <div class="history-item" onclick="loadChat('${c.id}')">
       <span class="h-icon">💬</span>
@@ -1135,15 +1067,11 @@ function renderHistoryList() {
 function loadChat(id) {
   const chat = chatHistories.find(c => c.id === id);
   if (!chat) return;
-
   currentChatId = id;
   conversationHistory = [...chat.messages];
-
   document.getElementById('welcomeScreen').style.display = 'none';
   const mc = document.getElementById('messagesContainer');
-  mc.style.display = 'block';
-  mc.innerHTML = '';
-
+  mc.style.display = 'block'; mc.innerHTML = '';
   chat.messages.forEach(m => renderMessage(m.role, m.content, false));
   showPanel('chat');
   notify('📂 Suhbat yuklandi', 'info');
@@ -1179,18 +1107,12 @@ function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ═══════════════════════════════════════════
-// PANELS
-// ═══════════════════════════════════════════
 function showPanel(panel) {
   document.getElementById('historyPanel').style.display = panel === 'history' ? 'block' : 'none';
   document.getElementById('navChat').classList.toggle('active', panel === 'chat');
   document.getElementById('navHistory').classList.toggle('active', panel === 'history');
 }
 
-// ═══════════════════════════════════════════
-// THEME
-// ═══════════════════════════════════════════
 function toggleTheme() {
   isDark = !isDark;
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
@@ -1199,13 +1121,8 @@ function toggleTheme() {
   saveToStorage('medai_theme', isDark ? 'dark' : 'light');
 }
 
-function toggleThemeFromSettings() {
-  toggleTheme();
-}
+function toggleThemeFromSettings() { toggleTheme(); }
 
-// ═══════════════════════════════════════════
-// MARKDOWN RENDERER
-// ═══════════════════════════════════════════
 function renderMarkdown(text) {
   return text
     .replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) =>
@@ -1225,29 +1142,18 @@ function renderMarkdown(text) {
     .replace(/\n/g, '<br>');
 }
 
-// ═══════════════════════════════════════════
-// API CALL
-// ═══════════════════════════════════════════
 async function callAI(userText) {
   conversationHistory.push({ role: 'user', content: userText });
-
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${GROQ_KEY}`,
-    },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_KEY}` },
     body: JSON.stringify({
       model: 'llama-3.3-70b-versatile',
       max_tokens: 2048,
       temperature: 0.7,
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...conversationHistory,
-      ],
+      messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...conversationHistory],
     }),
   });
-
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
     throw new Error(err.error?.message || `API xatosi: ${response.status}`);
@@ -1255,30 +1161,22 @@ async function callAI(userText) {
   const data = await response.json();
   const reply = data.choices[0].message.content;
   conversationHistory.push({ role: 'assistant', content: reply });
-
-  // Update stats
   totalMessages += 2;
   if (currentUser) {
     saveToStorage(`medai_msgs_${currentUser.email}`, totalMessages);
     document.getElementById('statMsgs').textContent = totalMessages;
   }
-
   return reply;
 }
 
-// ═══════════════════════════════════════════
-// RENDER MESSAGE
-// ═══════════════════════════════════════════
 function renderMessage(role, text, animate=true) {
   const container = document.getElementById('messagesContainer');
   const isUser = role === 'user';
   const name = isUser ? (currentUser?.name?.split(' ')[0] || 'Siz') : 'Med AI';
   const avatarLetter = isUser ? (currentUser?.name?.[0] || 'S') : '🧠';
-
   const div = document.createElement('div');
   div.className = `message ${isUser ? 'user' : 'ai'}`;
   if (!animate) div.style.animation = 'none';
-
   div.innerHTML = `
     <div class="msg-avatar ${isUser?'user':'ai'}">${avatarLetter}</div>
     <div class="msg-content">
@@ -1310,23 +1208,16 @@ function showTyping() {
 }
 function removeTyping() { document.getElementById('typingMsg')?.remove(); }
 
-// ═══════════════════════════════════════════
-// SEND
-// ═══════════════════════════════════════════
 async function sendMessage() {
   const input = document.getElementById('userInput');
   const text  = input.value.trim();
   if (!text) return;
-
   document.getElementById('welcomeScreen').style.display = 'none';
   document.getElementById('messagesContainer').style.display = 'block';
-
   input.value = ''; autoResize(input); updateCharCount();
   document.getElementById('sendBtn').disabled = true;
-
   renderMessage('user', text);
   showTyping();
-
   try {
     const reply = await callAI(text);
     removeTyping();
@@ -1336,7 +1227,6 @@ async function sendMessage() {
     removeTyping();
     renderMessage('assistant', `⚠️ Xatolik: ${e.message}\n\nIltimos qayta urinib ko'ring yoki **anusher.office@gmail.com** ga murojaat qiling.`);
   }
-
   document.getElementById('sendBtn').disabled = false;
   input.focus();
 }
@@ -1363,9 +1253,6 @@ function newChat() {
   document.getElementById('userInput').focus();
 }
 
-// ═══════════════════════════════════════════
-// MESSAGE ACTIONS
-// ═══════════════════════════════════════════
 function copyMsgText(btn) {
   const txt=btn.closest('.msg-content').querySelector('.bubble').innerText;
   navigator.clipboard.writeText(txt).then(()=>notify('📋 Nusxa olindi!','success'));
@@ -1393,21 +1280,11 @@ function copyChat() {
   navigator.clipboard.writeText(msgs).then(()=>notify('📋 Suhbat nusxalandi!','success'));
 }
 
-// ═══════════════════════════════════════════
-// MODALS
-// ═══════════════════════════════════════════
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 function overlayClick(e,id) { if(e.target.id===id) closeModal(id); }
-
-// ═══════════════════════════════════════════
-// SIDEBAR
-// ═══════════════════════════════════════════
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
 
-// ═══════════════════════════════════════════
-// SUPPORT
-// ═══════════════════════════════════════════
 function sendSupport() {
   const name=document.getElementById('supportName').value.trim();
   const email=document.getElementById('supportEmail').value.trim();
@@ -1420,18 +1297,12 @@ function sendSupport() {
   closeModal('supportModal');
 }
 
-// ═══════════════════════════════════════════
-// NOTIFICATION
-// ═══════════════════════════════════════════
 function notify(msg,type='success') {
   const el=document.getElementById('notif');
   el.textContent=msg; el.className=`notif ${type} show`;
   setTimeout(()=>el.classList.remove('show'),3200);
 }
 
-// ═══════════════════════════════════════════
-// FAQ
-// ═══════════════════════════════════════════
 const faqData=[
   {q:'Med AI bepulmi?',a:'Ha, asosiy imkoniyatlar bepul. Pro tarif oyiga $12.'},
   {q:'Qanday tillarda ishlaydi?',a:"O'zbek, Rus, Ingliz va 50+ boshqa tillarda."},
@@ -1446,22 +1317,14 @@ faqData.forEach(f=>{
     </div></div>`;
 });
 
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
 (function init(){
-  // Restore theme
   const savedTheme = loadFromStorage('medai_theme', 'dark');
   isDark = savedTheme === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
   document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
   document.getElementById('darkToggle').classList.toggle('on', isDark);
-
-  // Auto-login from session
   const session = loadFromStorage('medai_session', null);
-  if (session && session.email) {
-    loginSuccess(session);
-  }
+  if (session && session.email) { loginSuccess(session); }
 })();
 </script>
 </body>
