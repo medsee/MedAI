@@ -9,7 +9,7 @@ app.use(express.static(__dirname));
 
 // ── Proxy endpoint — API kalitni faqat shu yerda saqlaysiz ──
 app.post('/api/chat', async (req, res) => {
-  const API_KEY = process.env.ANTHROPIC_API_KEY || 'YOUR_API_KEY_HERE';
+  const API_KEY = process.env.ANTHROPIC_API_KEY || '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';
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
