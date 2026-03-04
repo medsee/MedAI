@@ -1085,4 +1085,23 @@ function clearHistory() {
   closeModal('settingsModal');
 }
 
-function
+
+function copyChat() {
+  const msgs = [...document.querySelectorAll('.bubble')].map(b => b.textContent).join('\n\n');
+  navigator.clipboard.writeText(msgs).then(() => notify('📋 Nusxa olindi!', 'success'));
+}
+
+function copyText(btn) {
+  const txt = btn.closest('.msg-content').querySelector('.bubble').textContent;
+  navigator.clipboard.writeText(txt).then(() => notify('📋 Nusxa olindi!', 'success'));
+}
+
+function notify(msg, type = 'success') {
+  const el = document.getElementById('notif');
+  el.textContent = msg;
+  el.className = `notif ${type} show`;
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
