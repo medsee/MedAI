@@ -713,7 +713,7 @@
         <div style="flex:1;padding:14px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;text-align:center">
           <div style="font-size:24px;margin-bottom:6px">📧</div>
           <div style="font-size:12px;color:var(--text3)">Email</div>
-          <div style="font-size:12px;font-weight:600;color:var(--accent2);margin-top:4px">anusher.office@gmail.com</div>
+          <div style="font-size:12px;font-weight:600;color:var(--accent2);margin-top:4px"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8eefe0fbfde6ebfca0e1e8e8e7edebcee9e3efe7e2a0ede1e3">[email&#160;protected]</a></div>
         </div>
         <div style="flex:1;padding:14px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;text-align:center">
           <div style="font-size:24px;margin-bottom:6px">⚡</div>
@@ -747,7 +747,7 @@
         <label class="form-label">Xabaringiz</label>
         <textarea class="form-textarea" id="supportMessage" placeholder="Muammoni batafsil tushuntiring..."></textarea>
       </div>
-      <button class="submit-btn" onclick="sendSupport()">📨 Yuborish — anusher.office@gmail.com</button>
+      <button class="submit-btn" onclick="sendSupport()">📨 Yuborish — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="27464952544f4255094841414e444267404a464e4b0944484a">[email&#160;protected]</a></button>
     </div>
 
     <div class="modal-section">
@@ -812,7 +812,7 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:20px">
-      <p style="font-size:13px;color:var(--text3);margin-bottom:12px">Savol bormi? Bog'laning: <strong style="color:var(--accent2)">anusher.office@gmail.com</strong></p>
+      <p style="font-size:13px;color:var(--text3);margin-bottom:12px">Savol bormi? Bog'laning: <strong style="color:var(--accent2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c9c6dddbc0cdda86c7cecec1cbcde8cfc5c9c1c486cbc7c5">[email&#160;protected]</a></strong></p>
       <button class="submit-btn" onclick="openModal('supportModal');closeModal('plansModal')">Pro ni sotib olish</button>
     </div>
   </div>
@@ -853,7 +853,7 @@
       </div>
     </div>
     <p style="text-align:center;font-size:13px;color:var(--text3)">
-      📧 <a href="mailto:anusher.office@gmail.com" style="color:var(--accent2)">anusher.office@gmail.com</a>
+      📧 <a href="/cdn-cgi/l/email-protection#8feee1fafce7eafda1e0e9e9e6eceacfe8e2eee6e3a1ece0e2" style="color:var(--accent2)"><span class="__cf_email__" data-cfemail="5839362d2b303d2a76373e3e313b3d183f35393134763b3735">[email&#160;protected]</span></a>
     </p>
   </div>
 </div>
@@ -862,7 +862,7 @@
 <div class="notif" id="notif"></div>
 
 <!-- ═══════ SCRIPT ═══════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const SYSTEM_PROMPT = `Siz Anusher AI — zamonaviy, aqlli va do'stona sun'iy intellekt yordamchisisiz.
 
 Siz haqingizda:
@@ -900,23 +900,33 @@ faqData.forEach(f => {
 });
 
 // ── API CALL ──
+const GROQ_KEY = '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';
+
 async function callAI(userText) {
   conversationHistory.push({ role: "user", content: userText });
 
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
+  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${GROQ_KEY}`,
+    },
     body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: SYSTEM_PROMPT,
-      messages: conversationHistory,
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 1024,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...conversationHistory,
+      ],
     }),
   });
 
-  if (!response.ok) throw new Error(`API xatosi: ${response.status}`);
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(err.error?.message || `API xatosi: ${response.status}`);
+  }
   const data = await response.json();
-  const reply = data.content.map(b => b.text || "").join("\n");
+  const reply = data.choices[0].message.content;
   conversationHistory.push({ role: "assistant", content: reply });
   return reply;
 }
@@ -1075,22 +1085,4 @@ function clearHistory() {
   closeModal('settingsModal');
 }
 
-function copyChat() {
-  const msgs = [...document.querySelectorAll('.bubble')].map(b => b.textContent).join('\n\n');
-  navigator.clipboard.writeText(msgs).then(() => notify('📋 Nusxa olindi!', 'success'));
-}
-
-function copyText(btn) {
-  const txt = btn.closest('.msg-content').querySelector('.bubble').textContent;
-  navigator.clipboard.writeText(txt).then(() => notify('📋 Nusxa olindi!', 'success'));
-}
-
-function notify(msg, type = 'success') {
-  const el = document.getElementById('notif');
-  el.textContent = msg;
-  el.className = `notif ${type} show`;
-  setTimeout(() => el.classList.remove('show'), 3000);
-}
-</script>
-</body>
-</html>
+function
