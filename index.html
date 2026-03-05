@@ -515,6 +515,96 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .calc-btn.op{background:rgba(124,109,250,.1);color:var(--accent2);border-color:rgba(124,109,250,.2);}
 .calc-btn.eq{background:linear-gradient(135deg,var(--accent),#4f43d0);color:#fff;border:none;box-shadow:0 4px 12px rgba(124,109,250,.3);}
 .calc-btn.clr{background:rgba(239,68,68,.1);color:var(--red);border-color:rgba(239,68,68,.2);}
+
+/* ===== CURSOR TRAIL ===== */
+.cursor-dot{position:fixed;pointer-events:none;z-index:99999;border-radius:50%;transition:transform .1s;}
+.cursor-main{width:10px;height:10px;background:var(--accent);top:0;left:0;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--accent);}
+.cursor-ring{width:32px;height:32px;border:1.5px solid rgba(124,109,250,.5);top:0;left:0;transform:translate(-50%,-50%);transition:left .08s,top .08s,transform .1s,width .2s,height .2s;}
+.cursor-spark{width:5px;height:5px;background:var(--accent3);position:fixed;border-radius:50%;pointer-events:none;z-index:99998;animation:sparkFade .6s ease-out forwards;}
+@keyframes sparkFade{0%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(0) translateY(-15px);}}
+body.custom-cursor *{cursor:none!important;}
+
+/* ===== BG PATTERNS ===== */
+body.bg-mesh::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237c6dfa' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+body.bg-dots::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle, rgba(124,109,250,.08) 1px, transparent 1px) 0 0 / 28px 28px;}
+body.bg-lines::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(124,109,250,.04) 28px),repeating-linear-gradient(90deg,transparent,transparent 27px,rgba(124,109,250,.04) 28px);}
+body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:conic-gradient(from 180deg at 50% 50%,rgba(124,109,250,.06) 0deg,rgba(34,211,238,.04) 120deg,rgba(192,132,252,.05) 240deg,rgba(124,109,250,.06) 360deg);}
+
+/* ===== COLOR THEMES ===== */
+[data-color="purple"]{--accent:#7c6dfa;--accent2:#9d8ffc;--accent3:#22d3ee;}
+[data-color="cyan"]{--accent:#06b6d4;--accent2:#22d3ee;--accent3:#a78bfa;}
+[data-color="rose"]{--accent:#f43f5e;--accent2:#fb7185;--accent3:#f97316;}
+[data-color="emerald"]{--accent:#10b981;--accent2:#34d399;--accent3:#06b6d4;}
+[data-color="amber"]{--accent:#f59e0b;--accent2:#fbbf24;--accent3:#f97316;}
+[data-color="pink"]{--accent:#ec4899;--accent2:#f472b6;--accent3:#a78bfa;}
+
+/* ===== TODO MODAL ===== */
+.todo-item{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;transition:all .2s;animation:msgIn .3s ease;}
+.todo-item.done .todo-txt{text-decoration:line-through;opacity:.4;}
+.todo-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--border3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.todo-check.done{background:var(--green);border-color:var(--green);}
+.todo-check.done::after{content:'✓';font-size:12px;color:#fff;font-weight:700;}
+.todo-txt{flex:1;font-size:13px;font-weight:500;}
+.todo-del{width:22px;height:22px;border:none;background:rgba(239,68,68,.1);color:var(--red);border-radius:5px;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;}
+.todo-pri{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.pri-high{background:#ef4444;}.pri-med{background:#f59e0b;}.pri-low{background:#10b981;}
+.todo-empty{text-align:center;padding:30px;color:var(--text3);font-size:13px;line-height:2;}
+
+/* ===== REMINDER ===== */
+.reminder-item{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;}
+.reminder-time{font-size:11px;font-weight:800;color:var(--accent2);min-width:50px;letter-spacing:.3px;}
+.reminder-txt{flex:1;font-size:13px;font-weight:500;}
+.reminder-del{width:22px;height:22px;border:none;background:rgba(239,68,68,.1);color:var(--red);border-radius:5px;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;}
+.reminder-bell{animation:bellShake .5s ease infinite;}
+@keyframes bellShake{0%,100%{transform:rotate(0);}25%{transform:rotate(-15deg);}75%{transform:rotate(15deg);}}
+
+/* ===== QUIZ MODAL ===== */
+.quiz-opt{padding:12px 16px;background:var(--bg3);border:1.5px solid var(--border2);border-radius:11px;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;margin-bottom:7px;display:flex;gap:10px;align-items:center;}
+.quiz-opt:hover{border-color:var(--accent);background:rgba(124,109,250,.06);}
+.quiz-opt.correct{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--green);}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.08);color:var(--red);}
+.quiz-opt-letter{width:24px;height:24px;border-radius:7px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+.quiz-progress{height:5px;background:var(--bg4);border-radius:5px;margin-bottom:18px;overflow:hidden;}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:5px;transition:width .4s;}
+.quiz-score{text-align:center;padding:20px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;}
+.quiz-score-num{font-size:48px;font-weight:900;background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-2px;}
+
+/* ===== ANALYTICS MODAL ===== */
+.analytics-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px;}
+.analytics-bar-wrap{margin-top:8px;}
+.analytics-bar{height:8px;background:var(--bg4);border-radius:8px;overflow:hidden;margin-bottom:4px;}
+.analytics-bar-fill{height:100%;border-radius:8px;transition:width .8s cubic-bezier(.16,1,.3,1);}
+.analytics-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);font-weight:600;}
+.spark-line{display:flex;align-items:flex-end;gap:3px;height:36px;}
+.spark-bar{background:linear-gradient(to top,var(--accent),var(--accent3));border-radius:3px 3px 0 0;flex:1;min-width:6px;transition:height .4s;}
+
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+  .topbar{padding:8px 12px;}
+  .tb-right .lang-sw{display:none;}
+  .input-area{padding:8px 12px 12px;}
+  .hero-title{font-size:24px;}
+  .hero-chips{gap:6px;}
+  .chip{padding:7px 12px;font-size:12px;}
+  .hero-stats{padding:10px 14px;}
+  .hstat-n{font-size:18px;}
+  .messages{padding:16px 12px;}
+  .bubble{padding:11px 14px;font-size:13px;}
+  .modal{padding:20px;border-radius:16px;}
+  .hero-logo-wrap{width:90px;height:90px;}
+  .hero-logo-icon svg{width:38px;height:38px;}
+}
+@media(max-width:400px){
+  .hero-title{font-size:20px;}
+  .tb-center{display:none;}
+  .input-footer{flex-wrap:wrap;gap:4px;}
+  .hero-stats .hstat-div:nth-child(6){display:none;}
+  .hero-stats .hstat:last-child{display:none;}
+}
 </style>
 </head>
 <body>
@@ -643,6 +733,34 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="nv" onclick="medicalPrompt('dieta')">
         <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
         <span class="nv-lbl" id="navDietLabel">Dieta & Sog'liq</span>
+      </div>
+    </div>
+
+    <div class="nav-sec">
+      <span class="nav-sec-lbl">Vositalar</span>
+      <div class="nv" onclick="openModal('todoModal')">
+        <div class="nv-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <span class="nv-lbl">Vazifalar</span>
+        <span class="nv-badge" id="todoBadge" style="display:none">0</span>
+      </div>
+      <div class="nv" onclick="openModal('reminderModal')">
+        <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <span class="nv-lbl">Eslatmalar</span>
+        <span class="nv-badge" id="reminderBadge" style="display:none">0</span>
+      </div>
+      <div class="nv" onclick="openModal('quizModal')">
+        <div class="nv-icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span class="nv-lbl">Quiz rejimi</span>
+        <span class="nv-badge">AI</span>
+      </div>
+      <div class="nv" onclick="openModal('analyticsModal')">
+        <div class="nv-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <span class="nv-lbl">Analitika</span>
+      </div>
+      <div class="nv" onclick="openModal('bgModal')">
+        <div class="nv-icon ic-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <span class="nv-lbl">Fon & Mavzu</span>
+        <span class="nv-badge">Yangi</span>
       </div>
     </div>
 
@@ -1194,13 +1312,13 @@ const MODE_PROMPTS={
 
 QOIDA (MAJBURIY):
 - Foydalanuvchi salomlashganda yoki oddiy suhbat qilganda: FAQAT salomlash va savolga javob ber. O'zing haqingizda HECH NARSA aytma.
-- O'zing haqingizda ma'lumot FAQAT to'g'ridan-to'g'ri so'ralganda ayt:
+- O'zing haqingizda ma'lumot FAQAT togridan-togri so'ralganda ayt:
   * "Kim yaratdi?" → "Anusher"
   * "Qachon yaratilding?" → "2026"
   * "Kimsan?" → "Men Med AI — sun'iy intellekt yordamchiman"
   * Boshqa shaxsiy ma'lumot → "Bu ma'lumotlar maxfiy"
   * ChatGPT/Claude/Gemini emassan — faqat so'ralganda ayt
-- HECH QACHON o'z-o'zidan o'zing haqingizda ma'lumot berma.
+- HECH QACHON o'z-o'zidan ozing haqingizda ma'lumot berma.
 Markdown ishlatib, aniq va lo'nda javob ber.`,
   medical:`Siz Med AI — professional tibbiy yordamchi. Anatomiya, kasalliklar, dorilar, simptomlar haqida batafsil ma'lumot bering. Jiddiy holatlarda shifokorga murojaat qilishni tavsiya eting. O'zing haqingizda so'ralmasa, ma'lumot berma.`,
   code:`Siz Med AI Code — expert dasturchi. To'liq, ishlaydigan, izohli kod yozing. Eng yaxshi amaliyotlarni qo'llang. O'zing haqingizda so'ralmasa, ma'lumot berma.`,
@@ -1296,7 +1414,7 @@ function saveCurrentChat(){
 }
 function renderHistoryList(filter=''){
   const el=document.getElementById('historyList'),filtered=filter?chatHistories.filter(c=>c.title.toLowerCase().includes(filter.toLowerCase())):chatHistories;
-  if(!filtered.length){el.innerHTML=`<div class="hist-empty">📭 ${filter?'Topilmadi':"Hali suhbat yo'q"}<br><small>Yangi suhbat boshlang</small></div>`;return;}
+  if(!filtered.length){el.innerHTML=`<div class="hist-empty">📭 ${filter?'Topilmadi':"Hali suhbat yoq"}<br><small>Yangi suhbat boshlang</small></div>`;return;}
   const icons={medical:'❤️',code:'💻',creative:'✍️',chat:'💬'};
   el.innerHTML=filtered.map(c=>`
     <div class="hist-item ${c.id===currentChatId?'active':''}" onclick="loadChat('${c.id}')">
@@ -1599,7 +1717,7 @@ function swapLangs(){const f=document.getElementById('transFrom'),t=document.get
 function doAnalysis(){
   const type=document.getElementById('analysisType').value,text=document.getElementById('analysisText').value.trim();
   if(!text){notify('Matnni kiriting!','error');return;}
-  const p={summary:`Xulosa: ${text}`,keywords:`Kalit so'zlar: ${text}`,sentiment:`Hissiy tahlil: ${text}`,grammar:`Grammatika tekshir: ${text}`,rewrite:`Qayta yoz: ${text}`,simplify:`Sodda tilda izoyla: ${text}`,formal:`Rasmiy uslubga o'tkazish: ${text}`};
+  const p={summary:`Xulosa: ${text}`,keywords:`Kalit so'zlar: ${text}`,sentiment:`Hissiy tahlil: ${text}`,grammar:`Grammatika tekshir: ${text}`,rewrite:`Qayta yoz: ${text}`,simplify:`Sodda tilda izoyla: ${text}`,formal:`Rasmiy uslubga otkazish: ${text}`};
   closeModal('summaryModal');document.getElementById('userInput').value=p[type];sendMessage();
 }
 
@@ -1638,6 +1756,253 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));closeSidebar();}
 });
 
+
+// ===== COLOR THEMES =====
+function setColorTheme(color){
+  document.documentElement.setAttribute('data-color',color);
+  document.querySelectorAll('.color-theme-card').forEach(c=>{
+    const isActive=c.dataset.theme===color;
+    c.style.border=isActive?'1.5px solid var(--accent)':'1.5px solid var(--border)';
+    c.style.background=isActive?'rgba(124,109,250,.08)':'var(--bg3)';
+  });
+  s('medai_color',color);notify('🎨 Rang mavzusi ozgartirildi','info');
+}
+
+// ===== BG PATTERNS =====
+function setBgPattern(pat){
+  document.body.className=document.body.className.replace(/bg-\w+/g,'').trim();
+  if(pat!=='none'&&pat!=='neon')document.body.classList.add('bg-'+pat);
+  if(pat==='neon'){
+    document.body.style.backgroundImage='linear-gradient(135deg,rgba(124,109,250,.04) 0%,transparent 50%),linear-gradient(225deg,rgba(34,211,238,.04) 0%,transparent 50%)';
+  } else {document.body.style.backgroundImage='';}
+  document.querySelectorAll('.bg-card').forEach(c=>{
+    const isActive=c.dataset.bg===pat;
+    c.style.border=isActive?'1.5px solid var(--accent)':'1.5px solid var(--border)';
+    c.style.background=isActive?'rgba(124,109,250,.08)':'var(--bg3)';
+  });
+  s('medai_bg',pat);notify('🖼️ Fon ozgartirildi','info');
+}
+
+// ===== CURSOR EFFECT =====
+let cursorActive=false;const cursorMain=document.createElement('div'),cursorRing=document.createElement('div');
+cursorMain.className='cursor-dot cursor-main';cursorRing.className='cursor-dot cursor-ring';
+function toggleCursor(){
+  const tog=document.getElementById('cursorToggle');tog.classList.toggle('on');cursorActive=tog.classList.contains('on');
+  if(cursorActive){
+    document.body.classList.add('custom-cursor');document.body.appendChild(cursorMain);document.body.appendChild(cursorRing);
+    s('medai_cursor','1');
+  } else {
+    document.body.classList.remove('custom-cursor');cursorMain.remove();cursorRing.remove();s('medai_cursor','0');
+  }
+}
+document.addEventListener('mousemove',e=>{
+  if(!cursorActive)return;
+  cursorMain.style.left=e.clientX+'px';cursorMain.style.top=e.clientY+'px';
+  cursorRing.style.left=e.clientX+'px';cursorRing.style.top=e.clientY+'px';
+  if(Math.random()>0.7){const sp=document.createElement('div');sp.className='cursor-spark';sp.style.left=(e.clientX-3)+'px';sp.style.top=(e.clientY-3)+'px';sp.style.background=['var(--accent)','var(--accent3)','var(--accent4)','#fff'][Math.floor(Math.random()*4)];document.body.appendChild(sp);setTimeout(()=>sp.remove(),600);}
+});
+document.addEventListener('click',e=>{
+  if(!cursorActive)return;
+  for(let i=0;i<8;i++){const sp=document.createElement('div');sp.className='cursor-spark';const ang=i*(Math.PI*2/8),dist=20+Math.random()*30;sp.style.left=(e.clientX+Math.cos(ang)*dist)+'px';sp.style.top=(e.clientY+Math.sin(ang)*dist)+'px';sp.style.background=['var(--accent)','var(--accent3)','var(--accent4)','var(--yellow)'][Math.floor(Math.random()*4)];sp.style.width=sp.style.height=(4+Math.random()*4)+'px';document.body.appendChild(sp);setTimeout(()=>sp.remove(),600);}
+});
+
+// ===== ANIMATIONS =====
+function toggleAnimations(){
+  const t=document.getElementById('animToggle');t.classList.toggle('on');
+  const on=t.classList.contains('on');
+  const style=document.getElementById('animStyleTag')||Object.assign(document.createElement('style'),{id:'animStyleTag'});
+  if(!on){style.textContent='*{animation-duration:.001s!important;transition-duration:.1s!important;}';document.head.appendChild(style);}
+  else{style.remove();}
+  s('medai_anim',on?'1':'0');
+}
+
+// ===== TODO =====
+let todos=[];let todoFilter='all';
+function addTodo(){
+  const txt=document.getElementById('todoInput').value.trim();if(!txt)return;
+  const pri=document.getElementById('todoPri').value;
+  todos.unshift({id:Date.now(),text:txt,done:false,pri,createdAt:new Date().toLocaleString()});
+  document.getElementById('todoInput').value='';
+  saveTodos();renderTodos();
+}
+function saveTodos(){if(currentUser)s(`medai_todos_${currentUser.email}`,todos);updateTodoBadge();}
+function loadTodos(){if(currentUser)todos=l(`medai_todos_${currentUser.email}`,[]);}
+function updateTodoBadge(){const b=document.getElementById('todoBadge'),active=todos.filter(t=>!t.done).length;if(active>0){b.textContent=active;b.style.display='';}else{b.style.display='none';}}
+function filterTodo(f){
+  todoFilter=f;
+  ['all','active','done'].forEach(k=>{
+    const btn=document.getElementById('tf-'+k);if(!btn)return;
+    const isAct=k===f;
+    btn.style.border=isAct?'1px solid var(--accent)':'1px solid var(--border)';
+    btn.style.background=isAct?'rgba(124,109,250,.1)':'var(--bg3)';
+    btn.style.color=isAct?'var(--accent2)':'var(--text3)';
+  });
+  renderTodos();
+}
+function renderTodos(){
+  const el=document.getElementById('todoList');
+  const filtered=todoFilter==='all'?todos:todoFilter==='done'?todos.filter(t=>t.done):todos.filter(t=>!t.done);
+  const priC={high:'#ef4444',med:'#f59e0b',low:'#10b981'};
+  if(!filtered.length){el.innerHTML=`<div class="todo-empty">✅ ${todoFilter==='done'?'Hali bajarilgan vazifalar yoq':'Barcha vazifalar bajarilgan!'}<br><small>Yangi vazifa qoshing</small></div>`;updateStats();return;}
+  el.innerHTML=filtered.map(t=>`<div class="todo-item ${t.done?'done':''}" id="td-${t.id}">
+    <div class="todo-pri" style="background:${priC[t.pri]||'#7c6dfa'}"></div>
+    <div class="todo-check ${t.done?'done':''}" onclick="toggleTodo(${t.id})"></div>
+    <span class="todo-txt">${escHtml(t.text)}</span>
+    <span style="font-size:10px;color:var(--text3)">${t.pri==='high'?'🔴':t.pri==='med'?'🟡':'🟢'}</span>
+    <button class="todo-del" onclick="deleteTodo(${t.id})">✕</button>
+  </div>`).join('');
+  updateStats();
+}
+function toggleTodo(id){const t=todos.find(x=>x.id===id);if(t){t.done=!t.done;saveTodos();renderTodos();}}
+function deleteTodo(id){todos=todos.filter(x=>x.id!==id);saveTodos();renderTodos();}
+function updateStats(){const d=todos.filter(t=>t.done).length,t=todos.length;document.getElementById('todoStats').textContent=t?`${d}/${t} bajarildi · ${t-d} qoldi`:'Vazifalar yoq';}
+function todoToAI(){
+  const active=todos.filter(t=>!t.done).map((t,i)=>((i+1)+'. '+t.text)).join('\n');
+  if(!active){notify('Faol vazifalar yoq','error');return;}
+  closeModal('todoModal');document.getElementById('userInput').value=`Bu vazifalarni qanday rejalashtirishni tavsiya qilasiz?
+${active}`;sendMessage();
+}
+
+// ===== REMINDER =====
+let reminders=[];let reminderInterval=null;
+function addReminder(){
+  const txt=document.getElementById('reminderText').value.trim(),time=document.getElementById('reminderTime').value,repeat=document.getElementById('reminderRepeat').value;
+  if(!txt||!time){notify('Matn va vaqtni kiriting!','error');return;}
+  reminders.push({id:Date.now(),text:txt,time,repeat,active:true});
+  document.getElementById('reminderText').value='';
+  saveReminders();renderReminders();startReminderChecker();
+  notify('🔔 Eslatma qoshildi!','success');
+}
+function saveReminders(){if(currentUser)s(`medai_reminders_${currentUser.email}`,reminders);updateReminderBadge();}
+function loadReminders(){if(currentUser){reminders=l(`medai_reminders_${currentUser.email}`,[]);startReminderChecker();}}
+function updateReminderBadge(){const b=document.getElementById('reminderBadge'),c=reminders.filter(r=>r.active).length;if(c>0){b.textContent=c;b.style.display='';}else{b.style.display='none';}}
+function renderReminders(){
+  const el=document.getElementById('reminderList');
+  if(!reminders.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">🔔 Eslatmalar yoq</div>';return;}
+  el.innerHTML=reminders.map(r=>`<div class="reminder-item">
+    <div class="reminder-bell">🔔</div>
+    <div class="reminder-time">${r.time}</div>
+    <div class="reminder-txt"><div style="font-weight:600">${escHtml(r.text)}</div><div style="font-size:10px;color:var(--text3)">${r.repeat==='once'?'Bir marta':r.repeat==='daily'?'Har kuni':'Ish kunlari'}</div></div>
+    <button class="reminder-del" onclick="deleteReminder(${r.id})">✕</button>
+  </div>`).join('');
+}
+function deleteReminder(id){reminders=reminders.filter(r=>r.id!==id);saveReminders();renderReminders();}
+function startReminderChecker(){
+  if(reminderInterval)clearInterval(reminderInterval);
+  reminderInterval=setInterval(()=>{
+    const now=new Date(),cur=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+    reminders.forEach(r=>{
+      if(r.active&&r.time===cur){
+        if('Notification'in window&&Notification.permission==='granted'){new Notification('Med AI Eslatma',{body:r.text,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%237c6dfa"/></svg>'});}
+        notify(`🔔 ${r.text}`,'warning');
+        if(r.repeat==='once'){r.active=false;saveReminders();}
+      }
+    });
+  },30000);
+  if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();
+}
+
+// ===== QUIZ =====
+let quizQuestions=[],quizCurrent=0,quizScore=0,quizStartTime=0,quizTimerInt=null;
+async function startQuiz(){
+  const topic=document.getElementById('quizTopic').value.trim(),count=document.getElementById('quizCount').value,level=document.getElementById('quizLevel').value;
+  if(!topic){notify('Mavzuni kiriting!','error');return;}
+  const btn=document.getElementById('quizStartBtn');btn.disabled=true;btn.textContent='Yuklanmoqda...';
+  try{
+    const prompt=`"${topic}" mavzusida ${count} ta test savolini JSON formatida ber. Qiyinlik: ${level==='easy'?'oson':level==='medium'?'o\'rta':'qiyin'}.
+FAQAT JSON qaytargin, boshqa hech narsa yoq:
+[{"q":"savol matni","opts":["A javob","B javob","C javob","D javob"],"ans":0,"explain":"qisqa tushuntirish"}]
+ans = togri javob indeksi (0,1,2,3)`;
+    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},body:JSON.stringify({model:currentModel,max_tokens:2000,temperature:.7,messages:[{role:'system',content:'Faqat JSON qaytar, boshqa hech narsa yozma.'},{role:'user',content:prompt}]})});
+    const data=await res.json();let raw=data.choices[0].message.content.trim();
+    raw=raw.replace(/```json[\s\S]?/g,'').replace(/```/g,'').trim();
+    quizQuestions=JSON.parse(raw);quizCurrent=0;quizScore=0;
+    quizStartTime=Date.now();
+    document.getElementById('quizSetup').style.display='none';document.getElementById('quizGame').style.display='block';document.getElementById('quizResult').style.display='none';
+    startQuizTimer();renderQuizQuestion();
+  }catch(e){notify('Quiz yaratishda xatolik: '+e.message,'error');}
+  btn.disabled=false;btn.textContent='AI Quiz boshlash →';
+}
+function startQuizTimer(){clearInterval(quizTimerInt);quizTimerInt=setInterval(()=>{const s=Math.floor((Date.now()-quizStartTime)/1000);document.getElementById('quizTimer').textContent=`⏱ ${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`;},1000);}
+function renderQuizQuestion(){
+  if(quizCurrent>=quizQuestions.length){showQuizResult();return;}
+  const q=quizQuestions[quizCurrent];const tot=quizQuestions.length;
+  document.getElementById('quizQNum').textContent=`Savol ${quizCurrent+1} / ${tot}`;
+  document.getElementById('quizProgressFill').style.width=((quizCurrent/tot)*100)+'%';
+  document.getElementById('quizScoreDisplay').textContent=`✅ ${quizScore}/${quizCurrent}`;
+  document.getElementById('quizQuestion').textContent=q.q;
+  document.getElementById('quizExplain').style.display='none';
+  document.getElementById('quizNextBtn').style.display='none';
+  const letters=['A','B','C','D'];
+  document.getElementById('quizOptions').innerHTML=q.opts.map((opt,i)=>`<div class="quiz-opt" id="qo-${i}" onclick="selectQuizOpt(${i})"><span class="quiz-opt-letter">${letters[i]}</span>${escHtml(opt)}</div>`).join('');
+}
+function selectQuizOpt(idx){
+  const q=quizQuestions[quizCurrent];
+  document.querySelectorAll('.quiz-opt').forEach(o=>o.onclick=null);
+  document.getElementById('qo-'+idx).classList.add(idx===q.ans?'correct':'wrong');
+  if(idx!==q.ans)document.getElementById('qo-'+q.ans).classList.add('correct');
+  if(idx===q.ans)quizScore++;
+  const ex=document.getElementById('quizExplain');ex.style.display='block';ex.innerHTML=`<strong>${idx===q.ans?"✅ Togri!":"❌ Notogri!"}</strong><br>${q.explain||''}`;
+  document.getElementById('quizNextBtn').style.display='block';
+}
+function quizNext(){quizCurrent++;renderQuizQuestion();}
+function showQuizResult(){
+  clearInterval(quizTimerInt);
+  document.getElementById('quizGame').style.display='none';document.getElementById('quizResult').style.display='block';
+  const pct=Math.round((quizScore/quizQuestions.length)*100);
+  document.getElementById('quizFinalScore').textContent=`${quizScore}/${quizQuestions.length}`;
+  document.getElementById('quizFinalMsg').textContent=pct>=80?'🏆 Ajoyib natija!':pct>=60?'👍 Yaxshi!':pct>=40?'📚 Mashq kerak':'💪 Harakat qil!';
+  const sec=Math.floor((Date.now()-quizStartTime)/1000);document.getElementById('quizTimeTaken').textContent=`Sarflangan vaqt: ${Math.floor(sec/60)}:${(sec%60).toString().padStart(2,'0')}`;
+}
+function restartQuiz(){document.getElementById('quizSetup').style.display='block';document.getElementById('quizGame').style.display='none';document.getElementById('quizResult').style.display='none';}
+function shareQuizResult(){const msg=`Med AI Quiz natijasi: ${quizScore}/${quizQuestions.length} ✅`;navigator.clipboard.writeText(msg).then(()=>notify('📋 Nusxalandi!','success'));}
+
+// ===== ANALYTICS =====
+function openAnalytics(){
+  const msgs=l(`medai_msgs_${currentUser?.email}`,0);
+  const tokens=l(`medai_tokens_${currentUser?.email}`,0);
+  const chats=chatHistories.length;
+  const modes={chat:0,code:0,medical:0,creative:0};
+  chatHistories.forEach(c=>modes[c.mode]=(modes[c.mode]||0)+1);
+  const maxMode=Object.entries(modes).sort((a,b)=>b[1]-a[1])[0];
+  const modeIco={chat:'💬',code:'💻',medical:'🩺',creative:'✍️'};
+  const last7=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const ds=d.toISOString().slice(0,10);return chatHistories.filter(c=>new Date(c.createdAt).toISOString().slice(0,10)===ds).length;});
+  const maxBar=Math.max(...last7,1);
+  const days=['Du','Se','Ch','Pa','Ju','Sh','Ya'];
+  const todayDay=new Date().getDay();const ordDays=[...Array(7)].map((_,i)=>days[(todayDay-6+i+7)%7]);
+  document.getElementById('analyticsContent').innerHTML=`
+    <div class="stats-bar" style="margin-bottom:14px">
+      <div class="stat-i"><div class="stat-v" style="color:var(--accent2)">${msgs}</div><div class="stat-l">Xabarlar</div></div>
+      <div class="stat-i"><div class="stat-v" style="color:var(--accent3)">${chats}</div><div class="stat-l">Suhbatlar</div></div>
+      <div class="stat-i"><div class="stat-v" style="color:var(--accent4)">${tokens>999?Math.round(tokens/1000)+'K':tokens}</div><div class="stat-l">Tokenlar</div></div>
+      <div class="stat-i"><div class="stat-v" style="color:var(--green)">${todos.filter(t=>t.done).length}</div><div class="stat-l">Vazifalar</div></div>
+    </div>
+    <div class="analytics-card">
+      <div style="font-size:11px;font-weight:800;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Haftalik faollik</div>
+      <div class="spark-line">
+        ${last7.map((v,i)=>`<div style="display:flex;flex-direction:column;align-items:center;flex:1;gap:4px"><div class="spark-bar" style="height:${Math.max(3,Math.round((v/maxBar)*100))}%;background:${i===6?'linear-gradient(to top,var(--accent),var(--accent3))':'linear-gradient(to top,rgba(124,109,250,.4),rgba(34,211,238,.3))'}"></div><span style="font-size:9px;color:var(--text3);font-weight:600">${ordDays[i]}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="analytics-card">
+      <div style="font-size:11px;font-weight:800;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">Rejim taqsimoti</div>
+      ${Object.entries(modes).map(([m,c])=>`<div class="analytics-bar-wrap"><div class="analytics-label"><span>${modeIco[m]||''} ${m.charAt(0).toUpperCase()+m.slice(1)}</span><span>${c} ta</span></div><div class="analytics-bar"><div class="analytics-bar-fill" style="width:${chats?Math.round((c/chats)*100):0}%;background:${m==='chat'?'var(--accent)':m==='code'?'var(--accent3)':m==='medical'?'var(--accent5)':'var(--accent4)'}"></div></div></div>`).join('')}
+    </div>
+    <div class="analytics-card" style="text-align:center">
+      <div style="font-size:11px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Eng faol rejim</div>
+      <div style="font-size:32px;margin-bottom:4px">${modeIco[maxMode?.[0]]||'💬'}</div>
+      <div style="font-size:16px;font-weight:800">${maxMode?.[0]||'chat'}</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:3px">${maxMode?.[1]||0} ta suhbat</div>
+    </div>`;
+}
+// openModal with side effects
+const _openModalOrig=openModal;
+openModal=function(id){
+  _openModalOrig(id);
+  if(id==='analyticsModal'&&currentUser)openAnalytics();
+  if(id==='todoModal'){loadTodos();renderTodos();}
+  if(id==='reminderModal'){loadReminders();renderReminders();}
+};
+
 // ===== INIT =====
 (function init(){
   const th=l('medai_theme','dark');isDark=th==='dark';
@@ -1648,7 +2013,221 @@ document.addEventListener('keydown',e=>{
   const lang=l('medai_lang','uz');currentLang=lang;
   ['uz','ru','en'].forEach(ll=>{document.getElementById('lang'+ll.charAt(0).toUpperCase()+ll.slice(1)).classList.toggle('active',ll===lang);});
   applyI18n(lang);
+  // Load color theme
+  const savedColor=l('medai_color','purple');setColorTheme(savedColor);
+  // Load bg pattern
+  const savedBg=l('medai_bg','none');if(savedBg!=='none')setBgPattern(savedBg);
+  // Load cursor
+  if(l('medai_cursor','0')==='1'){document.getElementById('cursorToggle').classList.add('on');toggleCursor();}
+  // Load anim
+  if(l('medai_anim','1')==='0'){document.getElementById('animToggle').classList.remove('on');toggleAnimations();}
+  // Update todo badge
+  if(currentUser){loadTodos();updateTodoBadge();loadReminders();updateReminderBadge();}
 })();
 </script>
+
+<!-- ===== TODO MODAL ===== -->
+<div class="overlay" id="todoModal" onclick="overlayClick(event,'todoModal')">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        Kunlik Vazifalar
+      </div>
+      <button class="close-btn" onclick="closeModal('todoModal')">✕</button>
+    </div>
+    <div style="display:flex;gap:7px;margin-bottom:14px">
+      <input class="form-inp" id="todoInput" placeholder="Yangi vazifa qo'shing..." onkeydown="if(event.key==='Enter')addTodo()" style="flex:1">
+      <select class="form-sel" id="todoPri" style="width:110px">
+        <option value="high">🔴 Yuqori</option>
+        <option value="med" selected>🟡 O'rta</option>
+        <option value="low">🟢 Past</option>
+      </select>
+      <button class="sub-btn" onclick="addTodo()" style="width:44px;padding:0;flex-shrink:0;font-size:18px">+</button>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <button onclick="filterTodo('all')" id="tf-all" style="flex:1;padding:6px;border-radius:8px;border:1px solid var(--accent);background:rgba(124,109,250,.1);color:var(--accent2);font-size:11px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif">Barchasi</button>
+      <button onclick="filterTodo('active')" id="tf-active" style="flex:1;padding:6px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text3);font-size:11px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif">Faol</button>
+      <button onclick="filterTodo('done')" id="tf-done" style="flex:1;padding:6px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text3);font-size:11px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif">Bajarilgan</button>
+    </div>
+    <div id="todoList"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+      <span id="todoStats" style="font-size:12px;color:var(--text3)"></span>
+      <button onclick="todoToAI()" style="padding:7px 14px;background:linear-gradient(135deg,var(--accent),#4f43d0);border:none;border-radius:8px;color:#fff;font-family:Inter,sans-serif;font-size:12px;font-weight:700;cursor:pointer">AI bilan rejalashtirish →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REMINDER MODAL ===== -->
+<div class="overlay" id="reminderModal" onclick="overlayClick(event,'reminderModal')">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        Eslatmalar
+      </div>
+      <button class="close-btn" onclick="closeModal('reminderModal')">✕</button>
+    </div>
+    <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:10px 13px;font-size:12px;color:var(--text2);margin-bottom:14px;display:flex;gap:8px;align-items:flex-start">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Brauzer tab ochiq bo'lganda eslatmalar ishlaydi
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div class="form-g"><label class="form-lbl">Matn</label><input class="form-inp" id="reminderText" placeholder="Eslatma matni..."></div>
+      <div class="form-g"><label class="form-lbl">Vaqt</label><input class="form-inp" type="time" id="reminderTime"></div>
+    </div>
+    <div class="form-g">
+      <label class="form-lbl">Takrorlanish</label>
+      <select class="form-sel" id="reminderRepeat">
+        <option value="once">Bir marta</option>
+        <option value="daily">Har kuni</option>
+        <option value="weekdays">Ish kunlari</option>
+      </select>
+    </div>
+    <button class="sub-btn" onclick="addReminder()" style="margin-bottom:14px">Eslatma qo'shish →</button>
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px">Joriy eslatmalar</div>
+    <div id="reminderList"><div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">🔔 Eslatmalar yo'q</div></div>
+  </div>
+</div>
+
+<!-- ===== QUIZ MODAL ===== -->
+<div class="overlay" id="quizModal" onclick="overlayClick(event,'quizModal')">
+  <div class="modal" style="max-width:540px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        AI Quiz Rejimi
+      </div>
+      <button class="close-btn" onclick="closeModal('quizModal')">✕</button>
+    </div>
+    <div id="quizSetup">
+      <div class="form-g"><label class="form-lbl">Mavzu</label><input class="form-inp" id="quizTopic" placeholder="Masalan: Anatomiya, Python, Tarix..."></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px">
+        <div class="form-g"><label class="form-lbl">Savollar soni</label><select class="form-sel" id="quizCount"><option value="5">5 ta</option><option value="10" selected>10 ta</option><option value="15">15 ta</option></select></div>
+        <div class="form-g"><label class="form-lbl">Qiyinlik</label><select class="form-sel" id="quizLevel"><option value="easy">Oson</option><option value="medium" selected>O'rta</option><option value="hard">Qiyin</option></select></div>
+      </div>
+      <button class="sub-btn" onclick="startQuiz()" id="quizStartBtn">AI Quiz boshlash →</button>
+    </div>
+    <div id="quizGame" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span id="quizQNum" style="font-size:11px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.8px"></span>
+        <span id="quizTimer" style="font-size:13px;font-weight:800;color:var(--accent2)">⏱ 0:00</span>
+        <span id="quizScoreDisplay" style="font-size:12px;color:var(--green);font-weight:700"></span>
+      </div>
+      <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:13px;padding:18px;margin-bottom:14px">
+        <div id="quizQuestion" style="font-size:15px;font-weight:600;line-height:1.6"></div>
+      </div>
+      <div id="quizOptions"></div>
+      <div id="quizExplain" style="display:none;background:rgba(124,109,250,.06);border:1px solid rgba(124,109,250,.2);border-radius:10px;padding:13px;font-size:13px;color:var(--text2);margin-top:8px;line-height:1.7"></div>
+      <button id="quizNextBtn" onclick="quizNext()" style="display:none;width:100%;margin-top:12px;padding:12px;background:linear-gradient(135deg,var(--accent),#4f43d0);border:none;border-radius:11px;color:#fff;font-family:Inter,sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s">Keyingi →</button>
+    </div>
+    <div id="quizResult" style="display:none">
+      <div class="quiz-score">
+        <div class="quiz-score-num" id="quizFinalScore">0/0</div>
+        <div style="font-size:14px;font-weight:700;margin-top:8px" id="quizFinalMsg"></div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px" id="quizTimeTaken"></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button onclick="restartQuiz()" style="flex:1;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:11px;color:var(--text);font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer">Qayta urinish</button>
+        <button onclick="shareQuizResult()" style="flex:1;padding:12px;background:linear-gradient(135deg,var(--accent),#4f43d0);border:none;border-radius:11px;color:#fff;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer">Natijani ulashish →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANALYTICS MODAL ===== -->
+<div class="overlay" id="analyticsModal" onclick="overlayClick(event,'analyticsModal')">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        Analitika
+      </div>
+      <button class="close-btn" onclick="closeModal('analyticsModal')">✕</button>
+    </div>
+    <div id="analyticsContent"></div>
+  </div>
+</div>
+
+<!-- ===== BG & COLOR THEME MODAL ===== -->
+<div class="overlay" id="bgModal" onclick="overlayClick(event,'bgModal')">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        Fon & Rang Mavzusi
+      </div>
+      <button class="close-btn" onclick="closeModal('bgModal')">✕</button>
+    </div>
+
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:11px">Asosiy ranglar</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px" id="colorThemeGrid">
+      <div onclick="setColorTheme('purple')" class="color-theme-card active" data-theme="purple" style="padding:14px;border-radius:12px;background:linear-gradient(135deg,rgba(124,109,250,.15),rgba(34,211,238,.1));border:1.5px solid rgba(124,109,250,.3);cursor:pointer;transition:all .2s;text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#7c6dfa,#22d3ee);margin:0 auto 7px;box-shadow:0 4px 12px rgba(124,109,250,.4)"></div>
+        <div style="font-size:11px;font-weight:700">Binafsha</div>
+      </div>
+      <div onclick="setColorTheme('cyan')" class="color-theme-card" data-theme="cyan" style="padding:14px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#06b6d4,#a78bfa);margin:0 auto 7px;box-shadow:0 4px 12px rgba(6,182,212,.4)"></div>
+        <div style="font-size:11px;font-weight:700">Moviy</div>
+      </div>
+      <div onclick="setColorTheme('rose')" class="color-theme-card" data-theme="rose" style="padding:14px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f43f5e,#f97316);margin:0 auto 7px;box-shadow:0 4px 12px rgba(244,63,94,.4)"></div>
+        <div style="font-size:11px;font-weight:700">Qizil</div>
+      </div>
+      <div onclick="setColorTheme('emerald')" class="color-theme-card" data-theme="emerald" style="padding:14px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10b981,#06b6d4);margin:0 auto 7px;box-shadow:0 4px 12px rgba(16,185,129,.4)"></div>
+        <div style="font-size:11px;font-weight:700">Yashil</div>
+      </div>
+      <div onclick="setColorTheme('amber')" class="color-theme-card" data-theme="amber" style="padding:14px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#f97316);margin:0 auto 7px;box-shadow:0 4px 12px rgba(245,158,11,.4)"></div>
+        <div style="font-size:11px;font-weight:700">Sariq</div>
+      </div>
+      <div onclick="setColorTheme('pink')" class="color-theme-card" data-theme="pink" style="padding:14px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;transition:all .2s;text-align:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#a78bfa);margin:0 auto 7px;box-shadow:0 4px 12px rgba(236,72,153,.4)"></div>
+        <div style="font-size:11px;font-weight:700">Pushti</div>
+      </div>
+    </div>
+
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:11px">Fon naqshi</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px">
+      <div onclick="setBgPattern('none')" class="bg-card active" data-bg="none" style="padding:13px;border-radius:12px;background:var(--bg);border:1.5px solid var(--accent);cursor:pointer;text-align:center;transition:all .2s">
+        <div style="height:30px;border-radius:6px;background:var(--bg3);margin-bottom:6px"></div>
+        <div style="font-size:11px;font-weight:700">Oddiy</div>
+      </div>
+      <div onclick="setBgPattern('mesh')" class="bg-card" data-bg="mesh" style="padding:13px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;text-align:center;transition:all .2s">
+        <div style="height:30px;border-radius:6px;background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(124,109,250,.1) 4px,rgba(124,109,250,.1) 5px);margin-bottom:6px"></div>
+        <div style="font-size:11px;font-weight:700">Mesh</div>
+      </div>
+      <div onclick="setBgPattern('dots')" class="bg-card" data-bg="dots" style="padding:13px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;text-align:center;transition:all .2s">
+        <div style="height:30px;border-radius:6px;background:radial-gradient(circle,rgba(124,109,250,.2) 1px,transparent 1px) 0 0/8px 8px;margin-bottom:6px"></div>
+        <div style="font-size:11px;font-weight:700">Nuqtalar</div>
+      </div>
+      <div onclick="setBgPattern('lines')" class="bg-card" data-bg="lines" style="padding:13px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;text-align:center;transition:all .2s">
+        <div style="height:30px;border-radius:6px;background:repeating-linear-gradient(0deg,transparent,transparent 5px,rgba(124,109,250,.1) 6px);margin-bottom:6px"></div>
+        <div style="font-size:11px;font-weight:700">Chiziqlar</div>
+      </div>
+      <div onclick="setBgPattern('gradient')" class="bg-card" data-bg="gradient" style="padding:13px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;text-align:center;transition:all .2s">
+        <div style="height:30px;border-radius:6px;background:conic-gradient(from 0deg,rgba(124,109,250,.2),rgba(34,211,238,.15),rgba(192,132,252,.2));margin-bottom:6px"></div>
+        <div style="font-size:11px;font-weight:700">Gradient</div>
+      </div>
+      <div onclick="setBgPattern('neon')" class="bg-card" data-bg="neon" style="padding:13px;border-radius:12px;background:var(--bg3);border:1.5px solid var(--border);cursor:pointer;text-align:center;transition:all .2s">
+        <div style="height:30px;border-radius:6px;background:linear-gradient(135deg,rgba(124,109,250,.15),rgba(34,211,238,.1),rgba(192,132,252,.12));margin-bottom:6px;box-shadow:inset 0 0 12px rgba(124,109,250,.15)"></div>
+        <div style="font-size:11px;font-weight:700">Neon</div>
+      </div>
+    </div>
+
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:11px">Qo'shimcha</div>
+    <div class="set-row" onclick="toggleCursor()">
+      <div class="s-left"><div class="s-name">✨ Custom cursor</div><div class="s-desc">Sehrli cursor effekti</div></div>
+      <div class="toggle" id="cursorToggle"></div>
+    </div>
+    <div class="set-row" onclick="toggleAnimations()">
+      <div class="s-left"><div class="s-name">🌊 Ko'proq animatsiya</div><div class="s-desc">Maxsus CSS effektlar</div></div>
+      <div class="toggle on" id="animToggle"></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
