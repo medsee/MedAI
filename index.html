@@ -1454,7 +1454,380 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
 .grad-preset:hover,.grad-preset.active{border-color:var(--text);transform:scale(1.08);}
 .opacity-slider{width:100%;accent-color:var(--accent);margin-top:4px;}
 
+
+/* ════ HERO v2 — PREMIUM REDESIGN ════ */
+.welcome-hero{
+  position:relative;width:100%;min-height:calc(100vh - 130px);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+/* Animated mesh gradient background */
+.hero-blobs{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);animation:blobA 14s ease-in-out infinite;}
+.b1{width:700px;height:700px;background:radial-gradient(circle,rgba(124,109,250,.18),transparent 65%);top:-180px;left:-180px;}
+.b2{width:600px;height:600px;background:radial-gradient(circle,rgba(34,211,238,.14),transparent 65%);bottom:-150px;right:-150px;animation-delay:5s;}
+.b3{width:500px;height:500px;background:radial-gradient(circle,rgba(192,132,252,.12),transparent 65%);top:40%;left:30%;animation-delay:9s;}
+.b4{width:400px;height:400px;background:radial-gradient(circle,rgba(251,113,133,.09),transparent 65%);bottom:20%;left:0%;animation-delay:3s;}
+
+/* Grid overlay for premium feel */
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(124,109,250,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,109,250,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);
+}
+
+/* Hero content */
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  padding:32px 24px 40px;max-width:680px;width:100%;
+}
+
+/* Logo with orbiting rings */
+.hero-logo-wrap{
+  position:relative;width:110px;height:110px;margin:0 auto 28px;
+}
+.hero-logo-icon{
+  width:110px;height:110px;border-radius:32px;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent3) 50%,var(--accent4) 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 1px rgba(124,109,250,.3),0 0 50px rgba(124,109,250,.5),0 0 100px rgba(34,211,238,.2);
+  animation:logoPulse 3s ease-in-out infinite;position:relative;z-index:2;
+  transition:transform .3s;
+}
+.hero-logo-icon:hover{transform:scale(1.05) rotate(3deg);}
+.hero-logo-icon svg{width:52px;height:52px;}
+.orb-ring{position:absolute;border-radius:50%;border:1px solid;animation:orbSpin linear infinite;top:50%;left:50%;transform:translate(-50%,-50%);}
+.r1{width:140px;height:140px;border-color:rgba(124,109,250,.25);animation-duration:8s;}
+.r2{width:180px;height:180px;border-color:rgba(34,211,238,.15);animation-duration:14s;animation-direction:reverse;}
+.r3{width:220px;height:220px;border-color:rgba(192,132,252,.1);animation-duration:20s;}
+@keyframes orbSpin{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
+
+/* Hero badge */
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:30px;
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);
+  font-size:12px;font-weight:700;color:var(--green);
+  margin-bottom:22px;backdrop-filter:blur(8px);
+  animation:fadeInDown .6s ease .1s both;
+}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:dotP 2s infinite;}
+
+/* Animated hero title */
+.hero-title{
+  font-size:44px;font-weight:900;letter-spacing:-2.5px;line-height:1.05;margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 0%,var(--accent2) 35%,var(--accent3) 60%,var(--accent4) 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:titleShimmer 5s linear infinite, fadeInUp .7s ease .2s both;
+}
+.hero-desc{
+  font-size:15px;color:var(--text2);margin-bottom:32px;line-height:1.7;
+  animation:fadeInUp .7s ease .3s both;max-width:500px;margin-left:auto;margin-right:auto;
+}
+
+/* Chip redesign */
+.hero-chips{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:32px;animation:fadeInUp .7s ease .4s both;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border-radius:26px;
+  background:rgba(17,17,40,.7);border:1px solid var(--border2);
+  font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;
+  transition:all .25s;backdrop-filter:blur(10px);
+}
+.chip:hover{
+  background:rgba(124,109,250,.15);border-color:rgba(124,109,250,.4);
+  color:var(--accent2);transform:translateY(-3px) scale(1.03);
+  box-shadow:0 8px 24px rgba(124,109,250,.2);
+}
+.chip-ico{width:16px;height:16px;display:flex;align-items:center;justify-content:center;color:var(--accent2);}
+.chip-ico svg{width:15px;height:15px;}
+
+/* Stats bar */
+.hero-stats{
+  display:flex;align-items:center;gap:0;
+  background:rgba(12,12,30,.6);border:1px solid rgba(255,255,255,.06);
+  border-radius:20px;padding:14px 24px;backdrop-filter:blur(16px);
+  animation:fadeInUp .7s ease .5s both;
+  box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04);
+  display:inline-flex;
+}
+.hstat{text-align:center;padding:0 20px;}
+.hstat-n{display:block;font-size:22px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hstat-l{display:block;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.hstat-div{width:1px;background:var(--border);height:36px;align-self:center;}
+
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.9);}to{opacity:1;transform:scale(1);}}
+
+
+/* ════ CUSTOM CURSOR ════ */
+body.custom-cursor{cursor:none !important;}
+body.custom-cursor *{cursor:none !important;}
+
+#customCursor{
+  position:fixed;pointer-events:none;z-index:99999;
+  transition:opacity .3s;
+}
+#cursorDot{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--accent);
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 10px var(--accent),0 0 20px rgba(124,109,250,.4);
+  transition:transform .1s,width .2s,height .2s,background .2s;
+}
+#cursorRing{
+  position:absolute;width:32px;height:32px;border-radius:50%;
+  border:1.5px solid rgba(124,109,250,.5);
+  transform:translate(-50%,-50%);
+  transition:transform .15s ease-out,width .25s,height .25s,border-color .25s,opacity .25s;
+}
+/* Cursor hover states */
+body.custom-cursor a:hover ~ #customCursor #cursorRing,
+body.custom-cursor button:hover ~ #customCursor #cursorRing{
+  width:48px;height:48px;border-color:var(--accent2);
+}
+
+/* ════ MICRO-ANIMATIONS ════ */
+/* Button ripple */
+.ripple-btn{position:relative;overflow:hidden;}
+.ripple-btn::after{
+  content:'';position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.15);
+  width:0;height:0;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  transition:width .4s ease,height .4s ease,opacity .4s ease;
+  opacity:0;
+}
+.ripple-btn:active::after{
+  width:200px;height:200px;opacity:1;transition:0s;
+}
+
+/* Hover lift effect */
+.hover-lift{transition:transform .2s,box-shadow .2s;}
+.hover-lift:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.25);}
+
+/* Magnetic button effect */
+@keyframes magnetPulse{
+  0%,100%{box-shadow:0 4px 16px rgba(124,109,250,.4);}
+  50%{box-shadow:0 4px 32px rgba(124,109,250,.7),0 0 0 6px rgba(124,109,250,.1);}
+}
+.send-btn:not(:disabled){animation:magnetPulse 2s ease-in-out infinite;}
+
+/* Sticker float animations - more variety */
+@keyframes stkFl{
+  0%{opacity:0;transform:translateY(100vh) scale(.5) rotate(-10deg);}
+  10%{opacity:.7;}
+  90%{opacity:.6;}
+  100%{opacity:0;transform:translateY(-20vh) scale(1.1) rotate(10deg);}
+}
+
+/* Message appear animation */
+@keyframes msgSlideIn{
+  from{opacity:0;transform:translateX(-16px) scale(.97);}
+  to{opacity:1;transform:translateX(0) scale(1);}
+}
+@keyframes msgSlideInRight{
+  from{opacity:0;transform:translateX(16px) scale(.97);}
+  to{opacity:1;transform:translateX(0) scale(1);}
+}
+
+/* Reaction popup */
+.reaction-bar{
+  display:none;position:absolute;bottom:calc(100% + 8px);
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:30px;padding:6px 10px;gap:4px;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  z-index:10;animation:scaleIn .2s cubic-bezier(.16,1,.3,1);
+  white-space:nowrap;
+}
+.reaction-bar.show{display:flex;}
+.reaction-btn{
+  font-size:18px;cursor:pointer;padding:3px 6px;border-radius:8px;
+  transition:transform .15s,background .15s;
+  background:none;border:none;
+}
+.reaction-btn:hover{transform:scale(1.3);background:rgba(124,109,250,.1);}
+.msg-reaction-display{
+  display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;
+}
+.msg-react-chip{
+  font-size:13px;padding:2px 8px;border-radius:20px;
+  background:rgba(124,109,250,.1);border:1px solid rgba(124,109,250,.2);
+  cursor:pointer;transition:all .15s;
+}
+.msg-react-chip:hover{background:rgba(124,109,250,.2);}
+
+/* Chat search bar */
+.chat-search-bar{
+  display:none;position:absolute;top:0;left:0;right:0;z-index:50;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:10px 16px;align-items:center;gap:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  animation:fadeInDown .25s ease;
+}
+.chat-search-bar.show{display:flex;}
+.chat-search-inp{
+  flex:1;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:10px;padding:9px 14px;color:var(--text);
+  font-family:'Inter',sans-serif;font-size:14px;outline:none;
+  transition:border-color .2s;
+}
+.chat-search-inp:focus{border-color:var(--accent);}
+.chat-search-nav{display:flex;gap:4px;align-items:center;}
+.cs-nav-btn{
+  width:30px;height:30px;border-radius:8px;background:var(--bg3);
+  border:1px solid var(--border);color:var(--text2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+  font-size:14px;
+}
+.cs-nav-btn:hover{background:var(--bg4);color:var(--text);}
+.chat-search-count{font-size:12px;color:var(--text3);white-space:nowrap;}
+.search-highlight{background:rgba(124,109,250,.25);border-radius:3px;padding:1px 2px;}
+.search-highlight.active{background:rgba(124,109,250,.5);}
+
+
+/* ════ MESSAGE REACTIONS & REPLY ════ */
+.message{position:relative;}
+.msg-actions{
+  display:none;position:absolute;
+  right:8px;top:8px;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:20px;padding:4px 8px;
+  gap:4px;align-items:center;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  z-index:5;animation:scaleIn .15s ease;
+}
+.message:hover .msg-actions{display:flex;}
+.msg-act-btn{
+  width:28px;height:28px;border-radius:8px;background:none;border:none;
+  cursor:pointer;color:var(--text3);font-size:14px;display:flex;
+  align-items:center;justify-content:center;transition:all .15s;
+}
+.msg-act-btn:hover{background:var(--bg4);color:var(--accent2);}
+
+/* Reply preview above input */
+.reply-preview{
+  display:none;padding:8px 14px;margin-bottom:6px;
+  background:rgba(124,109,250,.06);border-left:3px solid var(--accent);
+  border-radius:0 10px 10px 0;font-size:12px;color:var(--text2);
+  position:relative;animation:fadeInDown .2s ease;
+}
+.reply-preview.show{display:flex;align-items:center;gap:10px;}
+.reply-preview-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.reply-preview-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;}
+
+/* Replied message inside bubble */
+.reply-quote{
+  padding:8px 12px;margin-bottom:10px;
+  background:rgba(124,109,250,.08);border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0;font-size:11px;color:var(--text3);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px;
+}
+.reply-quote-name{font-weight:800;color:var(--accent2);margin-bottom:2px;font-size:10px;}
+
+/* Reactions display */
+.msg-reactions{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px;}
+.react-chip{
+  padding:3px 9px;border-radius:20px;font-size:13px;
+  background:rgba(124,109,250,.08);border:1px solid rgba(124,109,250,.15);
+  cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;
+  animation:scaleIn .2s ease;
+}
+.react-chip:hover{background:rgba(124,109,250,.18);transform:scale(1.08);}
+.react-chip .cnt{font-size:11px;font-weight:700;color:var(--accent2);}
+
+/* Emoji picker */
+.emoji-picker{
+  position:absolute;bottom:calc(100% + 8px);left:0;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:20px;padding:8px 12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  display:none;gap:6px;z-index:100;
+  animation:scaleIn .15s cubic-bezier(.16,1,.3,1);
+  white-space:nowrap;
+}
+.emoji-picker.show{display:flex;}
+.ep-btn{font-size:20px;cursor:pointer;padding:4px;border-radius:8px;transition:transform .15s;background:none;border:none;}
+.ep-btn:hover{transform:scale(1.3);}
+
+/* ════ VOICE CHAT (real-time TTS) ════ */
+.voice-chat-bar{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,rgba(12,12,30,.97),rgba(8,8,22,.97));
+  border:1px solid rgba(124,109,250,.3);border-radius:30px;
+  padding:12px 20px;display:none;align-items:center;gap:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 0 1px rgba(124,109,250,.1);
+  z-index:500;backdrop-filter:blur(20px);
+  animation:slideUpIn .3s cubic-bezier(.16,1,.3,1);
+  min-width:260px;
+}
+.voice-chat-bar.show{display:flex;}
+@keyframes slideUpIn{from{opacity:0;transform:translateX(-50%) translateY(20px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+.vc-orb{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent3));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 20px rgba(124,109,250,.5);
+  position:relative;cursor:pointer;
+}
+.vc-orb.listening{animation:vcPulse 1.2s ease-in-out infinite;}
+.vc-orb.speaking{animation:vcSpeak .6s ease-in-out infinite alternate;}
+@keyframes vcPulse{0%,100%{box-shadow:0 0 20px rgba(124,109,250,.5),0 0 0 0 rgba(124,109,250,.4);}50%{box-shadow:0 0 30px rgba(124,109,250,.7),0 0 0 12px rgba(124,109,250,0);}}
+@keyframes vcSpeak{from{box-shadow:0 0 20px rgba(34,211,238,.5);}to{box-shadow:0 0 40px rgba(34,211,238,.8),0 0 0 8px rgba(34,211,238,.1);}}
+.vc-info{flex:1;}
+.vc-status{font-size:13px;font-weight:700;color:var(--text);}
+.vc-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+.vc-waves{display:flex;align-items:center;gap:3px;margin-top:6px;}
+.vc-wave{width:3px;border-radius:3px;background:var(--accent);animation:waveAnim .8s ease-in-out infinite;}
+.vc-wave:nth-child(2){animation-delay:.1s;height:8px;}
+.vc-wave:nth-child(3){animation-delay:.2s;height:16px;}
+.vc-wave:nth-child(4){animation-delay:.3s;height:10px;}
+.vc-wave:nth-child(5){animation-delay:.4s;height:20px;}
+.vc-wave:nth-child(6){animation-delay:.5s;height:12px;}
+.vc-wave:nth-child(7){animation-delay:.6s;height:6px;}
+@keyframes waveAnim{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+.vc-close{width:32px;height:32px;border-radius:50%;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;}
+.vc-close:hover{background:rgba(239,68,68,.2);}
+
+/* ════ CHARTS ════ */
+.ai-chart-wrap{
+  margin:12px 0 4px;padding:16px;
+  background:rgba(12,12,30,.8);border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;max-width:100%;overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.ai-chart-title{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.ai-chart-wrap canvas{max-width:100% !important;}
+
+/* ════ PAYMENT MODAL ════ */
+.payment-method{
+  padding:14px 16px;background:var(--bg3);border:1.5px solid var(--border);
+  border-radius:14px;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:14px;margin-bottom:8px;
+}
+.payment-method:hover{border-color:rgba(124,109,250,.4);background:rgba(124,109,250,.06);}
+.payment-method.selected{border-color:var(--accent);background:rgba(124,109,250,.1);}
+.pay-logo{width:44px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;}
+.pay-name{font-size:14px;font-weight:700;}
+.pay-desc{font-size:11px;color:var(--text3);}
+.pay-check{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.payment-method.selected .pay-check{background:var(--accent);border-color:var(--accent);}
+.pay-amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.pay-amt{padding:12px;border:1.5px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;transition:all .2s;font-weight:700;font-size:13px;}
+.pay-amt:hover,.pay-amt.active{border-color:var(--accent);background:rgba(124,109,250,.1);color:var(--accent2);}
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -1462,6 +1835,7 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
 <div id="sbOverlay" onclick="closeSidebar()"></div>
 
 <!-- ===== AUTH ===== -->
+<div id="customCursor" aria-hidden="true"><div id="cursorDot"></div><div id="cursorRing"></div></div>
 <div id="authScreen">
   <div class="auth-orbs"><div class="auth-orb"></div><div class="auth-orb"></div><div class="auth-orb"></div></div>
   <div class="auth-container">
@@ -1599,6 +1973,11 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
 
     <div class="nav-sec">
       <span class="nav-sec-lbl" data-i18n="secQoshimcha">Qo'shimcha</span>
+      <div class="nv" onclick="openVoiceChatFromNav()">
+        <div class="nv-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+        <span class="nv-lbl">Ovozli Chat</span>
+        <span class="nv-badge">Yangi</span>
+      </div>
       <div class="nv" onclick="openModal('templatesModal')">
         <div class="nv-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
         <span class="nv-lbl" data-i18n="navTemplLabel">Shablonlar</span>
@@ -1607,6 +1986,10 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
       <div class="nv" id="privacyNavBtn" onclick="togglePrivacyMode()">
         <div class="nv-icon ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <span class="nv-lbl" data-i18n="navPrivLabel">Maxfiylik rejimi</span>
+      </div>
+      <div class="nv" onclick="openModal('reminderModal')">
+        <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <span class="nv-lbl">Eslatmalar</span>
       </div>
       <div class="nv" onclick="setSleepTimer()">
         <div class="nv-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
@@ -1623,6 +2006,11 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
         <div class="nv-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <span class="nv-lbl" data-i18n="navProfileLabel">AI Profil</span>
         <span class="nv-badge">Yangi</span>
+      </div>
+      <div class="nv" onclick="openModal('paymentModal')">
+        <div class="nv-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <span class="nv-lbl">Pro Xarid</span>
+        <span class="nv-badge" style="background:linear-gradient(135deg,#10b981,#059669);color:white">💳</span>
       </div>
       <div class="nv" onclick="openModal('plansModal')">
         <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
@@ -1701,6 +2089,12 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
       </div>
     </div>
     <div class="tb-right">
+        <button class="tb-btn" onclick="openModal('exportModal')" title="Eksport">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button class="tb-btn" onclick="openChatSearch()" title="Chat qidirish (Ctrl+F)" id="searchTopBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
       <div class="lang-sw">
         <div class="lang-o active" id="langUz" onclick="setLang('uz')">UZ</div>
         <div class="lang-o" id="langRu" onclick="setLang('ru')">RU</div>
@@ -1760,6 +2154,7 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
 <div class="chat-area" id="chatArea">
     <div id="welcomeScreen">
       <div class="welcome-hero">
+        <div class="hero-grid"></div>
         <div class="hero-blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
         <div class="stickers">
           <span class="stk s1"><span class="stk-inner">🫀</span></span>
@@ -1831,14 +2226,15 @@ input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
       <div style="position:relative">
       <div class="autocomplete-popup" id="autocompletePopup"></div>
       </div>
+      <div id="replyPreviewWrap"></div>
       <div class="input-box">
         <textarea id="userInput" placeholder="Savolingizni yozing… (Enter — yuborish, Shift+Enter — yangi qator)" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this);updateCharCount()" maxlength="4000"></textarea>
         <div class="input-btns">
-          <label class="inp-btn" for="fileInput" title="Fayl" style="cursor:pointer">
-            <input type="file" id="fileInput" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none" accept="image/*,.pdf,.txt,.doc,.docx,.md" onchange="handleFileAttach(event)">
+          <button class="inp-btn" id="attachBtn" onclick="triggerFileOrBridge()" title="Fayl">
+            <input type="file" id="fileInput" accept="image/*,.pdf,.txt,.doc,.docx,.md" onchange="handleFileAttach(event)" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-          </label>
-          <button class="inp-btn" id="voiceBtn" onclick="toggleVoice()" title="Ovoz">
+          </button>
+          <button class="inp-btn" id="voiceBtn" onclick="toggleVoiceOrBridge()" title="Ovoz">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
           </button>
           <button class="send-btn" id="sendBtn" onclick="sendMessage()">
@@ -2513,11 +2909,25 @@ function renderMessage(role,text,animate=true,imgData=null){
   div.className='message '+(isUser?'user':'ai');
   if(!animate)div.style.animation='none';
   const imgHtml=imgData?`<img src="${imgData}" style="max-width:280px;border-radius:12px;margin-bottom:8px;display:block;cursor:pointer;border:1px solid var(--border2)" onclick="fullscreenImg('${imgData}')" alt="Yuklangan rasm">`:'';
+  const msgId='msg_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+  div.dataset.msgId=msgId;
+  const replyHtml=pendingReply?`<div class="reply-quote"><div class="reply-quote-name">↩ ${escHtml(pendingReply.name)}</div>${escHtml(pendingReply.text.slice(0,80))}${pendingReply.text.length>80?'…':''}</div>`:'';
+  if(pendingReply&&isUser)pendingReply=null;
   div.innerHTML=`
     <div class="msg-avatar ${isUser?'user':'ai'}">${avatarContent}</div>
-    <div class="msg-content">
+    <div class="msg-content" style="position:relative">
+      <div class="msg-actions">
+        <button class="msg-act-btn" onclick="showEmojiPicker('${msgId}',this)" title="Reaksiya">😊</button>
+        <button class="msg-act-btn" onclick="replyToMsg('${msgId}','${escHtml(name)}',this)" title="Javob">↩</button>
+        ${!isUser?`<button class="msg-act-btn" onclick="speakMsg(this)" title="Tinglash">🔊</button>`:''}
+        <button class="msg-act-btn" onclick="copyMsgText(this)" title="Nusxa">📋</button>
+      </div>
+      <div class="emoji-picker" id="ep_${msgId}">
+        ${['👍','❤️','😂','🔥','😮','👏','💯','🤔','😢','🙏'].map(e=>`<button class="ep-btn" onclick="addMsgReaction('${msgId}','${e}')">${e}</button>`).join('')}
+      </div>
       <div class="msg-name">${escHtml(name)} · ${time}</div>
-      <div class="bubble">${imgHtml}<p>${renderMarkdown(text)}</p></div>
+      <div class="bubble">${replyHtml}${imgHtml}<p>${renderMarkdown(text)}</p></div>
+      <div class="msg-reactions" id="reactions_${msgId}"></div>
     </div>`;
   container.appendChild(div);
   document.getElementById('chatArea').scrollTo({top:99999,behavior:'smooth'});
@@ -2731,7 +3141,19 @@ function handleFileAttach(e){
     reader.onload=ev=>{
       pendingImageData=ev.target.result;
       showFilePreview(f.name,'img',ev.target.result);
-      notify('🖼️ Rasm biriktildi — yuborish tugmasini bosing','info');
+      // Show quick-analyze button
+      setTimeout(()=>{
+        const prev=document.getElementById('filePreview');
+        if(prev&&!prev.querySelector('.analyze-quick-btn')){
+          const btn=document.createElement('button');
+          btn.className='analyze-quick-btn';
+          btn.innerHTML='🔍 Tahlil qilish';
+          btn.style.cssText='padding:6px 14px;background:rgba(124,109,250,.15);border:1px solid rgba(124,109,250,.3);border-radius:8px;color:var(--accent2);font-family:Inter,sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0;';
+          btn.onclick=()=>quickAnalyzeImage();
+          prev.appendChild(btn);
+        }
+      },100);
+      notify('🖼️ Rasm biriktildi — savol yozing yoki tahlil qiling','info');
     };
     reader.readAsDataURL(f);
   } else if(isPDF){
@@ -3299,6 +3721,880 @@ callAIStream=async function(userText,onChunk,imgData=null){
   return result;
 };
 
+
+// ════════════════════════════════════════
+// CUSTOM CURSOR
+// ════════════════════════════════════════
+(function(){
+  const cursor=document.getElementById('customCursor');
+  const dot=document.getElementById('cursorDot');
+  const ring=document.getElementById('cursorRing');
+  if(!cursor)return;
+  let mx=0,my=0,rx=0,ry=0,raf=null;
+  const useCursor=()=>localStorage.getItem('medai_cursor')==='custom';
+  function applyCursor(){
+    const on=useCursor();
+    document.body.classList.toggle('custom-cursor',on);
+    if(cursor)cursor.style.opacity=on?'1':'0';
+  }
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    if(dot){dot.style.left=mx+'px';dot.style.top=my+'px';}
+    if(!raf)raf=requestAnimationFrame(function loop(){
+      if(ring){
+        rx+=(mx-rx)*.18;ry+=(my-ry)*.18;
+        ring.style.left=rx+'px';ring.style.top=ry+'px';
+      }
+      raf=requestAnimationFrame(loop);
+    });
+    // Scale ring on interactive elements
+    const el=document.elementFromPoint(mx,my);
+    const isBtn=el&&(el.tagName==='BUTTON'||el.tagName==='A'||el.closest('button')||el.closest('a')||el.style.cursor==='pointer'||el.closest('[onclick]'));
+    if(ring){ring.style.width=isBtn?'48px':'32px';ring.style.height=isBtn?'48px':'32px';ring.style.borderColor=isBtn?'var(--accent2)':'rgba(124,109,250,.5)';}
+    if(dot){dot.style.transform=isBtn?'translate(-50%,-50%) scale(1.8)':'translate(-50%,-50%) scale(1)';}
+  });
+  document.addEventListener('mousedown',()=>{if(dot)dot.style.transform='translate(-50%,-50%) scale(.7)';});
+  document.addEventListener('mouseup',()=>{if(dot)dot.style.transform='translate(-50%,-50%) scale(1)';});
+  document.addEventListener('mouseleave',()=>{if(cursor)cursor.style.opacity='0';});
+  document.addEventListener('mouseenter',()=>{if(cursor&&useCursor())cursor.style.opacity='1';});
+  // Init on load
+  setTimeout(applyCursor,500);
+  window._applyCursorMode=applyCursor;
+})();
+
+// ════════════════════════════════════════
+// CHAT SEARCH
+// ════════════════════════════════════════
+let chatSearchResults=[], chatSearchIdx=0;
+function openChatSearch(){
+  const bar=document.getElementById('chatSearchBar');
+  if(!bar)return;
+  bar.classList.add('show');
+  setTimeout(()=>document.getElementById('chatSearchInp')?.focus(),150);
+}
+function closeChatSearch(){
+  const bar=document.getElementById('chatSearchBar');
+  if(bar)bar.classList.remove('show');
+  // Remove highlights
+  document.querySelectorAll('.search-highlight').forEach(el=>{
+    el.replaceWith(document.createTextNode(el.textContent));
+  });
+  chatSearchResults=[];
+  const cnt=document.getElementById('chatSearchCount');
+  if(cnt)cnt.textContent='';
+}
+function searchInChat(query){
+  // Remove old highlights
+  document.querySelectorAll('.search-highlight').forEach(el=>{
+    const t=document.createTextNode(el.textContent);
+    el.replaceWith(t);
+  });
+  const cnt=document.getElementById('chatSearchCount');
+  if(!query.trim()){if(cnt)cnt.textContent='';return;}
+  const bubbles=document.querySelectorAll('.bubble p,.bubble code,.bubble li');
+  chatSearchResults=[];
+  const esc=query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const re=new RegExp(`(${esc})`,'gi');
+  bubbles.forEach(el=>{
+    if(el.innerHTML.includes('<span'))return;// skip already processed
+    el.innerHTML=el.innerHTML.replace(re,m=>{
+      chatSearchResults.push(null);// placeholder count
+      return `<span class="search-highlight">${m}</span>`;
+    });
+  });
+  // Recount real highlights
+  const all=document.querySelectorAll('.search-highlight');
+  chatSearchResults=[...all];
+  chatSearchIdx=0;
+  if(cnt)cnt.textContent=all.length?`${chatSearchIdx+1}/${all.length}`:'0 ta';
+  if(all.length){
+    all.forEach(el=>el.classList.remove('active'));
+    all[0].classList.add('active');
+    all[0].scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+function chatSearchNav(dir){
+  if(!chatSearchResults.length)return;
+  const all=document.querySelectorAll('.search-highlight');
+  all.forEach(el=>el.classList.remove('active'));
+  chatSearchIdx=(chatSearchIdx+dir+all.length)%all.length;
+  all[chatSearchIdx].classList.add('active');
+  all[chatSearchIdx].scrollIntoView({behavior:'smooth',block:'center'});
+  const cnt=document.getElementById('chatSearchCount');
+  if(cnt)cnt.textContent=`${chatSearchIdx+1}/${all.length}`;
+}
+// Ctrl+F to open search
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='f'){
+    const mc=document.getElementById('messagesContainer');
+    if(mc&&mc.style.display!=='none'){e.preventDefault();openChatSearch();}
+  }
+});
+
+// ════════════════════════════════════════
+// MESSAGE REACTIONS
+// ════════════════════════════════════════
+const REACTIONS=['👍','❤️','😂','😮','🔥','👏','💯','🤔'];
+let msgReactions={};// {msgId: {emoji: count}}
+
+function showReactionBar(msgId, anchor){
+  // Remove any existing
+  document.querySelectorAll('.reaction-bar').forEach(el=>el.remove());
+  const bar=document.createElement('div');
+  bar.className='reaction-bar show';
+  bar.id='reactionBar_'+msgId;
+  bar.style.cssText='left:0;';
+  bar.innerHTML=REACTIONS.map(r=>`<button class="reaction-btn" onclick="addReaction('${msgId}','${r}')">${r}</button>`).join('');
+  anchor.style.position='relative';
+  anchor.appendChild(bar);
+  // Auto-close
+  setTimeout(()=>{
+    bar.addEventListener('mouseleave',()=>setTimeout(()=>bar.remove(),500));
+  },100);
+}
+
+function addReaction(msgId, emoji){
+  if(!msgReactions[msgId])msgReactions[msgId]={};
+  msgReactions[msgId][emoji]=(msgReactions[msgId][emoji]||0)+1;
+  renderReactions(msgId);
+  document.querySelectorAll('.reaction-bar').forEach(el=>el.remove());
+  // Save
+  if(currentUser)localStorage.setItem('medai_reactions_'+currentUser.email,JSON.stringify(msgReactions));
+}
+
+function renderReactions(msgId){
+  const el=document.getElementById('react_'+msgId);
+  if(!el)return;
+  const rxs=msgReactions[msgId]||{};
+  el.innerHTML=Object.entries(rxs).map(([e,c])=>`<span class="msg-react-chip" onclick="addReaction('${msgId}','${e}')">${e}${c>1?' '+c:''}</span>`).join('');
+}
+
+// Patch addMessage to include reaction support
+const __origAddMsg=typeof addMessage==='function'?addMessage:null;
+
+// ════════════════════════════════════════
+// IMAGE QUICK ANALYZE
+// ════════════════════════════════════════
+function quickAnalyzeImage(){
+  if(!pendingImageData){notify('Rasm topilmadi','error');return;}
+  const inp=document.getElementById('userInput');
+  if(inp){
+    inp.value='Bu rasmni batafsil tahlil qil: nima ko\'rsatilgan, mazmuni nima, muhim detallar qanday?';
+    inp.focus();
+  }
+  notify('🔍 Tahlil uchun yuborish tugmasini bosing','info');
+}
+
+// ════════════════════════════════════════
+// CHAT EXPORT
+// ════════════════════════════════════════
+function exportChat(fmt){
+  closeModal('exportModal');
+  const msgs=conversationHistory;
+  if(!msgs||!msgs.length){notify('Eksport uchun suhbat yo\'q','error');return;}
+  const date=new Date().toLocaleDateString('uz-UZ');
+  const name=`MedAI_Chat_${date.replace(/\./g,'-')}`;
+  let content='',mime='',ext=fmt;
+
+  if(fmt==='txt'){
+    content=`Med AI — Suhbat nusxasi\nSana: ${date}\n${'─'.repeat(50)}\n\n`;
+    msgs.forEach(m=>{
+      const role=m.role==='user'?'👤 Siz':'🤖 Med AI';
+      content+=`${role}:\n${m.content}\n\n${'─'.repeat(40)}\n\n`;
+    });
+    mime='text/plain';
+  } else if(fmt==='md'){
+    content=`# Med AI Suhbat\n**Sana:** ${date}\n\n---\n\n`;
+    msgs.forEach(m=>{
+      const role=m.role==='user'?'**👤 Siz**':'**🤖 Med AI**';
+      content+=`${role}\n\n${m.content}\n\n---\n\n`;
+    });
+    mime='text/markdown';
+  } else if(fmt==='html'){
+    const rows=msgs.map(m=>{
+      const cls=m.role==='user'?'user':'ai';
+      const label=m.role==='user'?'Siz':'Med AI';
+      const bg=m.role==='user'?'#1a1a3a':'#0d0d24';
+      return `<div style="margin:12px 0;padding:14px;background:${bg};border-radius:12px"><strong style="color:${m.role==='user'?'#7c6dfa':'#22d3ee'}">${label}:</strong><p style="margin:8px 0 0;line-height:1.7;color:#eeeeff">${m.content.replace(/\n/g,'<br>')}</p></div>`;
+    }).join('');
+    content=`<!DOCTYPE html><html lang="uz"><head><meta charset="UTF-8"><title>Med AI Chat</title><style>body{background:#07071a;color:#eeeeff;font-family:Inter,sans-serif;max-width:800px;margin:40px auto;padding:20px}h1{color:#7c6dfa}</style></head><body><h1>🤖 Med AI Suhbat</h1><p style="color:#7878a0">Sana: ${date}</p><hr style="border-color:#1a1a35;margin:20px 0">${rows}
+<!-- VOICE CHAT BAR -->
+<div class="voice-chat-bar" id="voiceChatBar">
+  <div class="vc-orb" id="vcOrb" onclick="toggleVcListen()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="22" height="22"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+  </div>
+  <div class="vc-info">
+    <div class="vc-status" id="vcStatus">Tinglash uchun bosing</div>
+    <div class="vc-sub" id="vcSub">Ovozli suhbat rejimi</div>
+    <div class="vc-waves" id="vcWaves">
+      <div class="vc-wave" style="height:4px"></div>
+      <div class="vc-wave"></div>
+      <div class="vc-wave"></div>
+      <div class="vc-wave"></div>
+      <div class="vc-wave"></div>
+      <div class="vc-wave"></div>
+      <div class="vc-wave"></div>
+    </div>
+  </div>
+  <button class="vc-close" onclick="closeVoiceChat()">✕</button>
+</div>
+
+<!-- REPLY PREVIEW -->
+<div class="reply-preview" id="replyPreview">
+  <span style="color:var(--accent2);font-size:16px">↩</span>
+  <div class="reply-preview-text" id="replyPreviewText"></div>
+  <button class="reply-preview-close" onclick="cancelReply()">✕</button>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="overlay" id="paymentModal" onclick="overlayClick(event,'paymentModal')">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon" style="background:rgba(16,185,129,.1);color:var(--green)">💳</div>
+        Med AI Pro — Xarid qilish
+      </div>
+      <button class="close-btn" onclick="closeModal('paymentModal')">✕</button>
+    </div>
+    <!-- Plan info -->
+    <div style="padding:14px;background:linear-gradient(135deg,rgba(124,109,250,.1),rgba(34,211,238,.06));border:1px solid rgba(124,109,250,.2);border-radius:14px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:900;margin-bottom:4px">✨ Med AI Pro</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.8">✅ Cheksiz xabarlar &nbsp; ✅ GPT-4 sifati<br>✅ Rasm yaratish &nbsp; ✅ Ustuvor javob</div>
+    </div>
+    <!-- Amount -->
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Muddat tanlang</div>
+    <div class="pay-amount-grid" id="payAmountGrid">
+      <div class="pay-amt active" data-months="1" data-price="29000" onclick="selectPayPlan(this)"><div style="font-size:10px;color:var(--text3);margin-bottom:2px">1 OY</div>29 000 so'm</div>
+      <div class="pay-amt" data-months="3" data-price="79000" onclick="selectPayPlan(this)"><div style="font-size:10px;color:var(--green);margin-bottom:2px">-10%</div>79 000 so'm</div>
+      <div class="pay-amt" data-months="12" data-price="249000" onclick="selectPayPlan(this)"><div style="font-size:10px;color:var(--yellow);margin-bottom:2px">-28%</div>249 000 so'm</div>
+    </div>
+    <!-- Payment method -->
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">To'lov usuli</div>
+    <div class="payment-method selected" id="payPayme" onclick="selectPayMethod('payme')">
+      <div class="pay-logo" style="background:#00AAFF;color:white">P</div>
+      <div><div class="pay-name">Payme</div><div class="pay-desc">Visa, Mastercard, Uzcard</div></div>
+      <div class="pay-check">✓</div>
+    </div>
+    <div class="payment-method" id="payClick" onclick="selectPayMethod('click')">
+      <div class="pay-logo" style="background:#FF6B00;color:white">C</div>
+      <div><div class="pay-name">Click</div><div class="pay-desc">Barcha O'zbek kartalar</div></div>
+      <div class="pay-check"></div>
+    </div>
+    <div class="payment-method" id="payUzum" onclick="selectPayMethod('uzum')">
+      <div class="pay-logo" style="background:#8B5CF6;color:white">U</div>
+      <div><div class="pay-name">Uzum Bank</div><div class="pay-desc">Bo'lib to'lash imkoni</div></div>
+      <div class="pay-check"></div>
+    </div>
+    <button onclick="initiatePayment()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--green),#059669);border:none;border-radius:14px;color:#fff;font-family:Inter,sans-serif;font-size:15px;font-weight:800;cursor:pointer;margin-top:14px;transition:all .25s;box-shadow:0 6px 20px rgba(16,185,129,.35)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'" id="payBtn">
+      💳 To'lovni amalga oshirish
+    </button>
+    <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:10px">🔒 256-bit SSL shifrlash • Xavfsiz to'lov</div>
+  </div>
+</div>
+
+</body></html>`;
+    mime='text/html';
+  } else if(fmt==='json'){
+    content=JSON.stringify({app:'Med AI',date,messages:msgs},null,2);
+    mime='application/json';
+  }
+
+  const blob=new Blob([content],{type:mime});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`${name}.${ext}`;
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  notify(`📤 ${fmt.toUpperCase()} eksport qilindi!`,'success');
+}
+
+// ════════════════════════════════════════
+// SMART REMINDERS
+// ════════════════════════════════════════
+let reminders=[];
+let reminderCheckInterval=null;
+
+function loadReminders(){
+  if(!currentUser)return;
+  reminders=JSON.parse(localStorage.getItem('medai_reminders_'+currentUser.email)||'[]');
+  startReminderCheck();
+  renderReminderList();
+}
+
+function addReminder(){
+  const text=document.getElementById('remText')?.value.trim();
+  const date=document.getElementById('remDate')?.value;
+  const time=document.getElementById('remTime')?.value||'09:00';
+  const repeat=document.getElementById('remRepeat')?.value||'once';
+  if(!text){notify('Eslatma matnini kiriting','error');return;}
+  if(!date){notify('Sanani tanlang','error');return;}
+  const rem={id:Date.now(),text,date,time,repeat,done:false};
+  reminders.push(rem);
+  saveReminders();
+  renderReminderList();
+  notify('🔔 Eslatma qo\'shildi!','success');
+  if(document.getElementById('remText'))document.getElementById('remText').value='';
+}
+
+function saveReminders(){
+  if(!currentUser)return;
+  localStorage.setItem('medai_reminders_'+currentUser.email,JSON.stringify(reminders));
+}
+
+function deleteReminder(id){
+  reminders=reminders.filter(r=>r.id!==id);
+  saveReminders();renderReminderList();
+}
+
+function renderReminderList(){
+  const el=document.getElementById('reminderList');
+  if(!el)return;
+  const active=reminders.filter(r=>!r.done);
+  if(!active.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">Hali eslatma yo\'q</div>';return;}
+  el.innerHTML='<div style="font-size:10px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Faol eslatmalar</div>'+
+    active.map(r=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;margin-bottom:7px">
+      <span style="font-size:18px">🔔</span>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600">${r.text}</div>
+        <div style="font-size:11px;color:var(--text3)">${r.date} ${r.time} ${r.repeat!=='once'?'• '+r.repeat:''}</div>
+      </div>
+      <button onclick="deleteReminder(${r.id})" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:16px">✕</button>
+    </div>`).join('');
+}
+
+function startReminderCheck(){
+  clearInterval(reminderCheckInterval);
+  reminderCheckInterval=setInterval(()=>{
+    const now=new Date();
+    const nowStr=now.toISOString().slice(0,16).replace('T',' ');
+    reminders.forEach(r=>{
+      if(r.done)return;
+      const remStr=r.date+' '+r.time;
+      if(nowStr>=remStr){
+        notify(`🔔 Eslatma: ${r.text}`,'warning',8000);
+        // Browser notification
+        if(Notification.permission==='granted'){
+          new Notification('Med AI Eslatma',{body:r.text,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><text y="18" font-size="18">🤖</text></svg>'});
+        }
+        if(r.repeat==='once')r.done=true;
+        else if(r.repeat==='daily'){const d=new Date(r.date);d.setDate(d.getDate()+1);r.date=d.toISOString().slice(0,10);}
+        else if(r.repeat==='weekly'){const d=new Date(r.date);d.setDate(d.getDate()+7);r.date=d.toISOString().slice(0,10);}
+        saveReminders();
+      }
+    });
+  },30000);// check every 30s
+}
+
+// Request notification permission
+function requestNotifPermission(){
+  if(Notification.permission==='default'){
+    Notification.requestPermission().then(p=>{
+      if(p==='granted')notify('🔔 Bildirishnomalar yoqildi','success');
+    });
+  }
+}
+
+// Set today as default reminder date
+document.addEventListener('DOMContentLoaded',()=>{
+  const dateInp=document.getElementById('remDate');
+  if(dateInp){
+    const today=new Date().toISOString().slice(0,10);
+    dateInp.value=today;
+    dateInp.min=today;
+  }
+});
+
+// Patch login to load reminders
+
+
+// ════════════════════════════════════════
+// ANDROID WEBVIEW BRIDGE
+// ════════════════════════════════════════
+const isAndroidWebView = typeof Android !== 'undefined';
+const isIOSWebView = window.webkit && window.webkit.messageHandlers;
+
+// File attach — works on Android WebView AND browser
+function triggerFileOrBridge(){
+  if(isAndroidWebView && typeof Android.openFilePicker === 'function'){
+    // Android Studio WebView: call native Java method
+    Android.openFilePicker();
+  } else {
+    // Browser / PWA fallback
+    const inp = document.getElementById('fileInput');
+    if(inp){
+      inp.value = '';
+      inp.click();
+    }
+  }
+}
+
+// Called FROM Android Java when user picks a file
+// Android code should call: webView.evaluateJavascript("receiveFileFromAndroid(base64, name, mime)", null)
+function receiveFileFromAndroid(base64Data, fileName, mimeType){
+  if(!base64Data) return;
+  const dataUrl = 'data:' + mimeType + ';base64,' + base64Data;
+  if(mimeType.startsWith('image/')){
+    pendingImageData = dataUrl;
+    showFilePreview(fileName, 'img', dataUrl);
+    notify('🖼️ Rasm biriktildi', 'info');
+  } else {
+    // Text/PDF content passed directly
+    attachedFile = {name: fileName, textContent: base64Data};
+    showFilePreview(fileName, 'file', null);
+    notify('📎 Fayl biriktildi', 'info');
+  }
+}
+
+// Voice — works on Android WebView AND browser
+function toggleVoiceOrBridge(){
+  if(isAndroidWebView && typeof Android.startVoiceRecognition === 'function'){
+    // Android Studio WebView: call native speech recognition
+    if(isRecording){
+      Android.stopVoiceRecognition();
+      isRecording = false;
+      document.getElementById('voiceBtn')?.classList.remove('recording');
+    } else {
+      Android.startVoiceRecognition();
+      isRecording = true;
+      document.getElementById('voiceBtn')?.classList.add('recording');
+      notify('🎤 Gapiring...', 'info');
+    }
+  } else {
+    // Browser Web Speech API fallback
+    toggleVoice();
+  }
+}
+
+// Called FROM Android Java when voice result arrives
+// Android code: webView.evaluateJavascript("receiveVoiceFromAndroid('" + result + "')", null)
+function receiveVoiceFromAndroid(text){
+  if(!text) return;
+  isRecording = false;
+  document.getElementById('voiceBtn')?.classList.remove('recording');
+  const inp = document.getElementById('userInput');
+  if(inp){
+    inp.value = (inp.value ? inp.value + ' ' : '') + text;
+    autoResize(inp);
+    updateCharCount();
+    notify('🎤 Ovoz qabul qilindi!', 'success');
+  }
+}
+
+// Called FROM Android when voice recognition cancelled/error
+function voiceErrorFromAndroid(msg){
+  isRecording = false;
+  document.getElementById('voiceBtn')?.classList.remove('recording');
+  notify('🎤 ' + (msg || 'Ovoz tanib bo\'lmadi'), 'error');
+}
+
+
+// ════════════════════════════════════════
+// MESSAGE REACTIONS & REPLY (upgraded)
+// ════════════════════════════════════════
+let pendingReply = null;
+let msgReactionStore = {};
+
+function showEmojiPicker(msgId, btn) {
+  // Close all other pickers
+  document.querySelectorAll('.emoji-picker.show').forEach(el => {
+    if (el.id !== 'ep_' + msgId) el.classList.remove('show');
+  });
+  const picker = document.getElementById('ep_' + msgId);
+  if (picker) picker.classList.toggle('show');
+  // Close on outside click
+  setTimeout(() => {
+    const close = (e) => {
+      if (!picker?.contains(e.target) && e.target !== btn) {
+        picker?.classList.remove('show');
+        document.removeEventListener('click', close);
+      }
+    };
+    document.addEventListener('click', close);
+  }, 100);
+}
+
+function addMsgReaction(msgId, emoji) {
+  document.getElementById('ep_' + msgId)?.classList.remove('show');
+  if (!msgReactionStore[msgId]) msgReactionStore[msgId] = {};
+  const prev = msgReactionStore[msgId][emoji] || 0;
+  // Toggle off if same
+  if (prev > 0) {
+    delete msgReactionStore[msgId][emoji];
+  } else {
+    msgReactionStore[msgId][emoji] = 1;
+  }
+  renderMsgReactions(msgId);
+  if (currentUser) {
+    try { localStorage.setItem('medai_rxns_' + currentUser.email, JSON.stringify(msgReactionStore)); } catch(e) {}
+  }
+}
+
+function renderMsgReactions(msgId) {
+  const el = document.getElementById('reactions_' + msgId);
+  if (!el) return;
+  const rxs = msgReactionStore[msgId] || {};
+  const entries = Object.entries(rxs);
+  el.innerHTML = entries.map(([e, c]) =>
+    `<span class="react-chip" onclick="addMsgReaction('${msgId}','${e}')">${e}${c > 1 ? `<span class="cnt">${c}</span>` : ''}</span>`
+  ).join('');
+}
+
+function replyToMsg(msgId, senderName, btn) {
+  const bubble = btn.closest('.msg-content').querySelector('.bubble p');
+  if (!bubble) return;
+  const text = bubble.innerText || bubble.textContent;
+  pendingReply = { msgId, name: senderName, text };
+  const preview = document.getElementById('replyPreview');
+  const previewText = document.getElementById('replyPreviewText');
+  if (preview) preview.classList.add('show');
+  if (previewText) previewText.textContent = `${senderName}: ${text.slice(0, 80)}${text.length > 80 ? '…' : ''}`;
+  document.getElementById('userInput')?.focus();
+}
+
+function cancelReply() {
+  pendingReply = null;
+  document.getElementById('replyPreview')?.classList.remove('show');
+}
+
+function copyMsgText(btn) {
+  const bubble = btn.closest('.msg-content').querySelector('.bubble p');
+  if (!bubble) return;
+  navigator.clipboard.writeText(bubble.innerText || bubble.textContent)
+    .then(() => notify('📋 Nusxa olindi', 'success', 1500))
+    .catch(() => notify('Nusxa olishda xatolik', 'error'));
+}
+
+// ════════════════════════════════════════
+// REAL-TIME VOICE CHAT (TTS + STT loop)
+// ════════════════════════════════════════
+let vcActive = false, vcListening = false, vcSpeaking = false;
+let vcRecognition = null, vcSpeechSynth = window.speechSynthesis;
+let vcAutoListen = true;
+
+function openVoiceChat() {
+  const bar = document.getElementById('voiceChatBar');
+  if (bar) bar.classList.add('show');
+  vcActive = true;
+  vcAutoListen = true;
+  closeSidebar();
+  notify('🎙️ Ovozli suhbat yoqildi', 'info');
+  // Auto-start listening
+  setTimeout(startVcListen, 500);
+}
+
+function closeVoiceChat() {
+  vcActive = false;
+  vcListening = false;
+  vcAutoListen = false;
+  stopVcSpeech();
+  vcRecognition?.stop();
+  const bar = document.getElementById('voiceChatBar');
+  if (bar) bar.classList.remove('show');
+  const orb = document.getElementById('vcOrb');
+  if (orb) { orb.classList.remove('listening', 'speaking'); }
+}
+
+function toggleVcListen() {
+  if (vcListening) {
+    vcRecognition?.stop();
+    vcListening = false;
+    setVcStatus('Bosib gapiring', '');
+    const orb = document.getElementById('vcOrb');
+    if (orb) orb.classList.remove('listening');
+  } else {
+    stopVcSpeech();
+    startVcListen();
+  }
+}
+
+function startVcListen() {
+  if (!vcActive) return;
+  stopVcSpeech();
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { notify('Brauzeringiz ovozni qo\'llab-quvvatlamaydi', 'error'); return; }
+  vcRecognition = new SR();
+  vcRecognition.lang = currentLang === 'ru' ? 'ru-RU' : currentLang === 'en' ? 'en-US' : 'uz-UZ';
+  vcRecognition.interimResults = true;
+  vcRecognition.maxAlternatives = 1;
+
+  vcListening = true;
+  const orb = document.getElementById('vcOrb');
+  if (orb) { orb.classList.add('listening'); orb.classList.remove('speaking'); }
+  setVcStatus('🎤 Gapiring...', 'Ovozingizni eshitmoqda');
+  animateVcWaves(true);
+
+  let finalTranscript = '';
+  vcRecognition.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) finalTranscript += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
+    }
+    const sub = document.getElementById('vcSub');
+    if (sub) sub.textContent = (finalTranscript + interim).slice(-60) || 'Ovozingizni eshitmoqda';
+  };
+
+  vcRecognition.onend = async () => {
+    vcListening = false;
+    animateVcWaves(false);
+    if (orb) orb.classList.remove('listening');
+    if (finalTranscript.trim() && vcActive) {
+      setVcStatus('🤔 Javob tayyorlanmoqda...', finalTranscript.slice(0, 60));
+      // Send to AI
+      const inp = document.getElementById('userInput');
+      if (inp) inp.value = finalTranscript;
+      await sendMessage();
+      // Wait for response then speak it
+      waitAndSpeakLastAIMsg();
+    } else if (vcActive && vcAutoListen) {
+      setTimeout(startVcListen, 800);
+    }
+  };
+  vcRecognition.onerror = () => {
+    vcListening = false;
+    animateVcWaves(false);
+    if (orb) orb.classList.remove('listening');
+    if (vcActive && vcAutoListen) setTimeout(startVcListen, 1500);
+  };
+  vcRecognition.start();
+}
+
+function waitAndSpeakLastAIMsg() {
+  let attempts = 0;
+  const check = setInterval(() => {
+    const msgs = document.querySelectorAll('.message.ai .bubble p');
+    const last = msgs[msgs.length - 1];
+    if (last && last.textContent.length > 10) {
+      clearInterval(check);
+      speakVcText(last.innerText || last.textContent);
+    }
+    if (++attempts > 30) clearInterval(check);
+  }, 500);
+}
+
+function speakVcText(text) {
+  if (!vcSpeechSynth || !vcActive) return;
+  stopVcSpeech();
+  // Clean text
+  const clean = text.replace(/[#*`>]/g, '').replace(/\n+/g, '. ').slice(0, 500);
+  const utt = new SpeechSynthesisUtterance(clean);
+  utt.lang = currentLang === 'ru' ? 'ru-RU' : currentLang === 'en' ? 'en-US' : 'uz-UZ';
+  utt.rate = 1.05; utt.pitch = 1;
+  vcSpeaking = true;
+  const orb = document.getElementById('vcOrb');
+  if (orb) { orb.classList.add('speaking'); orb.classList.remove('listening'); }
+  setVcStatus('🔊 Javob o\'qilyapti...', clean.slice(0, 50) + '…');
+  animateVcWaves(true);
+  utt.onend = () => {
+    vcSpeaking = false;
+    if (orb) orb.classList.remove('speaking');
+    animateVcWaves(false);
+    if (vcActive && vcAutoListen) {
+      setVcStatus('🎤 Gapiring...', 'Navbatingiz');
+      setTimeout(startVcListen, 600);
+    }
+  };
+  utt.onerror = () => {
+    vcSpeaking = false;
+    if (vcActive && vcAutoListen) setTimeout(startVcListen, 800);
+  };
+  vcSpeechSynth.speak(utt);
+}
+
+function stopVcSpeech() {
+  if (vcSpeechSynth) vcSpeechSynth.cancel();
+  vcSpeaking = false;
+}
+
+function setVcStatus(status, sub) {
+  const s = document.getElementById('vcStatus');
+  const sb = document.getElementById('vcSub');
+  if (s) s.textContent = status;
+  if (sb && sub !== undefined) sb.textContent = sub;
+}
+
+function animateVcWaves(active) {
+  const waves = document.querySelectorAll('.vc-wave');
+  waves.forEach((w, i) => {
+    w.style.animation = active ? `waveAnim ${0.6 + i * 0.1}s ease-in-out infinite` : 'none';
+    w.style.height = active ? '' : '4px';
+  });
+}
+
+// Add voice chat nav item (patched via side effects)
+function openVoiceChatFromNav() { openVoiceChat(); closeSidebar(); }
+
+// ════════════════════════════════════════
+// AI CHARTS — Auto-render from markdown
+// ════════════════════════════════════════
+let chartCounter = 0;
+
+function tryRenderCharts(container) {
+  if (typeof Chart === 'undefined') return;
+  // Look for code blocks with chart data
+  container.querySelectorAll('pre code').forEach(block => {
+    const text = block.textContent.trim();
+    // Detect JSON chart data pattern
+    if (text.startsWith('{') && text.includes('"type"') && text.includes('"data"')) {
+      try {
+        const cfg = JSON.parse(text);
+        if (cfg.type && cfg.data) renderAIChart(block.closest('pre'), cfg);
+      } catch(e) {}
+    }
+    // Detect simple table/data pattern and auto-chart
+    if (text.includes('|') && text.split('\n').length > 3) {
+      const chartCfg = tableToChart(text);
+      if (chartCfg) renderAIChart(block.closest('pre'), chartCfg);
+    }
+  });
+  // Also look for ```chart blocks
+  container.querySelectorAll('code.language-chart, code.language-graph').forEach(block => {
+    try {
+      const cfg = JSON.parse(block.textContent);
+      renderAIChart(block.closest('pre'), cfg);
+    } catch(e) {}
+  });
+}
+
+function tableToChart(text) {
+  const lines = text.split('\n').filter(l => l.trim() && !l.includes('---'));
+  if (lines.length < 3) return null;
+  const headers = lines[0].split('|').map(h => h.trim()).filter(Boolean);
+  const rows = lines.slice(1).map(l => l.split('|').map(c => c.trim()).filter(Boolean));
+  if (headers.length < 2 || rows.length < 2) return null;
+  const labels = rows.map(r => r[0]);
+  const datasets = [];
+  for (let i = 1; i < Math.min(headers.length, 4); i++) {
+    const vals = rows.map(r => parseFloat(r[i]) || 0);
+    if (vals.some(v => v !== 0)) {
+      datasets.push({
+        label: headers[i],
+        data: vals,
+        backgroundColor: [`rgba(124,109,250,0.7)`, `rgba(34,211,238,0.7)`, `rgba(192,132,252,0.7)`][i-1],
+        borderColor: [`#7c6dfa`, `#22d3ee`, `#c084fc`][i-1],
+        borderWidth: 2,
+        borderRadius: 6,
+      });
+    }
+  }
+  if (!datasets.length) return null;
+  return {
+    type: 'bar',
+    data: { labels, datasets },
+    options: { plugins: { legend: { labels: { color: '#eeeeff', font: { family: 'Inter' } } } }, scales: { x: { ticks: { color: '#7878a0' }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { color: '#7878a0' }, grid: { color: 'rgba(255,255,255,0.04)' } } } }
+  };
+}
+
+function renderAIChart(el, cfg) {
+  if (!el) return;
+  const id = 'chart_' + (++chartCounter);
+  // Dark theme defaults
+  if (cfg.options?.plugins?.legend?.labels) {
+    cfg.options.plugins.legend.labels.color = '#eeeeff';
+  }
+  const wrap = document.createElement('div');
+  wrap.className = 'ai-chart-wrap';
+  wrap.innerHTML = `
+    <div class="ai-chart-title">📊 ${cfg.title || 'Grafik'}</div>
+    <canvas id="${id}" height="220"></canvas>`;
+  el.replaceWith(wrap);
+  try {
+    new Chart(document.getElementById(id), {
+      type: cfg.type || 'bar',
+      data: cfg.data,
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        animation: { duration: 800, easing: 'easeInOutQuart' },
+        plugins: {
+          legend: { labels: { color: '#eeeeff', font: { family: 'Inter', size: 11 } } },
+          ...(cfg.options?.plugins || {})
+        },
+        scales: cfg.type !== 'pie' && cfg.type !== 'doughnut' ? {
+          x: { ticks: { color: '#7878a0', font: { family: 'Inter', size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+          y: { ticks: { color: '#7878a0', font: { family: 'Inter', size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+        } : undefined,
+        ...(cfg.options || {})
+      }
+    });
+  } catch(e) { console.warn('Chart error:', e); }
+}
+
+// Patch renderMessage to try charts after render
+const _origRenderMsg = renderMessage;
+renderMessage = function(role, text, animate=true, imgData=null) {
+  const div = _origRenderMsg(role, text, animate, imgData);
+  if (role === 'ai' && div) {
+    setTimeout(() => tryRenderCharts(div), 100);
+  }
+  return div;
+};
+
+// Also try after stream completes
+const _origRemoveTyping = removeTyping;
+removeTyping = function() {
+  _origRemoveTyping();
+  setTimeout(() => {
+    const msgs = document.querySelectorAll('.message.ai');
+    const last = msgs[msgs.length - 1];
+    if (last) tryRenderCharts(last);
+  }, 200);
+};
+
+// Update MODE_PROMPTS to include chart support
+Object.keys(MODE_PROMPTS).forEach(k => {
+  MODE_PROMPTS[k] += '\n\nWhen showing data comparisons, statistics, or numerical data, format it as a markdown table. The system will auto-render bar charts from tables.';
+});
+
+// ════════════════════════════════════════
+// PAYMENT SYSTEM
+// ════════════════════════════════════════
+let selectedPayMethod = 'payme';
+let selectedPayPrice = 29000;
+let selectedPayMonths = 1;
+
+function selectPayMethod(method) {
+  selectedPayMethod = method;
+  ['payme','click','uzum'].forEach(m => {
+    const el = document.getElementById('pay' + m.charAt(0).toUpperCase() + m.slice(1));
+    if (el) {
+      el.classList.toggle('selected', m === method);
+      const check = el.querySelector('.pay-check');
+      if (check) check.textContent = m === method ? '✓' : '';
+    }
+  });
+}
+
+function selectPayPlan(el) {
+  document.querySelectorAll('.pay-amt').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+  selectedPayPrice = parseInt(el.dataset.price);
+  selectedPayMonths = parseInt(el.dataset.months);
+  const btn = document.getElementById('payBtn');
+  if (btn) btn.textContent = `💳 ${selectedPayPrice.toLocaleString()} so'm to'lash`;
+}
+
+function initiatePayment() {
+  const methods = {
+    payme: `https://checkout.paycom.uz/`,
+    click: `https://my.click.uz/services/pay`,
+    uzum: `https://uzumbank.uz/`
+  };
+  // Show processing
+  const btn = document.getElementById('payBtn');
+  if (btn) { btn.textContent = '⏳ Yo\'naltirilmoqda...'; btn.disabled = true; }
+  notify(`💳 ${selectedPayMethod} sahifasi ochilmoqda...`, 'info');
+  setTimeout(() => {
+    // In production: replace with real merchant ID & order params
+    const url = methods[selectedPayMethod];
+    window.open(url, '_blank');
+    if (btn) { btn.textContent = `💳 ${selectedPayPrice.toLocaleString()} so'm to'lash`; btn.disabled = false; }
+    closeModal('paymentModal');
+    notify('✅ To\'lov sahifasi ochildi', 'success');
+  }, 1500);
+}
+
 // ===== FAQ =====
 const faqData=[{q:"Med AI bepulmi?",a:"Ha, asosiy imkoniyatlar bepul. Pro tarif oyiga $12."},{q:"Qanday tillarda ishlaydi?",a:"O'zbek, Rus, Ingliz va 50+ boshqa tillarda."},{q:"Kod yozib bera oladimi?",a:"Ha, 30+ dasturlash tilida."},{q:"Tarix saqlanadimi?",a:"Ha, qurilmangizda mahalliy saqlanadi."},{q:"Ovozli kiritish ishlaydi?",a:"Ha, Chrome va Edge brauzerlarda."},{q:"Tibbiy maslahat beradimi?",a:"Umumiy ma'lumot beradi. Jiddiy holatlarda shifokorga murojaat qiling."}];
 const fl=document.getElementById('faqList');
@@ -3633,6 +4929,7 @@ function _openModalSideEffects(id){
   if(id==='statsModal')openStatsModal();
   if(id==='bgModal')initBgModal();
   if(id==='templatesModal'){renderTemplates();}
+  if(id==='reminderModal'){renderReminderList();const d=document.getElementById('remDate');if(d&&!d.value){d.value=new Date().toISOString().slice(0,10);}}
   if(id==='sleepModal'){setTimeout(()=>document.getElementById('customSleepMin')?.focus(),300);}
   if(id==='webSearchModal'){const inp=document.getElementById('webSearchInput');if(inp)setTimeout(()=>inp.focus(),300);}
 }
@@ -4598,6 +5895,77 @@ function exportMsgAsPDF(btn){
     <div style="display:flex;align-items:center;gap:10px">
       <input class="form-inp" id="customSleepMin" type="number" placeholder="Boshqa vaqt (daqiqa)" min="1" max="480" style="flex:1">
       <button onclick="activateSleep(parseInt(document.getElementById('customSleepMin').value)||30)" class="sub-btn" style="width:auto;padding:10px 16px">Boshlash</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== SMART REMINDERS MODAL ===== -->
+<div class="overlay" id="reminderModal" onclick="overlayClick(event,'reminderModal')">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon" style="background:rgba(245,158,11,.1);color:var(--yellow)">🔔</div>
+        Eslatmalar
+      </div>
+      <button class="close-btn" onclick="closeModal('reminderModal')">✕</button>
+    </div>
+    <div class="form-g">
+      <label class="form-lbl">Eslatma matni</label>
+      <input class="form-inp" id="remText" placeholder="Masalan: Dori ich, Uchrashuv..." maxlength="120">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div class="form-g" style="margin:0">
+        <label class="form-lbl">Sana</label>
+        <input class="form-inp" id="remDate" type="date">
+      </div>
+      <div class="form-g" style="margin:0">
+        <label class="form-lbl">Vaqt</label>
+        <input class="form-inp" id="remTime" type="time" value="09:00">
+      </div>
+    </div>
+    <div class="form-g">
+      <label class="form-lbl">Takrorlash</label>
+      <select class="form-sel" id="remRepeat">
+        <option value="once">Bir marta</option>
+        <option value="daily">Har kun</option>
+        <option value="weekly">Har hafta</option>
+      </select>
+    </div>
+    <button class="sub-btn" onclick="addReminder()">🔔 Eslatma qo'shish</button>
+    <div id="reminderList" style="margin-top:16px"></div>
+  </div>
+</div>
+
+
+<!-- ===== EXPORT MODAL ===== -->
+<div class="overlay" id="exportModal" onclick="overlayClick(event,'exportModal')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon" style="background:rgba(34,211,238,.1);color:var(--accent3)">📤</div>
+        Chat Eksport
+      </div>
+      <button class="close-btn" onclick="closeModal('exportModal')">✕</button>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.7">Joriy suhbatni tanlangan formatda saqlang.</p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button onclick="exportChat('txt')" style="padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <span style="font-size:22px">📝</span>
+        <div><div style="font-weight:700">Matn (.txt)</div><div style="font-size:11px;color:var(--text3)">Oddiy matn formatida saqlash</div></div>
+      </button>
+      <button onclick="exportChat('html')" style="padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <span style="font-size:22px">🌐</span>
+        <div><div style="font-weight:700">HTML (.html)</div><div style="font-size:11px;color:var(--text3)">Brauzerda o'qish uchun</div></div>
+      </button>
+      <button onclick="exportChat('md')" style="padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <span style="font-size:22px">📋</span>
+        <div><div style="font-weight:700">Markdown (.md)</div><div style="font-size:11px;color:var(--text3)">GitHub, Notion uchun</div></div>
+      </button>
+      <button onclick="exportChat('json')" style="padding:13px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <span style="font-size:22px">📊</span>
+        <div><div style="font-weight:700">JSON (.json)</div><div style="font-size:11px;color:var(--text3)">Dasturchilar uchun to'liq data</div></div>
+      </button>
     </div>
   </div>
 </div>
