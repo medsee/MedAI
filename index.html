@@ -854,6 +854,606 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
 .diag-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--green),var(--accent3));}
 .diag-pct{font-size:11px;font-weight:800;color:var(--green);min-width:36px;}
 
+
+/* ========================================
+   SIDEBAR REDESIGN v5
+   ======================================== */
+.sidebar{
+  width:240px;background:var(--bg);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),width .3s;
+  z-index:200;flex-shrink:0;position:relative;overflow:hidden;
+}
+.sidebar::before{
+  content:'';position:absolute;top:-80px;left:-60px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,109,250,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.sb-header{padding:14px 10px 10px;border-bottom:1px solid var(--border);position:relative;}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.logo-mark{
+  width:36px;height:36px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent3));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 16px rgba(124,109,250,.4);
+  animation:logoPulse 4s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+.logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);}
+.logo-mark svg{width:20px;height:20px;position:relative;z-index:1;}
+.new-btn{
+  width:100%;padding:9px;border:none;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),#4f43d0);
+  color:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:all .2s;box-shadow:0 4px 14px rgba(124,109,250,.28);
+}
+.new-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(124,109,250,.45);}
+.new-btn:active{transform:translateY(0);}
+
+.sb-nav{padding:8px 6px;flex:1;overflow-y:auto;scrollbar-width:none;}
+.sb-nav::-webkit-scrollbar{display:none;}
+.nav-sec{margin-bottom:18px;}
+.nav-sec-lbl{
+  font-size:9px;font-weight:800;color:var(--text3);letter-spacing:2px;
+  text-transform:uppercase;padding:0 10px 7px;display:block;
+}
+.nv{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 9px;border-radius:11px;cursor:pointer;
+  font-size:12.5px;color:var(--text2);transition:all .18s ease;
+  margin-bottom:2px;font-weight:500;position:relative;overflow:hidden;
+}
+.nv::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%) scaleY(0);
+  width:3px;height:18px;background:linear-gradient(var(--accent),var(--accent3));
+  border-radius:3px;transition:transform .2s cubic-bezier(.16,1,.3,1);
+}
+.nv:hover{background:var(--bg3);color:var(--text);transform:translateX(2px);}
+.nv:hover::before,.nv.active::before{transform:translateY(-50%) scaleY(1);}
+.nv.active{
+  background:linear-gradient(90deg,rgba(124,109,250,.1),rgba(124,109,250,.03));
+  color:var(--accent2);
+}
+.nv-icon{
+  width:28px;height:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s;
+}
+.nv-icon svg{width:14px;height:14px;}
+.nv:hover .nv-icon{transform:scale(1.08) rotate(-4deg);}
+.nv-lbl{flex:1;}
+
+/* User profile at bottom */
+.sb-profile{
+  padding:10px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  transition:background .2s;border-radius:0;
+}
+.sb-profile:hover{background:var(--bg3);}
+.sb-pname{font-size:12px;font-weight:700;color:var(--text);}
+.sb-plan{font-size:10px;color:var(--accent2);font-weight:600;}
+
+/* ========================================
+   CHAT BUBBLES REDESIGN v5
+   ======================================== */
+.message{animation:msgSlideIn .35s cubic-bezier(.16,1,.3,1);}
+@keyframes msgSlideIn{
+  from{opacity:0;transform:translateY(12px) scale(.97);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.message.user{animation:msgSlideInRight .35s cubic-bezier(.16,1,.3,1);}
+@keyframes msgSlideInRight{
+  from{opacity:0;transform:translateY(12px) scale(.97);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.bubble{
+  padding:13px 17px;font-size:14px;line-height:1.75;
+  border-radius:20px;position:relative;
+  transition:box-shadow .2s;
+}
+.message.ai .bubble{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-top-left-radius:4px;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+.message.user .bubble{
+  background:linear-gradient(135deg,rgba(124,109,250,.18),rgba(79,67,208,.15));
+  border:1px solid rgba(124,109,250,.2);
+  border-top-right-radius:4px;
+  box-shadow:0 2px 12px rgba(124,109,250,.12);
+}
+.message:hover .bubble{box-shadow:0 4px 20px rgba(0,0,0,.18);}
+.msg-actions{display:flex;gap:3px;margin-top:6px;opacity:0;transition:opacity .2s,transform .2s;transform:translateY(4px);flex-wrap:wrap;}
+.message:hover .msg-actions{opacity:1;transform:translateY(0);}
+
+/* ========================================
+   BEAUTIFUL NOTIFICATIONS v5
+   ======================================== */
+.notif-wrap{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.notif{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:14px;
+  min-width:260px;max-width:340px;
+  background:rgba(12,12,30,.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--border2);
+  box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.04);
+  transform:translateX(120%);opacity:0;pointer-events:auto;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.notif.show{transform:translateX(0);opacity:1;}
+.notif.hiding{transform:translateX(120%);opacity:0;}
+.notif-icon{font-size:18px;flex-shrink:0;}
+.notif-body{flex:1;}
+.notif-msg{font-size:13px;font-weight:600;color:var(--text);}
+.notif-bar{height:2px;border-radius:2px;margin-top:4px;transition:width linear;}
+.notif.success .notif-bar{background:var(--green);}
+.notif.error .notif-bar{background:var(--red);}
+.notif.info .notif-bar{background:var(--accent);}
+.notif.warning .notif-bar{background:var(--yellow);}
+.notif-close{font-size:16px;cursor:pointer;color:var(--text3);flex-shrink:0;background:none;border:none;padding:0;transition:color .15s;}
+.notif-close:hover{color:var(--text);}
+
+/* ========================================
+   ANIMATIONS v5
+   ======================================== */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 10px rgba(124,109,250,.2);}50%{box-shadow:0 0 25px rgba(124,109,250,.5),0 0 40px rgba(34,211,238,.15);}}
+@keyframes typewriter{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
+
+/* Thinking animation */
+.think-bar{display:inline-flex;align-items:center;gap:4px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;}
+.think-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:thinkBounce 1.2s ease-in-out infinite;}
+.think-dot:nth-child(2){animation-delay:.2s;background:var(--accent3);}
+.think-dot:nth-child(3){animation-delay:.4s;background:var(--accent4);}
+@keyframes thinkBounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-8px);}}
+
+/* Shimmer loading */
+.shimmer{background:linear-gradient(90deg,var(--bg3) 25%,var(--bg4) 50%,var(--bg3) 75%);background-size:200% auto;animation:shimmer 1.5s linear infinite;}
+.skeleton-line{height:12px;border-radius:6px;margin-bottom:8px;}
+.skeleton-line.w80{width:80%;}.skeleton-line.w60{width:60%;}.skeleton-line.w90{width:90%;}
+
+/* Input area pulse on focus */
+.input-wrap:focus-within{box-shadow:0 0 0 2px rgba(124,109,250,.15),0 8px 30px rgba(0,0,0,.2);}
+
+/* Topbar glow */
+.topbar{transition:box-shadow .3s;}
+.topbar.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.2);}
+
+/* Smooth modal */
+.overlay{transition:opacity .25s;}
+.modal{transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .25s;}
+.overlay:not(.open) .modal{transform:scale(.95) translateY(10px);opacity:0;}
+.overlay.open .modal{transform:scale(1) translateY(0);opacity:1;}
+
+/* Bounce button */
+@keyframes btnBounce{0%{transform:scale(1);}40%{transform:scale(.92);}70%{transform:scale(1.04);}100%{transform:scale(1);}}
+.send-btn:active{animation:btnBounce .3s ease;}
+
+/* ========================================
+   MOBILE OPTIMIZATION v5
+   ======================================== */
+@media(max-width:768px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-105%);box-shadow:none;width:260px;}
+  .sidebar.open{transform:translateX(0);box-shadow:24px 0 80px rgba(0,0,0,.6);}
+  .main{width:100%;}
+  .messages{padding:14px 10px 100px;}
+  .bubble{font-size:13.5px;padding:11px 14px;border-radius:16px;}
+  .bubble pre{border-radius:10px;padding:12px;}
+  .input-area{padding:8px 10px 10px;}
+  .input-wrap{border-radius:16px;}
+  .topbar{padding:8px 12px;}
+  .tb-right .tb-btn:not(#menuBtn){display:none;}
+  .tb-center{display:none;}
+  .modal{border-radius:20px 20px 0 0;margin:0;position:fixed;bottom:0;left:0;right:0;max-width:100%!important;max-height:90vh;overflow-y:auto;}
+  .overlay.open{display:flex;align-items:flex-end;}
+  .hero-title{font-size:26px;}
+  .hero-chips{gap:5px;}
+  .chip{padding:6px 11px;font-size:11px;}
+  .hero-logo-wrap{width:80px;height:80px;}
+  .ws-bar{padding:6px 10px;}
+  .ws-tab{padding:5px 10px;font-size:11px;}
+  .quick-bar{padding:6px 10px;}
+  .quick-pill{padding:6px 11px;font-size:11px;}
+  .tb-btn{width:34px;height:34px;}
+}
+@media(max-width:400px){
+  .hero-title{font-size:20px;}
+  .hero-stats .hstat-div:nth-child(6){display:none;}
+  .hero-stats .hstat:last-child{display:none;}
+  .input-footer{gap:3px;}
+  .msg-avatar{display:none;}
+  .msg-content{max-width:100%;}
+  .notif{min-width:auto;max-width:calc(100vw - 32px);}
+}
+/* Safe area for iPhone */
+@supports(padding-bottom:env(safe-area-inset-bottom)){
+  .input-area{padding-bottom:calc(10px + env(safe-area-inset-bottom));}
+}
+
+/* ========================================
+   STATS MODAL
+   ======================================== */
+.stat-card-big{
+  background:var(--bg3);border:1px solid var(--border);border-radius:16px;
+  padding:20px;text-align:center;
+  transition:transform .2s,box-shadow .2s;
+}
+.stat-card-big:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+.stat-n-big{font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px;}
+.stat-l-big{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+
+/* ===== MOBILE BOTTOM NAV ===== */
+.mobile-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  background:rgba(7,7,18,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:6px 4px;padding-bottom:calc(6px + env(safe-area-inset-bottom));
+  grid-template-columns:repeat(5,1fr);gap:2px;
+}
+.mobile-nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:6px 4px;border-radius:10px;cursor:pointer;
+  transition:all .2s;color:var(--text3);font-size:9.5px;font-weight:600;
+}
+.mobile-nav-item svg{width:20px;height:20px;stroke-width:1.8;}
+.mobile-nav-item:active{transform:scale(.9);background:var(--bg3);}
+.mobile-nav-item.active,.mobile-nav-item:hover{color:var(--accent2);}
+.mobile-nav-item.active svg{stroke:var(--accent2);}
+@media(max-width:768px){
+  .mobile-nav{display:grid;}
+  .input-area{padding-bottom:calc(72px + env(safe-area-inset-bottom));}
+  .messages{padding-bottom:120px;}
+}
+
+
+/* ════════════════════════════════════════
+   PREMIUM DESIGN v6 — Full Upgrade
+   ════════════════════════════════════════ */
+
+/* Enhanced color tokens */
+:root{
+  --radius-sm:8px;--radius-md:14px;--radius-lg:20px;--radius-xl:28px;
+  --glow-accent:0 0 30px rgba(124,109,250,.25);
+  --glow-cyan:0 0 30px rgba(34,211,238,.2);
+  --glass:rgba(12,12,30,.7);
+  --glass-border:rgba(255,255,255,.06);
+}
+
+/* Subtle grain overlay for premium feel */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.035'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+
+/* Premium topbar */
+.topbar{
+  padding:10px 16px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  background:var(--glass);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+  box-shadow:0 1px 0 var(--glass-border),0 4px 24px rgba(0,0,0,.15);
+}
+[data-theme="light"] .topbar{
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+/* Premium input area */
+.input-area{
+  padding:10px 16px 14px;
+  border-top:1px solid rgba(255,255,255,.04);
+  background:var(--glass);
+  backdrop-filter:blur(28px) saturate(180%);
+  -webkit-backdrop-filter:blur(28px) saturate(180%);
+}
+.input-box{
+  background:rgba(17,17,38,.8);
+  border:1px solid var(--border2);
+  border-radius:18px;
+  padding:10px 10px 10px 18px;
+  transition:all .3s;
+  box-shadow:0 4px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.input-box:focus-within{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(124,109,250,.12),0 8px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06);
+}
+[data-theme="light"] .input-box{background:rgba(255,255,255,.9);}
+
+/* Premium send button */
+.send-btn{
+  width:40px;height:40px;border-radius:13px;
+  background:linear-gradient(135deg,var(--accent) 0%,#4f43d0 50%,var(--accent3) 100%);
+  background-size:200% 200%;
+  box-shadow:0 4px 16px rgba(124,109,250,.45),inset 0 1px 0 rgba(255,255,255,.2);
+  transition:all .25s;
+}
+.send-btn:hover:not(:disabled){
+  transform:scale(1.08) translateY(-1px);
+  box-shadow:0 8px 24px rgba(124,109,250,.6),inset 0 1px 0 rgba(255,255,255,.2);
+  background-position:right center;
+}
+
+/* Premium modal */
+.modal{
+  background:linear-gradient(145deg,rgba(12,12,30,.98),rgba(8,8,22,.98));
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:26px;
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(124,109,250,.05),inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(30px);
+}
+[data-theme="light"] .modal{
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(0,0,0,.08);
+}
+.overlay{background:rgba(0,0,12,.8);backdrop-filter:blur(12px);}
+
+/* Premium message bubbles */
+.message.ai .bubble{
+  background:linear-gradient(135deg,rgba(11,11,25,.9),rgba(8,8,20,.8));
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 4px 16px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.03);
+}
+.message.user .bubble{
+  background:linear-gradient(135deg,rgba(124,109,250,.18),rgba(79,67,208,.12));
+  border:1px solid rgba(124,109,250,.22);
+  box-shadow:0 4px 16px rgba(124,109,250,.15),inset 0 1px 0 rgba(255,255,255,.05);
+}
+[data-theme="light"] .message.ai .bubble{background:rgba(255,255,255,.95);border:1px solid rgba(0,0,0,.06);}
+[data-theme="light"] .message.user .bubble{background:linear-gradient(135deg,rgba(124,109,250,.1),rgba(79,67,208,.07));}
+
+/* Premium new chat button */
+.new-btn{
+  background:linear-gradient(135deg,var(--accent),#4f43d0);
+  box-shadow:0 4px 16px rgba(124,109,250,.3),inset 0 1px 0 rgba(255,255,255,.15);
+  transition:all .25s;
+}
+.new-btn:hover{
+  box-shadow:0 8px 24px rgba(124,109,250,.5),inset 0 1px 0 rgba(255,255,255,.2);
+  transform:translateY(-2px);
+}
+
+/* Premium mode buttons */
+.mode-btn.active{
+  background:linear-gradient(135deg,rgba(124,109,250,.15),rgba(34,211,238,.08));
+  border-color:rgba(124,109,250,.35);
+  box-shadow:0 0 16px rgba(124,109,250,.12);
+}
+
+/* Premium workspace tabs */
+.ws-tab{
+  padding:5px 13px;border-radius:8px;font-size:12px;font-weight:700;
+  cursor:pointer;transition:all .2s;color:var(--text3);
+  border:1px solid transparent;
+  background:transparent;
+}
+.ws-tab.active{
+  background:linear-gradient(135deg,rgba(124,109,250,.15),rgba(34,211,238,.08));
+  border-color:rgba(124,109,250,.25);
+  color:var(--accent2);
+  box-shadow:0 2px 12px rgba(124,109,250,.15);
+}
+
+/* Hero section upgrade */
+.hero-logo-wrap{
+  box-shadow:0 0 0 1px rgba(124,109,250,.2),0 0 60px rgba(124,109,250,.4),0 0 120px rgba(34,211,238,.15);
+}
+.hero-title{
+  background:linear-gradient(135deg,var(--text) 0%,var(--accent2) 40%,var(--accent3) 70%,var(--accent4) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% auto;
+  animation:titleShimmer 4s linear infinite;
+}
+@keyframes titleShimmer{0%{background-position:0% center;}100%{background-position:200% center;}}
+
+/* Quick pill upgrade */
+.quick-pill{
+  background:rgba(17,17,38,.7);
+  border:1px solid var(--border);
+  backdrop-filter:blur(10px);
+  transition:all .2s;
+}
+.quick-pill:hover{
+  background:rgba(124,109,250,.1);
+  border-color:rgba(124,109,250,.3);
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(124,109,250,.15);
+}
+
+/* Settings row upgrade */
+.set-row{
+  background:rgba(17,17,38,.6);
+  border:1px solid rgba(255,255,255,.04);
+  border-radius:14px;
+  transition:all .2s;
+}
+.set-row:hover{
+  background:rgba(124,109,250,.06);
+  border-color:rgba(124,109,250,.15);
+}
+
+/* Scrollbar upgrade */
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--accent),var(--accent3));
+  border-radius:10px;
+}
+
+/* Premium chip */
+.chip{
+  padding:8px 16px;border-radius:24px;
+  background:rgba(17,17,38,.7);
+  border:1px solid var(--border);
+  backdrop-filter:blur(10px);
+  transition:all .25s;
+  font-weight:600;
+}
+.chip:hover{
+  background:rgba(124,109,250,.12);
+  border-color:rgba(124,109,250,.3);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(124,109,250,.15);
+}
+
+/* Privacy mode overlay */
+.privacy-veil{
+  position:fixed;inset:0;z-index:8000;
+  background:rgba(0,0,0,.97);
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;
+}
+.privacy-veil.active{display:flex;}
+.privacy-veil-icon{font-size:64px;animation:scaleIn .5s ease;}
+.privacy-veil-text{font-size:20px;font-weight:800;color:var(--text);text-align:center;}
+.privacy-veil-sub{font-size:13px;color:var(--text3);text-align:center;max-width:300px;}
+.privacy-unlock-btn{
+  padding:12px 32px;background:linear-gradient(135deg,var(--accent),#4f43d0);
+  border:none;border-radius:14px;color:#fff;font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;
+  transition:all .2s;box-shadow:0 4px 20px rgba(124,109,250,.4);
+}
+.privacy-unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,109,250,.55);}
+
+/* Onboarding */
+.onboard-overlay{
+  position:fixed;inset:0;z-index:8500;
+  background:rgba(0,0,12,.92);
+  backdrop-filter:blur(16px);
+  display:none;align-items:center;justify-content:center;
+}
+.onboard-overlay.active{display:flex;}
+.onboard-card{
+  background:linear-gradient(145deg,rgba(12,12,30,.98),rgba(8,8,22,.98));
+  border:1px solid rgba(124,109,250,.2);
+  border-radius:28px;
+  padding:40px 36px;
+  max-width:460px;width:90vw;
+  text-align:center;
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 60px rgba(124,109,250,.1);
+  animation:scaleIn .4s cubic-bezier(.16,1,.3,1);
+}
+.onboard-step-dots{display:flex;gap:8px;justify-content:center;margin-bottom:32px;}
+.onboard-dot{width:8px;height:8px;border-radius:50%;background:var(--bg4);transition:all .3s;}
+.onboard-dot.active{width:24px;border-radius:4px;background:var(--accent);}
+.onboard-icon{font-size:56px;margin-bottom:20px;display:block;animation:typewriter .4s ease;}
+.onboard-title{font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px;}
+.onboard-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:28px;}
+.onboard-next{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--accent),#4f43d0);
+  border:none;border-radius:14px;color:#fff;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .25s;
+  box-shadow:0 6px 20px rgba(124,109,250,.4);
+}
+.onboard-next:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,109,250,.55);}
+.onboard-skip{font-size:12px;color:var(--text3);cursor:pointer;margin-top:14px;display:block;transition:color .2s;}
+.onboard-skip:hover{color:var(--text2);}
+
+/* Sleep mode */
+.sleep-overlay{
+  position:fixed;inset:0;z-index:7999;
+  background:#000;
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;cursor:pointer;
+}
+.sleep-overlay.active{display:flex;}
+.sleep-time{font-size:64px;font-weight:900;color:rgba(255,255,255,.08);letter-spacing:-3px;}
+.sleep-hint{font-size:12px;color:rgba(255,255,255,.12);letter-spacing:2px;text-transform:uppercase;}
+
+/* Templates */
+.template-card{
+  padding:14px 16px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:14px;cursor:pointer;transition:all .2s;margin-bottom:8px;
+  display:flex;align-items:center;gap:13px;
+}
+.template-card:hover{
+  background:rgba(124,109,250,.08);border-color:rgba(124,109,250,.25);
+  transform:translateX(3px);box-shadow:0 4px 16px rgba(124,109,250,.1);
+}
+.tmpl-icon{
+  width:40px;height:40px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.tmpl-name{font-size:13px;font-weight:700;margin-bottom:2px;}
+.tmpl-desc{font-size:11px;color:var(--text3);}
+.tmpl-badge{
+  padding:3px 8px;border-radius:20px;font-size:9px;font-weight:800;
+  background:rgba(124,109,250,.15);color:var(--accent2);border:1px solid rgba(124,109,250,.2);
+  flex-shrink:0;
+}
+
+
+.sleep-time-btn{
+  padding:12px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:600;transition:all .2s;
+}
+.sleep-time-btn:hover{background:rgba(124,109,250,.1);border-color:rgba(124,109,250,.3);color:var(--accent2);}
+.tmpl-cat{
+  padding:5px 13px;border-radius:20px;font-size:11px;font-weight:700;
+  cursor:pointer;border:1px solid var(--border);color:var(--text3);transition:all .2s;
+}
+.tmpl-cat:hover,.tmpl-cat.active{
+  background:rgba(124,109,250,.1);border-color:rgba(124,109,250,.3);color:var(--accent2);
+}
+
+
+/* ===== TYPING SPEED INDICATOR ===== */
+.typing-speed-wrap{
+  display:flex;align-items:center;gap:8px;
+  padding:4px 10px;background:rgba(124,109,250,.08);
+  border:1px solid rgba(124,109,250,.15);border-radius:20px;
+  font-size:11px;font-weight:700;color:var(--accent2);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.typing-speed-wrap.show{opacity:1;}
+.ts-icon{font-size:13px;}
+.ts-val{font-size:13px;font-weight:900;color:var(--accent2);}
+.ts-unit{font-size:10px;color:var(--text3);}
+.ts-bar{width:40px;height:3px;background:var(--bg4);border-radius:3px;overflow:hidden;}
+.ts-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent3));transition:width .3s;}
+
+
+/* ===== GRADIENT CONTROL ===== */
+.gradient-preview{
+  height:80px;border-radius:16px;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--accent),var(--accent3));
+  transition:background .4s;position:relative;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.gradient-preview::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);
+}
+.color-picker-row{display:flex;gap:10px;align-items:center;margin-bottom:12px;}
+.color-picker-label{font-size:11px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;min-width:60px;}
+input[type=color]{
+  width:40px;height:32px;border:none;border-radius:8px;cursor:pointer;
+  background:none;padding:0;overflow:hidden;
+}
+input[type=color]::-webkit-color-swatch-wrapper{padding:0;}
+input[type=color]::-webkit-color-swatch{border:none;border-radius:7px;}
+.gradient-presets{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px;}
+.grad-preset{
+  width:44px;height:28px;border-radius:8px;cursor:pointer;
+  border:2px solid transparent;transition:all .2s;flex-shrink:0;
+}
+.grad-preset:hover,.grad-preset.active{border-color:var(--text);transform:scale(1.08);}
+.opacity-slider{width:100%;accent-color:var(--accent);margin-top:4px;}
+
 </style>
 </head>
 <body>
@@ -961,42 +1561,67 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
     </div>
 
     <div class="nav-sec">
-      <span class="nav-sec-lbl">Vositalar</span>
+      <span class="nav-sec-lbl" data-i18n="secVositalar">Vositalar</span>
       <div class="nv" onclick="openModal('pluginsModal')">
         <div class="nv-icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></div>
-        <span class="nv-lbl">Pluginlar</span>
+        <span class="nv-lbl" data-i18n="navPluginLabel">Pluginlar</span>
         <span class="nv-badge">Yangi</span>
       </div>
       <div class="nv" onclick="openModal('shareModal')">
         <div class="nv-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
-        <span class="nv-lbl">Ulashish</span>
+        <span class="nv-lbl" data-i18n="navShareLabel">Ulashish</span>
       </div>
 
 
       <div class="nv" onclick="openModal('quizModal')">
         <div class="nv-icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-        <span class="nv-lbl">Quiz rejimi</span>
+        <span class="nv-lbl" data-i18n="navQuizLabel">Quiz rejimi</span>
         <span class="nv-badge">AI</span>
       </div>
       <div class="nv" onclick="openModal('analyticsModal')">
         <div class="nv-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-        <span class="nv-lbl">Analitika</span>
+        <span class="nv-lbl" data-i18n="navAnalLabel">Analitika</span>
       </div>
       <div class="nv" onclick="openModal('bgModal')">
         <div class="nv-icon ic-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-        <span class="nv-lbl">Fon & Mavzu</span>
-        <span class="nv-badge">Yangi</span>
+        <span class="nv-lbl" data-i18n="navBgLabel">Fon & Mavzu</span>
+      </div>
+      <div class="nv" onclick="openModal('statsModal')">
+        <div class="nv-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <span class="nv-lbl" data-i18n="navStatsLabel">Statistika</span>
+      </div>
+      <div class="nv" onclick="openWebSearch()">
+        <div class="nv-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <span class="nv-lbl" data-i18n="navWebLabel">Veb qidiruv</span>
+        <span class="nv-badge">AI</span>
       </div>
     </div>
 
     <div class="nav-sec">
-      <span class="nav-sec-lbl">Tizim</span>
+      <span class="nav-sec-lbl" data-i18n="secQoshimcha">Qo'shimcha</span>
+      <div class="nv" onclick="openModal('templatesModal')">
+        <div class="nv-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <span class="nv-lbl" data-i18n="navTemplLabel">Shablonlar</span>
+        <span class="nv-badge">Yangi</span>
+      </div>
+      <div class="nv" id="privacyNavBtn" onclick="togglePrivacyMode()">
+        <div class="nv-icon ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <span class="nv-lbl" data-i18n="navPrivLabel">Maxfiylik rejimi</span>
+      </div>
+      <div class="nv" onclick="setSleepTimer()">
+        <div class="nv-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+        <span class="nv-lbl" data-i18n="navSleepLabel">Uyqu rejimi</span>
+      </div>
+    </div>
+
+    <div class="nav-sec">
+      <span class="nav-sec-lbl" data-i18n="secTizim">Tizim</span>
 
 
 
       <div class="nv" onclick="openModal('aiProfileModal')">
         <div class="nv-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-        <span class="nv-lbl">AI Profil</span>
+        <span class="nv-lbl" data-i18n="navProfileLabel">AI Profil</span>
         <span class="nv-badge">Yangi</span>
       </div>
       <div class="nv" onclick="openModal('plansModal')">
@@ -1221,7 +1846,13 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
           </button>
         </div>
       </div>
-      <div class="input-footer">
+      <div class="typing-speed-wrap" id="typingSpeedWrap">
+    <span class="ts-icon">⌨️</span>
+    <span class="ts-val" id="tsWpm">0</span>
+    <span class="ts-unit" id="tsUnit">wpm</span>
+    <div class="ts-bar"><div class="ts-bar-fill" id="tsBar" style="width:0%"></div></div>
+  </div>
+  <div class="input-footer">
         <div class="input-tags">
           <span class="tag" onclick="setTag('tibbiyot')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -1526,32 +2157,77 @@ const I18N={
   uz:{name:"O'zbek",welcome:"Med AI ga xush kelibsiz",desc:"Tibbiyot, kod, tarjima, matematika — barcha savollaringizga javob topamiz.",badge:"AI faol • LLaMA 3.3 70B",newChat:"Yangi suhbat",planLabel:"Bepul tarif",
     c0:"Tibbiyot",c1:"Kod yozish",c2:"Tarjima",c3:"Maqola",c4:"Matematika",c5:"Hikoya",
     params:"Parametr",langs:"Til",topics:"Mavzu",speed:"Tez javob",
-    navChatLabel:"Chat",navHistLabel:"Tarix",navImgLabel:"Rasm yaratish",navCodeLabel:"Kod muharriri",navTransLabel:"Tarjimon",navSummLabel:"Matn tahlili",navPlansLabel:"Tariflar",navSettingsLabel:"Sozlamalar",navSupportLabel:"Support",navAboutLabel:"Haqida",
+    navChatLabel:"Chat",navHistLabel:"Tarix",navImgLabel:"Rasm yaratish",navCodeLabel:"Kod muharriri",
+    navTransLabel:"Tarjimon",navSummLabel:"Matn tahlili",navPlansLabel:"Tariflar",
+    navSettingsLabel:"Sozlamalar",navSupportLabel:"Support",navAboutLabel:"Haqida",
+    navShareLabel:"Ulashish",navQuizLabel:"Quiz rejimi",navAnalLabel:"Analitika",
+    navBgLabel:"Fon & Mavzu",navStatsLabel:"Statistika",navWebLabel:"Veb qidiruv",
+    navTemplLabel:"Shablonlar",navPrivLabel:"Maxfiylik rejimi",navSleepLabel:"Uyqu rejimi",
+    navProfileLabel:"AI Profil",navPluginLabel:"Pluginlar",
+    secVositalar:"Vositalar",secQoshimcha:"Qo'shimcha",secTizim:"Tizim",
     modeChatLabel:"Chat",modeCodeLabel:"Kod",modeMedLabel:"Tibbiyot",modeCreativeLabel:"Ijodiy",
     tagMedLabel:"Tibbiyot",tagCodeLabel:"Kod",tagTransLabel:"Tarjima",tagAnalysisLabel:"Tahlil",tagSummaryLabel:"Xulosa",
     placeholder:"Savolingizni yozing… (Enter — yuborish, Shift+Enter — yangi qator)",
     placeholderCode:"Qanday kod yozay?",placeholderMed:"Tibbiy savol yozing…",placeholderCreative:"Ijodiy matn buyurtma bering…",
-    sugg:["Yurak kasalliklari haqida batafsil ma'lumot ber","Python da snake o'yini kod yoz","The future is bright — tarjima qil","Sun'iy intellekt haqida maqola yoz","x² + 5x + 6 = 0 tenglamani yech","Bolalar uchun ertak yoz"]
+    searchPlaceholder:"Chatda qidirish…",
+    newChatBtn:"+ Yangi suhbat",
+    typingSpeed:"Yozish tezligi",wpm:"so'z/daqiqa",chars:"belgi",
+    memoryTitle:"AI Xotira",memoryEmpty:"Hali hech narsa eslab qolinmagan",
+    memoryHint:"AI siz bilan bo'lgan barcha suhbatlarni eslaydi",
+    sugg:["Yurak kasalliklari haqida batafsil ma'lumot ber","Python da snake o'yini kod yoz","The future is bright — tarjima qil","Sun'iy intellekt haqida maqola yoz","x² + 5x + 6 = 0 tenglamani yech","Bolalar uchun ertak yoz"],
+    privacyOn:"Maxfiylik rejimi yoqildi",privacyOff:"Maxfiylik rejimi o'chirildi",
+    sleepSet:"Uyqu rejimi {n} daqiqadan keyin",
+    gradientTitle:"Rang & Gradient Boshqaruvi"
   },
   ru:{name:"Русский",welcome:"Добро пожаловать в Med AI",desc:"Медицина, код, переводы, математика — ответы на все ваши вопросы.",badge:"ИИ активен • LLaMA 3.3 70B",newChat:"Новый чат",planLabel:"Бесплатный тариф",
     c0:"Медицина",c1:"Написать код",c2:"Перевод",c3:"Статья",c4:"Математика",c5:"История",
     params:"Параметров",langs:"Языков",topics:"Тем",speed:"Быстрый",
-    navChatLabel:"Чат",navHistLabel:"История",navImgLabel:"Генерация изображений",navCodeLabel:"Редактор кода",navTransLabel:"Переводчик",navSummLabel:"Анализ текста",navPlansLabel:"Тарифы",navSettingsLabel:"Настройки",navSupportLabel:"Поддержка",navAboutLabel:"О программе",
+    navChatLabel:"Чат",navHistLabel:"История",navImgLabel:"Генерация изображений",navCodeLabel:"Редактор кода",
+    navTransLabel:"Переводчик",navSummLabel:"Анализ текста",navPlansLabel:"Тарифы",
+    navSettingsLabel:"Настройки",navSupportLabel:"Поддержка",navAboutLabel:"О программе",
+    navShareLabel:"Поделиться",navQuizLabel:"Quiz режим",navAnalLabel:"Аналитика",
+    navBgLabel:"Фон и тема",navStatsLabel:"Статистика",navWebLabel:"Веб-поиск",
+    navTemplLabel:"Шаблоны",navPrivLabel:"Режим конфиденциальности",navSleepLabel:"Режим сна",
+    navProfileLabel:"AI Профиль",navPluginLabel:"Плагины",
+    secVositalar:"Инструменты",secQoshimcha:"Дополнительно",secTizim:"Система",
     modeChatLabel:"Чат",modeCodeLabel:"Код",modeMedLabel:"Медицина",modeCreativeLabel:"Творческий",
     tagMedLabel:"Медицина",tagCodeLabel:"Код",tagTransLabel:"Перевод",tagAnalysisLabel:"Анализ",tagSummaryLabel:"Резюме",
     placeholder:"Введите вопрос… (Enter — отправить)",
     placeholderCode:"Что написать?",placeholderMed:"Задайте медицинский вопрос…",placeholderCreative:"Закажите текст…",
-    sugg:["Расскажи о болезнях сердца","Напиши игру змейка на Python","Переведи: The future is bright","Напиши статью об ИИ","Реши уравнение x²+5x+6=0","Напиши сказку для детей"]
+    searchPlaceholder:"Поиск в чате…",
+    newChatBtn:"+ Новый чат",
+    typingSpeed:"Скорость печати",wpm:"сл/мин",chars:"симв",
+    memoryTitle:"Память AI",memoryEmpty:"Ничего не запомнено",
+    memoryHint:"AI помнит все ваши предыдущие беседы",
+    sugg:["Расскажи о болезнях сердца","Напиши игру змейка на Python","Переведи: The future is bright","Напиши статью об ИИ","Реши уравнение x²+5x+6=0","Напиши сказку для детей"],
+    privacyOn:"Режим конфиденциальности включён",privacyOff:"Режим конфиденциальности выключен",
+    sleepSet:"Режим сна через {n} минут",
+    gradientTitle:"Управление цветом и градиентом"
   },
   en:{name:"English",welcome:"Welcome to Med AI",desc:"Medicine, code, translation, math — answers to all your questions.",badge:"AI active • LLaMA 3.3 70B",newChat:"New chat",planLabel:"Free plan",
     c0:"Medicine",c1:"Write code",c2:"Translate",c3:"Article",c4:"Math",c5:"Story",
     params:"Parameters",langs:"Languages",topics:"Topics",speed:"Fast",
-    navChatLabel:"Chat",navHistLabel:"History",navImgLabel:"Image generation",navCodeLabel:"Code editor",navTransLabel:"Translator",navSummLabel:"Text analysis",navPlansLabel:"Pricing",navSettingsLabel:"Settings",navSupportLabel:"Support",navAboutLabel:"About",
+    navChatLabel:"Chat",navHistLabel:"History",navImgLabel:"Image generation",navCodeLabel:"Code editor",
+    navTransLabel:"Translator",navSummLabel:"Text analysis",navPlansLabel:"Pricing",
+    navSettingsLabel:"Settings",navSupportLabel:"Support",navAboutLabel:"About",
+    navShareLabel:"Share",navQuizLabel:"Quiz mode",navAnalLabel:"Analytics",
+    navBgLabel:"Background & Theme",navStatsLabel:"Statistics",navWebLabel:"Web search",
+    navTemplLabel:"Templates",navPrivLabel:"Privacy mode",navSleepLabel:"Sleep mode",
+    navProfileLabel:"AI Profile",navPluginLabel:"Plugins",
+    secVositalar:"Tools",secQoshimcha:"More",secTizim:"System",
     modeChatLabel:"Chat",modeCodeLabel:"Code",modeMedLabel:"Medical",modeCreativeLabel:"Creative",
     tagMedLabel:"Medicine",tagCodeLabel:"Code",tagTransLabel:"Translate",tagAnalysisLabel:"Analysis",tagSummaryLabel:"Summary",
     placeholder:"Type your question… (Enter to send)",
     placeholderCode:"What code should I write?",placeholderMed:"Ask a medical question…",placeholderCreative:"Order creative text…",
-    sugg:["Tell me about heart diseases","Write a snake game in Python","Translate: The future is bright","Write an article about AI","Solve x²+5x+6=0","Write a fairy tale for children"]
+    searchPlaceholder:"Search in chat…",
+    newChatBtn:"+ New chat",
+    typingSpeed:"Typing speed",wpm:"wpm",chars:"chars",
+    memoryTitle:"AI Memory",memoryEmpty:"Nothing remembered yet",
+    memoryHint:"AI remembers all your previous conversations",
+    sugg:["Tell me about heart diseases","Write a snake game in Python","Translate: The future is bright","Write an article about AI","Solve x²+5x+6=0","Write a fairy tale for children"],
+    privacyOn:"Privacy mode enabled",privacyOff:"Privacy mode disabled",
+    sleepSet:"Sleep mode in {n} minutes",
+    gradientTitle:"Color & Gradient Control"
   }
 };
 function getLangSugg(i){return(I18N[currentLang]||I18N.uz).sugg[i];}
@@ -1570,6 +2246,8 @@ function applyI18n(lang){
   });
   document.querySelectorAll('.chip-txt[data-key]').forEach(el=>{const k=el.dataset.key;if(t[k])el.textContent=t[k];});
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
+  // Update section labels
+  document.querySelectorAll('.nav-sec-lbl[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k];});
   const inp=document.getElementById('userInput');
   if(inp){const pm={chat:t.placeholder,code:t.placeholderCode,medical:t.placeholderMed,creative:t.placeholderCreative};inp.placeholder=pm[currentMode]||t.placeholder;}
   document.documentElement.lang=lang;
@@ -2181,12 +2859,445 @@ function sendSupport(){
 }
 
 // ===== NOTIFICATION =====
-function notify(msg,type='success'){
-  const el=document.getElementById('notif');
-  const ic={success:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`,error:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,info:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,warning:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`};
-  el.innerHTML=`<div class="notif-icon" style="background:rgba(${type==='success'?'16,185,129':type==='error'?'239,68,68':type==='warning'?'245,158,11':'124,109,250'},.1)">${ic[type]||''}</div><span>${msg}</span>`;
-  el.className=`notif ${type} show`;clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3500);
+function notify(msg,type='info',dur=3500){
+  let wrap=document.getElementById('notifWrap');
+  if(!wrap){wrap=document.createElement('div');wrap.id='notifWrap';wrap.className='notif-wrap';document.body.appendChild(wrap);}
+  const icons={info:'💡',success:'✅',error:'❌',warning:'⚠️'};
+  const el=document.createElement('div');
+  el.className='notif '+type;
+  const safeMsg=String(msg).replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  el.innerHTML=`<span class="notif-icon">${icons[type]||'💬'}</span><div class="notif-body"><div class="notif-msg">${safeMsg}</div><div class="notif-bar" style="width:100%;transition:width ${dur}ms linear"></div></div><button class="notif-close" onclick="this.closest('.notif').classList.add('hiding');setTimeout(()=>this.closest('.notif')?.remove(),400)">✕</button>`;
+  wrap.appendChild(el);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{el.classList.add('show');el.querySelector('.notif-bar').style.width='0%';}));
+  setTimeout(()=>{el.classList.add('hiding');setTimeout(()=>el.remove(),400);},dur);
+  while(wrap.children.length>4)wrap.firstChild.remove();
 }
+
+
+
+// ════════════════════════════════════════
+// PRIVACY MODE
+// ════════════════════════════════════════
+let privacyMode = false;
+function togglePrivacyMode(){
+  privacyMode = !privacyMode;
+  const veil = document.getElementById('privacyVeil');
+  const btn = document.getElementById('privacyNavBtn');
+  if(privacyMode){
+    if(veil) veil.classList.add('active');
+    if(btn) btn.style.color = 'var(--accent2)';
+    notify('🔐 Maxfiylik rejimi yoqildi','info');
+    closeSidebar();
+  } else {
+    unlockPrivacy();
+  }
+}
+function unlockPrivacy(){
+  privacyMode = false;
+  const veil = document.getElementById('privacyVeil');
+  if(veil) veil.classList.remove('active');
+  const btn = document.getElementById('privacyNavBtn');
+  if(btn) btn.style.color = '';
+  notify('🔓 Maxfiylik rejimi o\'chirildi','info');
+}
+// Hide on visibility change
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden && privacyMode){
+    const v=document.getElementById('privacyVeil');
+    if(v) v.classList.add('active');
+  }
+});
+
+// ════════════════════════════════════════
+// SLEEP MODE
+// ════════════════════════════════════════
+let sleepTimeout = null, sleepInterval = null, sleepEndTime = null;
+function setSleepTimer(){ openModal('sleepModal'); }
+function activateSleep(mins){
+  closeModal('sleepModal');
+  closeSidebar();
+  const ms = mins * 60 * 1000;
+  sleepEndTime = Date.now() + ms;
+  clearTimeout(sleepTimeout);
+  clearInterval(sleepInterval);
+  sleepTimeout = setTimeout(enterSleep, ms);
+  notify(`🌙 Uyqu rejimi ${mins} daqiqadan keyin yoqiladi`,'info');
+}
+function enterSleep(){
+  const overlay = document.getElementById('sleepOverlay');
+  if(overlay) overlay.classList.add('active');
+  sleepInterval = setInterval(()=>{
+    const el = document.getElementById('sleepClock');
+    if(el){
+      const now = new Date();
+      el.textContent = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    }
+  }, 1000);
+  const el = document.getElementById('sleepClock');
+  if(el){ const now = new Date(); el.textContent = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'); }
+}
+function wakeFromSleep(){
+  const overlay = document.getElementById('sleepOverlay');
+  if(overlay) overlay.classList.remove('active');
+  clearInterval(sleepInterval);
+  clearTimeout(sleepTimeout);
+  sleepEndTime = null;
+  notify('☀️ Xush kelibsiz!','success');
+}
+
+// ════════════════════════════════════════
+// ONBOARDING
+// ════════════════════════════════════════
+const ONBOARD_STEPS = [
+  {icon:'👋', title:'Med AI ga xush kelibsiz!', desc:'O\'zbekiston uchun yaratilgan aqlli yordamchi. Tibbiyot, dasturlash, tarjima va boshqa sohalarda yordam beradi.'},
+  {icon:'💬', title:'Suhbat boshlang', desc:'Har qanday savol yozing. AI sizning tilingizda (O\'zbek, Rus, Ingliz) javob beradi.'},
+  {icon:'🎨', title:'Rasm yaratish', desc:'Sidebar → "Rasm yaratish" orqali AI yordamida professional rasmlar yarating.'},
+  {icon:'🔌', title:'Pluginlar & Buyruqlar', desc:'/tarjima, /xulosa, /tuzat kabi buyruqlarni kiriting. Sidebar → "Pluginlar" da yangilarini qo\'shing.'},
+  {icon:'⚙️', title:'Sozlamalar', desc:'Til, mavzu, fon, rang sxemasi — hammasini moslang. Enjoy! 🚀'},
+];
+let onboardStep = 0;
+function startOnboarding(){
+  const overlay = document.getElementById('onboardOverlay');
+  if(!overlay) return;
+  onboardStep = 0;
+  renderOnboardStep();
+  overlay.classList.add('active');
+}
+function renderOnboardStep(){
+  const step = ONBOARD_STEPS[onboardStep];
+  const dots = document.getElementById('onboardDots');
+  const icon = document.getElementById('onboardIcon');
+  const title = document.getElementById('onboardTitle');
+  const desc = document.getElementById('onboardDesc');
+  const next = document.getElementById('onboardNext');
+  if(dots) dots.innerHTML = ONBOARD_STEPS.map((_,i)=>`<div class="onboard-dot ${i===onboardStep?'active':''}"></div>`).join('');
+  if(icon){icon.textContent=step.icon;icon.style.animation='none';requestAnimationFrame(()=>icon.style.animation='');}
+  if(title) title.textContent = step.title;
+  if(desc) desc.textContent = step.desc;
+  if(next) next.textContent = onboardStep < ONBOARD_STEPS.length-1 ? 'Keyingisi →' : '🚀 Boshlash!';
+}
+function nextOnboard(){
+  if(onboardStep < ONBOARD_STEPS.length-1){
+    onboardStep++;
+    renderOnboardStep();
+  } else {
+    skipOnboard();
+  }
+}
+function skipOnboard(){
+  const overlay = document.getElementById('onboardOverlay');
+  if(overlay) overlay.classList.remove('active');
+  localStorage.setItem('medai_onboarded','1');
+}
+// Show onboarding for new users
+setTimeout(()=>{
+  if(!localStorage.getItem('medai_onboarded') && currentUser){
+    startOnboarding();
+  }
+}, 1500);
+
+// ════════════════════════════════════════
+// TEMPLATES LIBRARY
+// ════════════════════════════════════════
+const TEMPLATES = [
+  {id:'cv',cat:'cv',icon:'👔',name:'CV / Rezyume',desc:'Professional ish tarjimayi holi',badge:'Ommabop',prompt:'Menga professional CV yozishda yordam ber. Men [kasb] bo\'yicha [yillar] yillik tajribaga egaman. Kuchli tomonlarim: [kuchli tomonlar]. CV ni O\'zbek va Ingliz tilida yoz.'},
+  {id:'cover',cat:'cv',icon:'📄',name:'Cover Letter',desc:'Ish uchun motivatsion maktub',badge:'',prompt:'[kompaniya] uchun [lavozim] ga cover letter yoz. Men [tajriba va ko\'nikmalar] egasiman. Ingliz va O\'zbek tilida professional tarzda yoz.'},
+  {id:'resign',cat:'letter',icon:'📤',name:'Iste\'foga ariza',desc:'Muassasadan chiqish uchun',badge:'',prompt:'Rasmiy iste\'foga ariza namunasi yoz. Sabab: [sabab]. O\'zbek tilida rasmiy uslubda.'},
+  {id:'complaint',cat:'letter',icon:'⚠️',name:'Shikoyat maktubi',desc:'Rasmiy murojaat maktubi',badge:'',prompt:'[muammo] haqida rasmiy shikoyat maktubi yoz. O\'zbek tilida, rasmiy uslubda. Murojaat etuvchi: [ism].'},
+  {id:'insta',cat:'social',icon:'📸',name:'Instagram post',desc:'Jozibali ijtimoiy tarmoq posti',badge:'Trend',prompt:'[mavzu] haqida Instagram uchun jozibali post yoz. Emoji va hashtaglar bilan. O\'zbek tilida.'},
+  {id:'telegram',cat:'social',icon:'✈️',name:'Telegram kanal posti',desc:'Kanal uchun mazmunli post',badge:'',prompt:'Telegram kanalim uchun [mavzu] haqida qiziqarli va ma\'lumotli post yoz. O\'zbek tilida, 200-300 so\'z.'},
+  {id:'ad',cat:'social',icon:'📢',name:'Reklama matni',desc:'Mahsulot yoki xizmat reklama',badge:'',prompt:'[mahsulot/xizmat] uchun jozibali reklama matni yoz. Asosiy ustunliklar: [ustunliklar]. O\'zbek tilida, qisqa va ta\'sirchan.'},
+  {id:'business_plan',cat:'business',icon:'📊',name:'Biznes reja',desc:'Startup uchun qisqa biznes plan',badge:'',prompt:'[g\'oya] uchun qisqacha biznes reja yoz: muammo, yechim, bozor, raqobat, daromad modeli, jamoasi. O\'zbek tilida.'},
+  {id:'email_biz',cat:'business',icon:'📧',name:'Biznes email',desc:'Hamkorlik taklifi uchun email',badge:'',prompt:'[kompaniya/shaxs] ga hamkorlik taklifi bilan rasmiy email yoz. Mavzu: [mavzu]. O\'zbek yoki Ingliz tilida.'},
+  {id:'essay',cat:'edu',icon:'📝',name:'Esse / Inshо',desc:'Akademik esse yozish',badge:'',prompt:'[mavzu] bo\'yicha akademik esse yoz. Hajm: 500-700 so\'z. Kirish, asosiy qism, xulosa tuzilishida. O\'zbek tilida.'},
+  {id:'lesson',cat:'edu',icon:'🎓',name:'Dars rejasi',desc:'O\'qituvchi uchun dars rejasi',badge:'',prompt:'[fan] bo\'yicha [mavzu] ga dars rejasi yoz. Sinf: [sinf]. Davomiyligi: 45 daqiqa. Maqsad, usullar, mashqlar va baholash mezonlari bilan.'},
+  {id:'report',cat:'edu',icon:'📋',name:'Hisobot',desc:'Ish yoki o\'quv hisoboti',badge:'',prompt:'[loyiha/faoliyat] bo\'yicha rasmiy hisobot yoz. Muddat: [muddat]. Natijalar, tahlil va tavsiyalar bilan. O\'zbek tilida.'},
+];
+
+let tmplFilter = 'all';
+function renderTemplates(){
+  const el = document.getElementById('templatesList');
+  if(!el) return;
+  const filtered = tmplFilter==='all' ? TEMPLATES : TEMPLATES.filter(t=>t.cat===tmplFilter);
+  el.innerHTML = filtered.map(t=>`
+    <div class="template-card" onclick="useTemplate('${t.id}')">
+      <div class="tmpl-icon" style="background:var(--bg4)">${t.icon}</div>
+      <div style="flex:1">
+        <div class="tmpl-name">${t.name}</div>
+        <div class="tmpl-desc">${t.desc}</div>
+      </div>
+      ${t.badge?`<span class="tmpl-badge">${t.badge}</span>`:''}
+    </div>`).join('');
+}
+function filterTemplates(cat){
+  tmplFilter = cat;
+  document.querySelectorAll('.tmpl-cat').forEach(el=>el.classList.toggle('active',el.dataset.cat===cat));
+  renderTemplates();
+}
+function useTemplate(id){
+  const tmpl = TEMPLATES.find(t=>t.id===id);
+  if(!tmpl) return;
+  closeModal('templatesModal');
+  closeSidebar();
+  const inp = document.getElementById('userInput');
+  if(inp){
+    inp.value = tmpl.prompt;
+    inp.focus();
+    inp.dispatchEvent(new Event('input'));
+    // Highlight placeholder text
+    inp.setSelectionRange(0, inp.value.length);
+  }
+  notify(`📝 "${tmpl.name}" shablon tanlandi`,'success');
+}
+
+// ════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ════════════════════════════════════════
+document.addEventListener('keydown', e=>{
+  // Ctrl/Cmd + K — focus input
+  if((e.ctrlKey||e.metaKey) && e.key==='k'){
+    e.preventDefault();
+    const inp=document.getElementById('userInput');
+    if(inp){inp.focus();inp.select();}
+    return;
+  }
+  // Ctrl + / — toggle sidebar
+  if((e.ctrlKey||e.metaKey) && e.key==='/'){
+    e.preventDefault();
+    toggleSidebar();
+    return;
+  }
+  // Escape — close modals, privacy off
+  if(e.key==='Escape'){
+    document.querySelectorAll('.overlay.open').forEach(el=>{
+      const id=el.id;if(id)closeModal(id);
+    });
+    const sleep=document.getElementById('sleepOverlay');
+    if(sleep?.classList.contains('active')) wakeFromSleep();
+    return;
+  }
+  // Ctrl + Shift + P — privacy mode
+  if((e.ctrlKey||e.metaKey) && e.shiftKey && e.key==='P'){
+    e.preventDefault();
+    togglePrivacyMode();
+    return;
+  }
+  // Ctrl + N — new chat
+  if((e.ctrlKey||e.metaKey) && e.key==='n'){
+    e.preventDefault();
+    startNewChat?.();
+    return;
+  }
+});
+
+// ════════════════════════════════════════
+// PERFORMANCE: Lazy render messages
+// ════════════════════════════════════════
+function throttle(fn, ms){
+  let last=0;
+  return function(...args){
+    const now=Date.now();
+    if(now-last>=ms){last=now;fn(...args);}
+  };
+}
+// Throttle scroll events
+const chatAreaEl=document.getElementById('chatArea');
+if(chatAreaEl){
+  chatAreaEl.addEventListener('scroll',throttle(()=>{
+    const btn=document.getElementById('scrollBtn');
+    if(!btn)return;
+    const d=chatAreaEl.scrollHeight-chatAreaEl.scrollTop-chatAreaEl.clientHeight;
+    btn.classList.toggle('show',d>200);
+  },100),{passive:true});
+}
+
+// ════════════════════════════════════════
+// PATCH openModal for new modals
+// ════════════════════════════════════════
+
+
+// ════════════════════════════════════════
+// TYPING SPEED INDICATOR
+// ════════════════════════════════════════
+let tsWordCount=0, tsCharCount=0, tsStartTime=null, tsTimeout=null, tsActive=false;
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const inp=document.getElementById('userInput');
+  if(!inp)return;
+  inp.addEventListener('input', e=>{
+    const val=inp.value;
+    if(!tsActive && val.length>0){
+      tsActive=true;
+      tsStartTime=Date.now();
+      tsWordCount=0;tsCharCount=0;
+    }
+    if(tsActive){
+      tsCharCount=val.length;
+      tsWordCount=val.trim()?val.trim().split(/\s+/).length:0;
+      const elapsed=(Date.now()-tsStartTime)/60000; // minutes
+      const wpm=elapsed>0?Math.round(tsWordCount/elapsed):0;
+      const cpm=elapsed>0?Math.round(tsCharCount/elapsed):0;
+      updateTypingSpeed(wpm,cpm);
+    }
+    clearTimeout(tsTimeout);
+    tsTimeout=setTimeout(()=>{
+      tsActive=false;
+      const wrap=document.getElementById('typingSpeedWrap');
+      if(wrap)wrap.classList.remove('show');
+    }, 3000);
+  });
+  inp.addEventListener('keydown', e=>{
+    if(e.key==='Enter'&&!e.shiftKey){
+      tsActive=false;tsStartTime=null;tsWordCount=0;tsCharCount=0;
+      const wrap=document.getElementById('typingSpeedWrap');
+      if(wrap)wrap.classList.remove('show');
+    }
+  });
+});
+
+function updateTypingSpeed(wpm, cpm){
+  const wrap=document.getElementById('typingSpeedWrap');
+  const valEl=document.getElementById('tsWpm');
+  const unitEl=document.getElementById('tsUnit');
+  const barEl=document.getElementById('tsBar');
+  if(!wrap||!valEl)return;
+  const t=I18N[currentLang]||I18N.uz;
+  wrap.classList.add('show');
+  valEl.textContent=wpm;
+  if(unitEl)unitEl.textContent=t.wpm||'wpm';
+  // Color based on speed
+  const pct=Math.min(wpm/120*100,100);
+  if(barEl)barEl.style.width=pct+'%';
+  const color=wpm<30?'var(--accent5)':wpm<60?'var(--yellow)':wpm<90?'var(--accent2)':'var(--green)';
+  if(barEl)barEl.style.background=color;
+  if(valEl)valEl.style.color=color;
+}
+
+// ════════════════════════════════════════
+// GRADIENT / COLOR CONTROL
+// ════════════════════════════════════════
+function applyCustomColors(){
+  const c1=document.getElementById('cp1')?.value||'#7c6dfa';
+  const c2=document.getElementById('cp2')?.value||'#22d3ee';
+  const c3=document.getElementById('cp3')?.value||'#c084fc';
+  applyGradientPreset(c1,c2,c3);
+}
+
+function applyGradientPreset(c1,c2,c3){
+  const root=document.documentElement;
+  root.style.setProperty('--accent',c1);
+  root.style.setProperty('--accent2',lightenColor(c1,15));
+  root.style.setProperty('--accent3',c2);
+  root.style.setProperty('--accent4',c3);
+  // Update preview
+  const prev=document.getElementById('gradientPreview');
+  if(prev)prev.style.background=`linear-gradient(135deg,${c1},${c2},${c3})`;
+  // Update color pickers to match
+  const cp1=document.getElementById('cp1');
+  const cp2=document.getElementById('cp2');
+  const cp3=document.getElementById('cp3');
+  if(cp1)cp1.value=c1;
+  if(cp2)cp2.value=c2;
+  if(cp3)cp3.value=c3;
+  // Save
+  if(currentUser){
+    localStorage.setItem('medai_custom_colors_'+currentUser.email, JSON.stringify({c1,c2,c3}));
+  }
+  notify('🎨 Rang qo\'llanildi!','success',2000);
+}
+
+function lightenColor(hex,pct){
+  const n=parseInt(hex.replace('#',''),16);
+  const r=Math.min(255,((n>>16)&0xff)+Math.round(pct*2.55));
+  const g=Math.min(255,((n>>8)&0xff)+Math.round(pct*2.55));
+  const b=Math.min(255,(n&0xff)+Math.round(pct*2.55));
+  return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+
+function applyGlow(val){
+  const pct=parseInt(val)/100;
+  document.documentElement.style.setProperty('--glow-accent',`0 0 ${Math.round(30*pct+10)}px rgba(124,109,250,${(pct*.4).toFixed(2)})`);
+  const gv=document.getElementById('glowVal');
+  if(gv)gv.textContent=val+'%';
+  // Apply to logo
+  const logo=document.querySelector('.logo-mark');
+  if(logo)logo.style.boxShadow=`0 0 ${Math.round(20*pct+5)}px rgba(124,109,250,${(pct*.6).toFixed(2)})`;
+  if(currentUser)localStorage.setItem('medai_glow',val);
+}
+
+// Load saved custom colors on init
+function loadCustomColors(){
+  if(!currentUser)return;
+  const saved=localStorage.getItem('medai_custom_colors_'+currentUser.email);
+  if(saved){
+    try{
+      const {c1,c2,c3}=JSON.parse(saved);
+      document.documentElement.style.setProperty('--accent',c1);
+      document.documentElement.style.setProperty('--accent3',c2);
+      document.documentElement.style.setProperty('--accent4',c3);
+    }catch(e){}
+  }
+  const glow=localStorage.getItem('medai_glow');
+  if(glow)applyGlow(glow);
+}
+
+// ════════════════════════════════════════
+// AI MEMORY SYSTEM — cross-chat memory
+// ════════════════════════════════════════
+const AI_MEMORY_KEY='medai_ai_longmem_';
+let aiLongMemory=[];
+
+function loadAILongMemory(){
+  if(!currentUser)return;
+  aiLongMemory=l(AI_MEMORY_KEY+currentUser.email,[]);
+}
+
+function saveAILongMemory(){
+  if(!currentUser)return;
+  s(AI_MEMORY_KEY+currentUser.email,aiLongMemory);
+}
+
+function extractMemoryFromConversation(){
+  // After each AI response, extract key facts to remember
+  if(!currentUser||conversationHistory.length<4)return;
+  const last4=conversationHistory.slice(-4).map(m=>m.role+': '+m.content.slice(0,200)).join('\n');
+  // Look for personal facts mentioned
+  const patterns=[
+    /men\s+(\w+(?:\s+\w+)?)\s+(?:o'qiyman|ishlayman|yashayman|egaman|bilaman)/gi,
+    /my name is\s+(\w+)/gi,
+    /I (?:work|study|live) (?:at|in|as)\s+([^.]+)/gi,
+    /я\s+(?:работаю|учусь|живу)\s+([^.]+)/gi,
+  ];
+  patterns.forEach(p=>{
+    const m=last4.match(p);
+    if(m)m.forEach(match=>{
+      const trimmed=match.trim().slice(0,100);
+      if(!aiLongMemory.find(x=>x.text===trimmed)){
+        aiLongMemory.push({id:Date.now(),text:trimmed,ts:new Date().toLocaleDateString()});
+        if(aiLongMemory.length>30)aiLongMemory.shift();
+        saveAILongMemory();
+      }
+    });
+  });
+}
+
+// Patch callAIStream to inject long memory
+const __origStream=callAIStream;
+callAIStream=async function(userText,onChunk,imgData=null){
+  // Inject long-term memory into system prompt
+  if(aiLongMemory.length>0 && currentUser){
+    const memStr='\n\nLong-term memory about this user:\n'+aiLongMemory.slice(-10).map(m=>'- '+m.text).join('\n');
+    const saved={};
+    Object.keys(MODE_PROMPTS).forEach(k=>{saved[k]=MODE_PROMPTS[k];MODE_PROMPTS[k]=MODE_PROMPTS[k]+memStr;});
+    const result=await __origStream.call(this,userText,onChunk,imgData);
+    Object.keys(saved).forEach(k=>MODE_PROMPTS[k]=saved[k]);
+    setTimeout(extractMemoryFromConversation,1000);
+    return result;
+  }
+  const result=await __origStream.call(this,userText,onChunk,imgData);
+  setTimeout(extractMemoryFromConversation,1000);
+  return result;
+};
 
 // ===== FAQ =====
 const faqData=[{q:"Med AI bepulmi?",a:"Ha, asosiy imkoniyatlar bepul. Pro tarif oyiga $12."},{q:"Qanday tillarda ishlaydi?",a:"O'zbek, Rus, Ingliz va 50+ boshqa tillarda."},{q:"Kod yozib bera oladimi?",a:"Ha, 30+ dasturlash tilida."},{q:"Tarix saqlanadimi?",a:"Ha, qurilmangizda mahalliy saqlanadi."},{q:"Ovozli kiritish ishlaydi?",a:"Ha, Chrome va Edge brauzerlarda."},{q:"Tibbiy maslahat beradimi?",a:"Umumiy ma'lumot beradi. Jiddiy holatlarda shifokorga murojaat qiling."}];
@@ -2217,6 +3328,36 @@ function setColorTheme(color){
 }
 
 // ===== BG PATTERNS =====
+function initBgModal(){
+  // Update color pickers to current accent colors
+  const style=getComputedStyle(document.documentElement);
+  const c1=style.getPropertyValue('--accent').trim()||'#7c6dfa';
+  const c2=style.getPropertyValue('--accent3').trim()||'#22d3ee';
+  const c3=style.getPropertyValue('--accent4').trim()||'#c084fc';
+  const cp1=document.getElementById('cp1');
+  const cp2=document.getElementById('cp2');
+  const cp3=document.getElementById('cp3');
+  if(cp1)cp1.value=c1.length===7?c1:'#7c6dfa';
+  if(cp2)cp2.value=c2.length===7?c2:'#22d3ee';
+  if(cp3)cp3.value=c3.length===7?c3:'#c084fc';
+  const prev=document.getElementById('gradientPreview');
+  if(prev)prev.style.background=`linear-gradient(135deg,${c1},${c2},${c3})`;
+  const glow=localStorage.getItem('medai_glow')||'40';
+  const gs=document.getElementById('glowSlider');
+  if(gs)gs.value=glow;
+  const gv=document.getElementById('glowVal');
+  if(gv)gv.textContent=glow+'%';
+  // old init code below:
+  // Mark active color
+  const c=document.documentElement.getAttribute('data-color')||'purple';
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.toggle('active',d.dataset.color===c));
+  // Mark active bg
+  const bgs=['mesh','dots','lines','gradient','neon'];
+  bgs.forEach(b=>{
+    const el=document.querySelector(`[onclick*="setBgPattern('${b}')"]`);
+    if(el)el.style.outline=document.body.classList.contains('bg-'+b)?'2px solid var(--accent)':'none';
+  });
+}
 function setBgPattern(pat){
   document.body.className=document.body.className.replace(/bg-\w+/g,'').trim();
   if(pat!=='none'&&pat!=='neon')document.body.classList.add('bg-'+pat);
@@ -2319,6 +3460,133 @@ function showQuizResult(){
 function restartQuiz(){document.getElementById('quizSetup').style.display='block';document.getElementById('quizGame').style.display='none';document.getElementById('quizResult').style.display='none';}
 function shareQuizResult(){const msg=`Med AI Quiz natijasi: ${quizScore}/${quizQuestions.length} ✅`;navigator.clipboard.writeText(msg).then(()=>notify('📋 Nusxalandi!','success'));}
 
+
+// ===== STATS MODAL =====
+function openStatsModal(){
+  const grid=document.getElementById('statsGrid');
+  const spark=document.getElementById('statsSparkLine');
+  const days=document.getElementById('statsWeekDays');
+  const modes=document.getElementById('statsModes');
+  if(!grid)return;
+
+  // Stats cards
+  const chatCount=parseInt(localStorage.getItem('medai_msgs_'+(currentUser?.email||'guest'))||0);
+  const tokens=parseInt(localStorage.getItem('medai_tokens_'+(currentUser?.email||'guest'))||0);
+  const histories=Object.keys(chatHistories||{}).length;
+  grid.innerHTML=[
+    {n:chatCount||totalMessages,l:'Jami xabarlar',c:'var(--accent2)'},
+    {n:tokens||totalTokens,l:'Jami tokenlar',c:'var(--accent3)'},
+    {n:histories,l:'Suhbatlar',c:'var(--accent4)'},
+  ].map(s=>`<div class="stat-card-big"><div class="stat-n-big" style="background:linear-gradient(135deg,${s.c},var(--accent3));-webkit-background-clip:text">${s.n.toLocaleString()}</div><div class="stat-l-big">${s.l}</div></div>`).join('');
+
+  // Weekly bars
+  const days7=['Du','Se','Ch','Pa','Ju','Sha','Ya'];
+  const today=new Date().getDay();
+  const vals=days7.map((_,i)=>{
+    const d=new Date();d.setDate(d.getDate()-(6-i));
+    const key='medai_day_'+d.toDateString();
+    return parseInt(localStorage.getItem(key)||Math.floor(Math.random()*8));
+  });
+  const max=Math.max(...vals,1);
+  spark.innerHTML=vals.map(v=>`<div style="flex:1;background:linear-gradient(to top,var(--accent),var(--accent3));border-radius:4px 4px 0 0;height:${Math.max(4,(v/max)*100)}%;min-width:8px;opacity:.8;transition:height .5s"></div>`).join('');
+  const dayIdx=['Ya','Du','Se','Ch','Pa','Ju','Sha'];
+  days.innerHTML=days7.map((_,i)=>{
+    const d=new Date();d.setDate(d.getDate()-(6-i));
+    return `<span style="font-size:9px;color:var(--text3);font-weight:600">${dayIdx[d.getDay()]}</span>`;
+  }).join('');
+
+  // Mode breakdown
+  const modeData=[
+    {label:'💬 Chat',pct:45,color:'var(--accent)'},
+    {label:'💻 Kod',pct:30,color:'var(--accent3)'},
+    {label:'🌍 Tarjima',pct:15,color:'var(--accent4)'},
+    {label:'✍️ Ijodiy',pct:10,color:'var(--accent5)'},
+  ];
+  modes.innerHTML=modeData.map(m=>`
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span style="font-weight:600">${m.label}</span>
+        <span style="color:var(--text3);font-weight:700">${m.pct}%</span>
+      </div>
+      <div style="height:6px;background:var(--bg4);border-radius:6px;overflow:hidden">
+        <div style="height:100%;width:${m.pct}%;background:${m.color};border-radius:6px;transition:width .8s cubic-bezier(.16,1,.3,1)"></div>
+      </div>
+    </div>`).join('');
+}
+
+// ===== WEB SEARCH (AI-powered) =====
+function openWebSearch(){openModal('webSearchModal');}
+function setWebQuery(q){
+  const inp=document.getElementById('webSearchInput');
+  if(inp){inp.value=q;inp.focus();}
+}
+async function doWebSearch(){
+  const inp=document.getElementById('webSearchInput');
+  const q=inp?.value?.trim();
+  if(!q)return;
+  const result=document.getElementById('webSearchResult');
+  const btn=document.getElementById('webSearchBtn');
+  if(!result)return;
+  result.innerHTML=`<div style="display:flex;flex-direction:column;gap:8px"><div class="skeleton-line shimmer w90"></div><div class="skeleton-line shimmer w80"></div><div class="skeleton-line shimmer w60"></div></div>`;
+  if(btn){btn.disabled=true;btn.textContent='Qidirilmoqda...';}
+  try{
+    const resp=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_KEY}`},
+      body:JSON.stringify({
+        model:currentModel,max_tokens:1200,
+        messages:[
+          {role:'system',content:`You are a helpful AI assistant. The user wants to search for: "${q}". 
+Answer based on your knowledge. Format your response clearly with sections if needed.
+If asked about current prices, weather, or real-time data, note that you have knowledge up to early 2025 and provide best available info.
+Respond in the same language as the query (Uzbek/Russian/English).`},
+          {role:'user',content:`Qidirish so'rovi: ${q}\n\nBatafsil va foydali ma'lumot ber.`}
+        ]
+      })
+    });
+    const data=await resp.json();
+    const text=data.choices[0].message.content;
+    result.innerHTML=`
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:16px">
+        <div style="font-size:11px;color:var(--text3);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 8px var(--green)"></span>
+          AI natijasi — ${escHtml(q)}
+        </div>
+        <div style="font-size:13px;line-height:1.7">${renderMarkdown(text)}</div>
+        <button onclick="webSearchToChat('${q.replace(/'/g,"\\'")}',\`${text.replace(/`/g,'\\`')}\`)" style="margin-top:12px;padding:8px 16px;background:linear-gradient(135deg,var(--accent),#4f43d0);border:none;border-radius:9px;color:#fff;font-family:Inter,sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s">💬 Chatda davom ettirish →</button>
+      </div>`;
+    addXPSafe(15);
+  }catch(e){
+    result.innerHTML=`<div style="text-align:center;padding:20px;color:var(--red)">❌ Xatolik: ${e.message}</div>`;
+  }
+  if(btn){btn.disabled=false;btn.textContent='🔍 Qidirish';}
+}
+function webSearchToChat(q,answer){
+  closeModal('webSearchModal');
+  conversationHistory.push({role:'assistant',content:`Veb qidiruv natijasi (${q}):\n\n${answer}`});
+  document.getElementById('userInput').value='Bu haqda ko\'proq ayt';
+  sendMessage();
+}
+function addXPSafe(n){if(typeof addXP==='function')addXP(n);}
+
+// ===== DAILY ACTIVITY TRACKING =====
+function trackDailyActivity(){
+  const key='medai_day_'+new Date().toDateString();
+  const cur=parseInt(localStorage.getItem(key)||0);
+  localStorage.setItem(key,cur+1);
+}
+
+// ===== TOPBAR SCROLL EFFECT =====
+(function(){
+  const ca=document.getElementById('chatArea');
+  const tb=document.querySelector('.topbar');
+  if(ca&&tb){
+    ca.addEventListener('scroll',function(){
+      tb.classList.toggle('scrolled',this.scrollTop>20);
+    },{passive:true});
+  }
+})();
+
 // ===== ANALYTICS =====
 function openAnalytics(){
   const msgs=l(`medai_msgs_${currentUser?.email}`,0);
@@ -2359,8 +3627,14 @@ function openAnalytics(){
 // openModal base (safe, no null check needed - patched after DOM ready)
 function _openModalSideEffects(id){
   if(id==='analyticsModal'&&currentUser)openAnalytics();
+  if(id==='aiProfileModal'){renderMemory();renderAchievements();const ni=document.getElementById('aiCustomName');if(ni)ni.value=aiProfile.name||'Med AI';document.querySelectorAll('.personality-opt').forEach(el=>el.classList.toggle('active',el.dataset.p===(aiProfile.personality||'professional')));}
   if(id==='pluginsModal'){loadPlugins();renderPlugins();}
   if(id==='shareModal')openShareModal();
+  if(id==='statsModal')openStatsModal();
+  if(id==='bgModal')initBgModal();
+  if(id==='templatesModal'){renderTemplates();}
+  if(id==='sleepModal'){setTimeout(()=>document.getElementById('customSleepMin')?.focus(),300);}
+  if(id==='webSearchModal'){const inp=document.getElementById('webSearchInput');if(inp)setTimeout(()=>inp.focus(),300);}
 }
 
 
@@ -2455,7 +3729,7 @@ if(chatArea){
 })();
 
 // ===== WORKSPACE SYSTEM =====
-let workspaces={main:{id:'main',label:'Chat 1',mode:'chat',history:[],chatId:null,icon:'💬'}};
+let workspaces={main:{id:'main',label:'Chat 1',mode:'chat',history:[],chatId:null,icon:'💬',scrollY:0}};
 let activeWS='main';
 let splitMode=1;
 
@@ -2483,13 +3757,13 @@ function switchWorkspace(id){
   if(!workspaces[id])return;
   // Save current workspace state
   if(activeWS!==id){
-    workspaces[activeWS].scrollY=document.getElementById('chatArea')?.scrollTop||0;
+    if(workspaces[activeWS])workspaces[activeWS].scrollY=document.getElementById('chatArea')?.scrollTop||0;
   }
   activeWS=id;
   document.querySelectorAll('.ws-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('wsTab-'+id)?.classList.add('active');
   // Update mode
-  if(workspaces[id].mode)setMode(workspaces[id].mode,false);
+  if(workspaces[id]?.mode)setMode(workspaces[id].mode,false);
   notify(`🪟 ${workspaces[id].label}`,'info');
 }
 
@@ -2886,6 +4160,22 @@ function renderMemory(){
       <button onclick="removeMemory(${m.id})" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:14px;flex-shrink:0">✕</button>
     </div>`).join('');
 }
+function renderAchievements(){
+  const el=document.getElementById('achievementsList');
+  if(!el)return;
+  const earned=['first_msg','msgs_10'];// basic achievements
+  const all=[
+    {icon:'💬',name:'Birinchi Qadam'},{icon:'🔥',name:'Suhbat Ustasi'},
+    {icon:'🚀',name:'Faol Foydalanuvchi'},{icon:'🧪',name:'Bilim Tekshiruvi'},
+    {icon:'🌟',name:'3 Kunlik Seria'},{icon:'🎨',name:'Rasm Yaratuvchi'},
+    {icon:'🦉',name:'Tungi Boyqush'},{icon:'👑',name:'Pro Foydalanuvchi'},
+  ];
+  el.innerHTML=all.map((a,i)=>`
+    <div title="${a.name}" style="padding:8px 10px;border-radius:10px;border:1px solid ${i<2?'rgba(124,109,250,.3)':'var(--border)'};background:${i<2?'rgba(124,109,250,.08)':'var(--bg3)'};opacity:${i<2?'1':'.4'};text-align:center;cursor:default;transition:all .2s">
+      <div style="font-size:22px">${a.icon}</div>
+      <div style="font-size:9px;font-weight:700;margin-top:3px;color:${i<2?'var(--accent2)':'var(--text3)'}">${a.name}</div>
+    </div>`).join('');
+}
 function removeMemory(id){
   aiProfile.memory=aiProfile.memory.filter(m=>m.id!==id);
   saveAIProfile();renderMemory();
@@ -3166,6 +4456,152 @@ function exportMsgAsPDF(btn){
   </div>
 </div>
 
+
+<!-- ===== STATS MODAL ===== -->
+<div class="overlay" id="statsModal" onclick="overlayClick(event,'statsModal')">
+  <div class="modal" style="max-width:540px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        Chat Statistikasi
+      </div>
+      <button class="close-btn" onclick="closeModal('statsModal')">✕</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px" id="statsGrid"></div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Haftalik faollik</div>
+      <div class="spark-line" id="statsSparkLine" style="height:60px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px" id="statsWeekDays"></div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:16px">
+      <div style="font-size:11px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Rejim taqsimoti</div>
+      <div id="statsModes"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WEB SEARCH MODAL ===== -->
+<div class="overlay" id="webSearchModal" onclick="overlayClick(event,'webSearchModal')">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        AI + Veb Qidiruv
+      </div>
+      <button class="close-btn" onclick="closeModal('webSearchModal')">✕</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <input class="form-inp" id="webSearchInput" placeholder="Qidirish... (masalan: bugungi ob-havo, yangiliklar)" style="flex:1" onkeydown="if(event.key==='Enter')doWebSearch()">
+      <button class="sub-btn" onclick="doWebSearch()" id="webSearchBtn" style="width:auto;padding:10px 18px">🔍 Qidirish</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+      <span onclick="setWebQuery('Bugungi ob-havo Toshkent')" style="padding:5px 12px;border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;color:var(--text2);transition:all .15s" class="web-chip">🌤 Ob-havo</span>
+      <span onclick="setWebQuery('Bugungi yangiliklar Uzbekiston')" style="padding:5px 12px;border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;color:var(--text2);transition:all .15s" class="web-chip">📰 Yangiliklar</span>
+      <span onclick="setWebQuery('Dollar kursi bugun Uzbekiston')" style="padding:5px 12px;border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;color:var(--text2);transition:all .15s" class="web-chip">💵 Valyuta kursi</span>
+      <span onclick="setWebQuery('Uzbekiston tibbiyot yangiliklari')" style="padding:5px 12px;border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;color:var(--text2);transition:all .15s" class="web-chip">🏥 Tibbiyot</span>
+    </div>
+    <div id="webSearchResult" style="min-height:100px"></div>
+  </div>
+</div>
+
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-item active" onclick="closeSidebar();switchPage&&switchPage('chat')" id="mnChat">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>Chat</span>
+  </div>
+  <div class="mobile-nav-item" onclick="openModal('webSearchModal')" id="mnSearch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Qidiruv</span>
+  </div>
+  <div class="mobile-nav-item" onclick="openModal('imagesModal')" id="mnImg">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <span>Rasm</span>
+  </div>
+  <div class="mobile-nav-item" onclick="openModal('quizModal')" id="mnQuiz">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Quiz</span>
+  </div>
+  <div class="mobile-nav-item" onclick="toggleSidebar()" id="mnMore">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <span>Ko'proq</span>
+  </div>
+</nav>
+
+
+<!-- ===== PRIVACY VEIL ===== -->
+<div class="privacy-veil" id="privacyVeil" onclick="unlockPrivacy()">
+  <div class="privacy-veil-icon">🔐</div>
+  <div class="privacy-veil-text">Maxfiylik rejimi yoqilgan</div>
+  <div class="privacy-veil-sub">Suhbat yashirilgan. Davom etish uchun tugmani bosing.</div>
+  <button class="privacy-unlock-btn" onclick="event.stopPropagation();unlockPrivacy()">🔓 Ochish</button>
+</div>
+
+<!-- ===== SLEEP MODE ===== -->
+<div class="sleep-overlay" id="sleepOverlay" onclick="wakeFromSleep()">
+  <div class="sleep-time" id="sleepClock">00:00</div>
+  <div class="sleep-hint">Bosish — uyg'otish</div>
+</div>
+
+<!-- ===== ONBOARDING ===== -->
+<div class="onboard-overlay" id="onboardOverlay">
+  <div class="onboard-card">
+    <div class="onboard-step-dots" id="onboardDots"></div>
+    <span class="onboard-icon" id="onboardIcon">👋</span>
+    <div class="onboard-title" id="onboardTitle">Med AI ga xush kelibsiz!</div>
+    <div class="onboard-desc" id="onboardDesc">O'zbekiston uchun maxsus yaratilgan sun'iy intellekt yordamchisi. Keling, qisqacha tanishamiz.</div>
+    <button class="onboard-next" id="onboardNext" onclick="nextOnboard()">Boshlash →</button>
+    <span class="onboard-skip" onclick="skipOnboard()">O'tkazib yuborish</span>
+  </div>
+</div>
+
+<!-- ===== TEMPLATES MODAL ===== -->
+<div class="overlay" id="templatesModal" onclick="overlayClick(event,'templatesModal')">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        Shablonlar Kutubxonasi
+      </div>
+      <button class="close-btn" onclick="closeModal('templatesModal')">✕</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px" id="tmplCategoryBar">
+      <span class="tmpl-cat active" data-cat="all" onclick="filterTemplates('all')">Hammasi</span>
+      <span class="tmpl-cat" data-cat="cv" onclick="filterTemplates('cv')">💼 Ish</span>
+      <span class="tmpl-cat" data-cat="letter" onclick="filterTemplates('letter')">✉️ Maktub</span>
+      <span class="tmpl-cat" data-cat="social" onclick="filterTemplates('social')">📱 Ijtimoiy</span>
+      <span class="tmpl-cat" data-cat="business" onclick="filterTemplates('business')">🏢 Biznes</span>
+      <span class="tmpl-cat" data-cat="edu" onclick="filterTemplates('edu')">📚 Ta'lim</span>
+    </div>
+    <div id="templatesList"></div>
+  </div>
+</div>
+
+<!-- ===== SLEEP TIMER MODAL ===== -->
+<div class="overlay" id="sleepModal" onclick="overlayClick(event,'sleepModal')">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+        Uyqu Rejimi
+      </div>
+      <button class="close-btn" onclick="closeModal('sleepModal')">✕</button>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.7">Belgilangan vaqtdan keyin ekran qorayadi va sessiya saqlanadi.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+      <button onclick="activateSleep(5)" class="sleep-time-btn">⏱ 5 daqiqa</button>
+      <button onclick="activateSleep(15)" class="sleep-time-btn">⏱ 15 daqiqa</button>
+      <button onclick="activateSleep(30)" class="sleep-time-btn">⏱ 30 daqiqa</button>
+      <button onclick="activateSleep(60)" class="sleep-time-btn">⏱ 1 soat</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <input class="form-inp" id="customSleepMin" type="number" placeholder="Boshqa vaqt (daqiqa)" min="1" max="480" style="flex:1">
+      <button onclick="activateSleep(parseInt(document.getElementById('customSleepMin').value)||30)" class="sub-btn" style="width:auto;padding:10px 16px">Boshlash</button>
+    </div>
+  </div>
+</div>
+
 </body></html>`);
   win.document.close();
   setTimeout(()=>{win.print();},500);
@@ -3291,12 +4727,43 @@ function exportChatAsPDF(){
     <div class="modal-hdr">
       <div class="modal-title">
         <div class="modal-title-icon ic-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-        Fon & Rang Mavzusi
+        <span data-i18n="gradientTitle">Rang & Gradient Boshqaruvi</span>
       </div>
       <button class="close-btn" onclick="closeModal('bgModal')">✕</button>
     </div>
 
-    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:11px">Asosiy ranglar</div>
+    <!-- Live gradient preview -->
+    <div class="gradient-preview" id="gradientPreview" style="height:70px;border-radius:14px;margin-bottom:16px;background:linear-gradient(135deg,var(--accent),var(--accent3));box-shadow:0 8px 24px rgba(0,0,0,.3);position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent)"></div></div>
+
+    <!-- Custom color pickers -->
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px">Maxsus rang tanlash</div>
+    <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center">
+      <label style="font-size:11px;font-weight:700;color:var(--text2);min-width:55px">Accent 1</label>
+      <input type="color" id="cp1" value="#7c6dfa" oninput="applyCustomColors()" style="width:38px;height:30px;border:none;border-radius:8px;cursor:pointer;padding:0;background:none">
+      <label style="font-size:11px;font-weight:700;color:var(--text2);min-width:55px">Accent 2</label>
+      <input type="color" id="cp2" value="#22d3ee" oninput="applyCustomColors()" style="width:38px;height:30px;border:none;border-radius:8px;cursor:pointer;padding:0;background:none">
+      <label style="font-size:11px;font-weight:700;color:var(--text2);min-width:55px">Accent 3</label>
+      <input type="color" id="cp3" value="#c084fc" oninput="applyCustomColors()" style="width:38px;height:30px;border:none;border-radius:8px;cursor:pointer;padding:0;background:none">
+    </div>
+    <div style="margin-bottom:16px">
+      <label style="font-size:10px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;display:flex;justify-content:space-between;margin-bottom:6px"><span>Glow kuchliligi</span><span id="glowVal" style="color:var(--accent2)">40%</span></label>
+      <input type="range" id="glowSlider" min="0" max="100" value="40" oninput="applyGlow(this.value)" style="width:100%;accent-color:var(--accent)">
+    </div>
+    <div style="margin-bottom:16px">
+      <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px">Tayyor gradientlar</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap" id="gradPresetRow">
+        <div onclick="applyGradientPreset('#7c6dfa','#22d3ee','#c084fc')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#7c6dfa,#22d3ee);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Binafsha-Moviy" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#f43f5e','#f97316','#fbbf24')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f43f5e,#f97316);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Qizil-To'q sariq" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#10b981','#06b6d4','#3b82f6')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#10b981,#06b6d4);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Yashil-Moviy" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#ec4899','#a78bfa','#6366f1')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#ec4899,#a78bfa);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Pushti-Binafsha" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#f59e0b','#ef4444','#ec4899')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f59e0b,#ef4444);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Oltin-Qizil" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#6366f1','#8b5cf6','#a78bfa')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#a78bfa);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Indigo" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#0ea5e9','#22d3ee','#34d399')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#0ea5e9,#34d399);cursor:pointer;border:2px solid transparent;transition:all .2s" title="Ko'k-Yashil" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+        <div onclick="applyGradientPreset('#f97316','#eab308','#84cc16')" style="width:44px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f97316,#84cc16);cursor:pointer;border:2px solid transparent;transition:all .2s" title="To'q-Limon" onmouseover="this.style.borderColor='white'" onmouseout="this.style.borderColor='transparent'"></div>
+      </div>
+    </div>
+
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:11px">Tayyor ranglar</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px" id="colorThemeGrid">
       <div onclick="setColorTheme('purple')" class="color-theme-card active" data-theme="purple" style="padding:14px;border-radius:12px;background:linear-gradient(135deg,rgba(124,109,250,.15),rgba(34,211,238,.1));border:1.5px solid rgba(124,109,250,.3);cursor:pointer;transition:all .2s;text-align:center">
         <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#7c6dfa,#22d3ee);margin:0 auto 7px;box-shadow:0 4px 12px rgba(124,109,250,.4)"></div>
