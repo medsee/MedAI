@@ -754,6 +754,106 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
 .share-link-box{display:flex;gap:7px;margin-top:12px;}
 .share-link-box input{flex:1;padding:9px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:11px;outline:none;}
 
+
+/* ===== AMOLED / ULTRA DARK ===== */
+[data-theme="amoled"]{
+  --bg:#000000;--bg2:#050505;--bg3:#0a0a0a;--bg4:#0f0f0f;--bg5:#141414;
+  --border:#1a1a1a;--border2:#222;--border3:#2a2a2a;
+  --accent:#7c6dfa;--accent2:#9d8ffc;--accent3:#22d3ee;--accent4:#c084fc;--accent5:#fb7185;
+  --text:#ffffff;--text2:#666;--text3:#2a2a2a;
+  --user:#0d0d0d;--ai:#050505;
+  --green:#00ff88;--red:#ff3355;--yellow:#ffcc00;
+}
+[data-theme="amoled"] .sidebar{background:#000;border-right:1px solid #111;}
+[data-theme="amoled"] .topbar{background:rgba(0,0,0,.95);}
+[data-theme="amoled"] .input-area{background:#000;}
+[data-theme="amoled"] .bubble{border-color:#1a1a1a;}
+[data-theme="amoled"] .modal{background:#050505;border-color:#1a1a1a;}
+
+/* ===== GAMIFICATION ===== */
+.xp-bar-wrap{padding:6px 12px;background:var(--bg2);border-bottom:1px solid var(--border);}
+.xp-bar-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.xp-label{font-size:10px;font-weight:800;color:var(--accent2);letter-spacing:.5px;}
+.xp-val{font-size:10px;color:var(--text3);font-weight:600;}
+.xp-bar{height:4px;background:var(--bg4);border-radius:4px;overflow:hidden;}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:4px;transition:width .6s cubic-bezier(.16,1,.3,1);}
+.level-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;background:linear-gradient(135deg,rgba(124,109,250,.15),rgba(34,211,238,.1));border:1px solid rgba(124,109,250,.25);border-radius:20px;font-size:10px;font-weight:800;color:var(--accent2);}
+.achievement-toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,#1a1a35,#0f0f28);border:1px solid rgba(124,109,250,.4);border-radius:16px;padding:14px 20px;z-index:9999;display:flex;align-items:center;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(124,109,250,.2);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(20px);min-width:280px;}
+.achievement-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.ach-icon{font-size:28px;animation:achBounce .5s ease;}
+@keyframes achBounce{0%{transform:scale(0);}60%{transform:scale(1.2);}100%{transform:scale(1);}}
+.ach-info{flex:1;}
+.ach-title{font-size:11px;font-weight:800;color:var(--accent2);text-transform:uppercase;letter-spacing:.8px;}
+.ach-name{font-size:14px;font-weight:800;color:var(--text);margin-top:2px;}
+.ach-desc{font-size:11px;color:var(--text3);margin-top:1px;}
+.ach-xp{font-size:13px;font-weight:900;color:var(--green);white-space:nowrap;}
+
+/* ===== AI PERSONAL PROFILE ===== */
+.ai-profile-card{background:linear-gradient(135deg,rgba(124,109,250,.08),rgba(34,211,238,.05));border:1px solid rgba(124,109,250,.15);border-radius:16px;padding:18px;margin-bottom:14px;}
+.ai-profile-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent3));display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px;box-shadow:0 0 30px rgba(124,109,250,.4);animation:logoPulse 3s infinite;}
+.ai-name-input{text-align:center;background:none;border:none;border-bottom:2px solid var(--border2);color:var(--text);font-size:18px;font-weight:800;text-align:center;width:100%;padding:6px;outline:none;font-family:Inter,sans-serif;transition:border-color .2s;}
+.ai-name-input:focus{border-color:var(--accent);}
+.personality-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px;}
+.personality-opt{padding:9px 12px;border-radius:10px;border:1.5px solid var(--border);cursor:pointer;text-align:center;transition:all .2s;font-size:12px;font-weight:600;}
+.personality-opt:hover{border-color:var(--accent);}
+.personality-opt.active{border-color:var(--accent);background:rgba(124,109,250,.1);color:var(--accent2);}
+.memory-item{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;font-size:12px;line-height:1.5;}
+.memory-pin{color:var(--accent2);font-size:14px;flex-shrink:0;}
+
+/* ===== KALORIYA HISOBLAGICH ===== */
+.calorie-ring{width:120px;height:120px;margin:0 auto 16px;position:relative;}
+.calorie-ring svg{transform:rotate(-90deg);}
+.calorie-ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.calorie-num{font-size:22px;font-weight:900;background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.calorie-lbl{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.food-item{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;margin-bottom:6px;}
+.food-cal{font-size:12px;font-weight:800;color:var(--accent2);min-width:55px;text-align:right;}
+.food-name{flex:1;font-size:13px;font-weight:500;}
+.food-del{color:var(--red);cursor:pointer;font-size:16px;flex-shrink:0;background:none;border:none;}
+.macro-bar{display:flex;gap:6px;margin-top:12px;}
+.macro-item{flex:1;text-align:center;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;}
+.macro-val{font-size:15px;font-weight:800;}
+.macro-lbl{font-size:10px;color:var(--text3);font-weight:600;margin-top:2px;}
+
+/* ===== FOCUS MUSIC ===== */
+.music-player{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:18px;text-align:center;}
+.music-visualizer{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:40px;margin:14px 0;}
+.music-bar{width:5px;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--accent),var(--accent3));transition:height .15s;}
+.music-bar.playing{animation:musicWave 1s ease-in-out infinite;}
+.music-bar:nth-child(1){animation-delay:0s;}
+.music-bar:nth-child(2){animation-delay:.1s;}
+.music-bar:nth-child(3){animation-delay:.2s;}
+.music-bar:nth-child(4){animation-delay:.3s;}
+.music-bar:nth-child(5){animation-delay:.4s;}
+.music-bar:nth-child(6){animation-delay:.3s;}
+.music-bar:nth-child(7){animation-delay:.2s;}
+.music-bar:nth-child(8){animation-delay:.1s;}
+@keyframes musicWave{0%,100%{height:6px;}50%{height:32px;}}
+.music-track-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+.music-track-type{font-size:11px;color:var(--text3);}
+.music-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.music-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--border2);background:var(--bg4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--text2);}
+.music-btn:hover{background:var(--bg5);color:var(--text);}
+.music-btn.play-btn{width:52px;height:52px;background:linear-gradient(135deg,var(--accent),var(--accent3));border:none;color:#fff;box-shadow:0 6px 20px rgba(124,109,250,.4);}
+.music-btn.play-btn:hover{transform:scale(1.08);}
+.music-track-list{margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+.music-track-item{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--bg4);border-radius:10px;cursor:pointer;transition:all .2s;border:1px solid transparent;}
+.music-track-item:hover,.music-track-item.active{background:rgba(124,109,250,.08);border-color:rgba(124,109,250,.2);}
+.music-track-item .track-ico{font-size:18px;flex-shrink:0;}
+.music-track-item .track-info{flex:1;text-align:left;}
+.music-track-item .track-nm{font-size:12px;font-weight:700;}
+.music-track-item .track-dur{font-size:10px;color:var(--text3);}
+
+/* ===== MEDICAL DIAGNOSIS ===== */
+.symptom-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.25);border-radius:20px;font-size:12px;font-weight:600;color:var(--accent5);margin:3px;cursor:default;}
+.symptom-tag .rm{cursor:pointer;opacity:.6;font-size:14px;line-height:1;}
+.symptom-tag .rm:hover{opacity:1;}
+.diagnosis-result{background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(34,211,238,.04));border:1px solid rgba(16,185,129,.2);border-radius:14px;padding:16px;margin-top:12px;}
+.diag-confidence{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.diag-bar{flex:1;height:6px;background:var(--bg4);border-radius:6px;overflow:hidden;}
+.diag-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--green),var(--accent3));}
+.diag-pct{font-size:11px;font-weight:800;color:var(--green);min-width:36px;}
+
 </style>
 </head>
 <body>
@@ -861,26 +961,6 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
     </div>
 
     <div class="nav-sec">
-      <span class="nav-sec-lbl">Tibbiyot</span>
-      <div class="nv" onclick="medicalPrompt('simptomlar')">
-        <div class="nv-icon ic-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></div>
-        <span class="nv-lbl" id="navSymptLabel">Simptom tahlili</span>
-      </div>
-      <div class="nv" onclick="medicalPrompt('dorilar')">
-        <div class="nv-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12C12 9.79 10.21 8 8 8S4 9.79 4 12s1.79 4 4 4M12 12c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4"/></svg></div>
-        <span class="nv-lbl" id="navMedLabel">Dori ma'lumoti</span>
-      </div>
-      <div class="nv" onclick="medicalPrompt('anatomiya')">
-        <div class="nv-icon ic-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
-        <span class="nv-lbl" id="navAnatomyLabel">Anatomiya</span>
-      </div>
-      <div class="nv" onclick="medicalPrompt('dieta')">
-        <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
-        <span class="nv-lbl" id="navDietLabel">Dieta & Sog'liq</span>
-      </div>
-    </div>
-
-    <div class="nav-sec">
       <span class="nav-sec-lbl">Vositalar</span>
       <div class="nv" onclick="openModal('pluginsModal')">
         <div class="nv-icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></div>
@@ -891,16 +971,8 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
         <div class="nv-icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
         <span class="nv-lbl">Ulashish</span>
       </div>
-      <div class="nv" onclick="openModal('todoModal')">
-        <div class="nv-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <span class="nv-lbl">Vazifalar</span>
-        <span class="nv-badge" id="todoBadge" style="display:none">0</span>
-      </div>
-      <div class="nv" onclick="openModal('reminderModal')">
-        <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-        <span class="nv-lbl">Eslatmalar</span>
-        <span class="nv-badge" id="reminderBadge" style="display:none">0</span>
-      </div>
+
+
       <div class="nv" onclick="openModal('quizModal')">
         <div class="nv-icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
         <span class="nv-lbl">Quiz rejimi</span>
@@ -919,6 +991,14 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
 
     <div class="nav-sec">
       <span class="nav-sec-lbl">Tizim</span>
+
+
+
+      <div class="nv" onclick="openModal('aiProfileModal')">
+        <div class="nv-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span class="nv-lbl">AI Profil</span>
+        <span class="nv-badge">Yangi</span>
+      </div>
       <div class="nv" onclick="openModal('plansModal')">
         <div class="nv-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <span class="nv-lbl" id="navPlansLabel">Tariflar</span>
@@ -1039,7 +1119,7 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
     </div>
   </div>
 
-  <!-- DAILY TIP (shown once per day) -->
+    <!-- DAILY TIP (shown once per day) -->
   <div class="daily-tip" id="dailyTip" style="display:none">
     <span class="daily-tip-ico" id="dailyTipIco">💡</span>
     <div class="daily-tip-body">
@@ -1434,11 +1514,11 @@ body.bg-gradient::after{content:'';position:fixed;inset:0;z-index:0;pointer-even
 <div class="notif" id="notif"></div>
 
 <script>
-const GROQ_KEY = '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';
+const GROQ_KEY = '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';
 let currentModel='llama-3.3-70b-versatile',currentTemp=0.7,currentLang='uz',currentMode='chat';
 let currentUser=null,conversationHistory=[],chatHistories=[],currentChatId=null;
 let totalMessages=0,totalTokens=0,isDark=true,isRecording=false,recognition=null,attachedFile=null,pendingImageData=null;
-let pinnedMessages=[];
+
 
 
 // ===== I18N =====
@@ -1446,7 +1526,7 @@ const I18N={
   uz:{name:"O'zbek",welcome:"Med AI ga xush kelibsiz",desc:"Tibbiyot, kod, tarjima, matematika — barcha savollaringizga javob topamiz.",badge:"AI faol • LLaMA 3.3 70B",newChat:"Yangi suhbat",planLabel:"Bepul tarif",
     c0:"Tibbiyot",c1:"Kod yozish",c2:"Tarjima",c3:"Maqola",c4:"Matematika",c5:"Hikoya",
     params:"Parametr",langs:"Til",topics:"Mavzu",speed:"Tez javob",
-    navChatLabel:"Chat",navHistLabel:"Tarix",navImgLabel:"Rasm yaratish",navCodeLabel:"Kod muharriri",navTransLabel:"Tarjimon",navSummLabel:"Matn tahlili",navSymptLabel:"Simptom tahlili",navMedLabel:"Dori ma'lumoti",navAnatomyLabel:"Anatomiya",navDietLabel:"Dieta & Sog'liq",navPlansLabel:"Tariflar",navSettingsLabel:"Sozlamalar",navSupportLabel:"Support",navAboutLabel:"Haqida",
+    navChatLabel:"Chat",navHistLabel:"Tarix",navImgLabel:"Rasm yaratish",navCodeLabel:"Kod muharriri",navTransLabel:"Tarjimon",navSummLabel:"Matn tahlili",navPlansLabel:"Tariflar",navSettingsLabel:"Sozlamalar",navSupportLabel:"Support",navAboutLabel:"Haqida",
     modeChatLabel:"Chat",modeCodeLabel:"Kod",modeMedLabel:"Tibbiyot",modeCreativeLabel:"Ijodiy",
     tagMedLabel:"Tibbiyot",tagCodeLabel:"Kod",tagTransLabel:"Tarjima",tagAnalysisLabel:"Tahlil",tagSummaryLabel:"Xulosa",
     placeholder:"Savolingizni yozing… (Enter — yuborish, Shift+Enter — yangi qator)",
@@ -1456,7 +1536,7 @@ const I18N={
   ru:{name:"Русский",welcome:"Добро пожаловать в Med AI",desc:"Медицина, код, переводы, математика — ответы на все ваши вопросы.",badge:"ИИ активен • LLaMA 3.3 70B",newChat:"Новый чат",planLabel:"Бесплатный тариф",
     c0:"Медицина",c1:"Написать код",c2:"Перевод",c3:"Статья",c4:"Математика",c5:"История",
     params:"Параметров",langs:"Языков",topics:"Тем",speed:"Быстрый",
-    navChatLabel:"Чат",navHistLabel:"История",navImgLabel:"Генерация изображений",navCodeLabel:"Редактор кода",navTransLabel:"Переводчик",navSummLabel:"Анализ текста",navSymptLabel:"Анализ симптомов",navMedLabel:"Лекарства",navAnatomyLabel:"Анатомия",navDietLabel:"Диета и здоровье",navPlansLabel:"Тарифы",navSettingsLabel:"Настройки",navSupportLabel:"Поддержка",navAboutLabel:"О программе",
+    navChatLabel:"Чат",navHistLabel:"История",navImgLabel:"Генерация изображений",navCodeLabel:"Редактор кода",navTransLabel:"Переводчик",navSummLabel:"Анализ текста",navPlansLabel:"Тарифы",navSettingsLabel:"Настройки",navSupportLabel:"Поддержка",navAboutLabel:"О программе",
     modeChatLabel:"Чат",modeCodeLabel:"Код",modeMedLabel:"Медицина",modeCreativeLabel:"Творческий",
     tagMedLabel:"Медицина",tagCodeLabel:"Код",tagTransLabel:"Перевод",tagAnalysisLabel:"Анализ",tagSummaryLabel:"Резюме",
     placeholder:"Введите вопрос… (Enter — отправить)",
@@ -1466,7 +1546,7 @@ const I18N={
   en:{name:"English",welcome:"Welcome to Med AI",desc:"Medicine, code, translation, math — answers to all your questions.",badge:"AI active • LLaMA 3.3 70B",newChat:"New chat",planLabel:"Free plan",
     c0:"Medicine",c1:"Write code",c2:"Translate",c3:"Article",c4:"Math",c5:"Story",
     params:"Parameters",langs:"Languages",topics:"Topics",speed:"Fast",
-    navChatLabel:"Chat",navHistLabel:"History",navImgLabel:"Image generation",navCodeLabel:"Code editor",navTransLabel:"Translator",navSummLabel:"Text analysis",navSymptLabel:"Symptom analysis",navMedLabel:"Drug info",navAnatomyLabel:"Anatomy",navDietLabel:"Diet & Health",navPlansLabel:"Pricing",navSettingsLabel:"Settings",navSupportLabel:"Support",navAboutLabel:"About",
+    navChatLabel:"Chat",navHistLabel:"History",navImgLabel:"Image generation",navCodeLabel:"Code editor",navTransLabel:"Translator",navSummLabel:"Text analysis",navPlansLabel:"Pricing",navSettingsLabel:"Settings",navSupportLabel:"Support",navAboutLabel:"About",
     modeChatLabel:"Chat",modeCodeLabel:"Code",modeMedLabel:"Medical",modeCreativeLabel:"Creative",
     tagMedLabel:"Medicine",tagCodeLabel:"Code",tagTransLabel:"Translate",tagAnalysisLabel:"Analysis",tagSummaryLabel:"Summary",
     placeholder:"Type your question… (Enter to send)",
@@ -1544,6 +1624,7 @@ function loginSuccess(user){
   totalTokens=l(`medai_tokens_${user.email}`,0);
   updateUserUI();
   document.getElementById('authScreen').classList.add('hidden');
+  setTimeout(()=>{}, 2000);
   renderHistoryList();updateMsgBadge();
   notify(`👋 Xush kelibsiz, ${user.name}!`,'success');
 }
@@ -2183,92 +2264,6 @@ function toggleAnimations(){
   s('medai_anim',on?'1':'0');
 }
 
-// ===== TODO =====
-let todos=[];let todoFilter='all';
-function addTodo(){
-  const txt=document.getElementById('todoInput').value.trim();if(!txt)return;
-  const pri=document.getElementById('todoPri').value;
-  todos.unshift({id:Date.now(),text:txt,done:false,pri,createdAt:new Date().toLocaleString()});
-  document.getElementById('todoInput').value='';
-  saveTodos();renderTodos();
-}
-function saveTodos(){if(currentUser)s(`medai_todos_${currentUser.email}`,todos);updateTodoBadge();}
-function loadTodos(){if(currentUser)todos=l(`medai_todos_${currentUser.email}`,[]);}
-function updateTodoBadge(){const b=document.getElementById('todoBadge'),active=todos.filter(t=>!t.done).length;if(active>0){b.textContent=active;b.style.display='';}else{b.style.display='none';}}
-function filterTodo(f){
-  todoFilter=f;
-  ['all','active','done'].forEach(k=>{
-    const btn=document.getElementById('tf-'+k);if(!btn)return;
-    const isAct=k===f;
-    btn.style.border=isAct?'1px solid var(--accent)':'1px solid var(--border)';
-    btn.style.background=isAct?'rgba(124,109,250,.1)':'var(--bg3)';
-    btn.style.color=isAct?'var(--accent2)':'var(--text3)';
-  });
-  renderTodos();
-}
-function renderTodos(){
-  const el=document.getElementById('todoList');
-  const filtered=todoFilter==='all'?todos:todoFilter==='done'?todos.filter(t=>t.done):todos.filter(t=>!t.done);
-  const priC={high:'#ef4444',med:'#f59e0b',low:'#10b981'};
-  if(!filtered.length){el.innerHTML=`<div class="todo-empty">✅ ${todoFilter==='done'?'Hali bajarilgan vazifalar yoq':'Barcha vazifalar bajarilgan!'}<br><small>Yangi vazifa qoshing</small></div>`;updateStats();return;}
-  el.innerHTML=filtered.map(t=>`<div class="todo-item ${t.done?'done':''}" id="td-${t.id}">
-    <div class="todo-pri" style="background:${priC[t.pri]||'#7c6dfa'}"></div>
-    <div class="todo-check ${t.done?'done':''}" onclick="toggleTodo(${t.id})"></div>
-    <span class="todo-txt">${escHtml(t.text)}</span>
-    <span style="font-size:10px;color:var(--text3)">${t.pri==='high'?'🔴':t.pri==='med'?'🟡':'🟢'}</span>
-    <button class="todo-del" onclick="deleteTodo(${t.id})">✕</button>
-  </div>`).join('');
-  updateStats();
-}
-function toggleTodo(id){const t=todos.find(x=>x.id===id);if(t){t.done=!t.done;saveTodos();renderTodos();}}
-function deleteTodo(id){todos=todos.filter(x=>x.id!==id);saveTodos();renderTodos();}
-function updateStats(){const d=todos.filter(t=>t.done).length,t=todos.length;document.getElementById('todoStats').textContent=t?`${d}/${t} bajarildi · ${t-d} qoldi`:'Vazifalar yoq';}
-function todoToAI(){
-  const active=todos.filter(t=>!t.done).map((t,i)=>((i+1)+'. '+t.text)).join('\n');
-  if(!active){notify('Faol vazifalar yoq','error');return;}
-  closeModal('todoModal');document.getElementById('userInput').value=`Bu vazifalarni qanday rejalashtirishni tavsiya qilasiz?
-${active}`;sendMessage();
-}
-
-// ===== REMINDER =====
-let reminders=[];let reminderInterval=null;
-function addReminder(){
-  const txt=document.getElementById('reminderText').value.trim(),time=document.getElementById('reminderTime').value,repeat=document.getElementById('reminderRepeat').value;
-  if(!txt||!time){notify('Matn va vaqtni kiriting!','error');return;}
-  reminders.push({id:Date.now(),text:txt,time,repeat,active:true});
-  document.getElementById('reminderText').value='';
-  saveReminders();renderReminders();startReminderChecker();
-  notify('🔔 Eslatma qoshildi!','success');
-}
-function saveReminders(){if(currentUser)s(`medai_reminders_${currentUser.email}`,reminders);updateReminderBadge();}
-function loadReminders(){if(currentUser){reminders=l(`medai_reminders_${currentUser.email}`,[]);startReminderChecker();}}
-function updateReminderBadge(){const b=document.getElementById('reminderBadge'),c=reminders.filter(r=>r.active).length;if(c>0){b.textContent=c;b.style.display='';}else{b.style.display='none';}}
-function renderReminders(){
-  const el=document.getElementById('reminderList');
-  if(!reminders.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">🔔 Eslatmalar yoq</div>';return;}
-  el.innerHTML=reminders.map(r=>`<div class="reminder-item">
-    <div class="reminder-bell">🔔</div>
-    <div class="reminder-time">${r.time}</div>
-    <div class="reminder-txt"><div style="font-weight:600">${escHtml(r.text)}</div><div style="font-size:10px;color:var(--text3)">${r.repeat==='once'?'Bir marta':r.repeat==='daily'?'Har kuni':'Ish kunlari'}</div></div>
-    <button class="reminder-del" onclick="deleteReminder(${r.id})">✕</button>
-  </div>`).join('');
-}
-function deleteReminder(id){reminders=reminders.filter(r=>r.id!==id);saveReminders();renderReminders();}
-function startReminderChecker(){
-  if(reminderInterval)clearInterval(reminderInterval);
-  reminderInterval=setInterval(()=>{
-    const now=new Date(),cur=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-    reminders.forEach(r=>{
-      if(r.active&&r.time===cur){
-        if('Notification'in window&&Notification.permission==='granted'){new Notification('Med AI Eslatma',{body:r.text,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%237c6dfa"/></svg>'});}
-        notify(`🔔 ${r.text}`,'warning');
-        if(r.repeat==='once'){r.active=false;saveReminders();}
-      }
-    });
-  },30000);
-  if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();
-}
-
 // ===== QUIZ =====
 let quizQuestions=[],quizCurrent=0,quizScore=0,quizStartTime=0,quizTimerInt=null;
 async function startQuiz(){
@@ -2342,7 +2337,7 @@ function openAnalytics(){
       <div class="stat-i"><div class="stat-v" style="color:var(--accent2)">${msgs}</div><div class="stat-l">Xabarlar</div></div>
       <div class="stat-i"><div class="stat-v" style="color:var(--accent3)">${chats}</div><div class="stat-l">Suhbatlar</div></div>
       <div class="stat-i"><div class="stat-v" style="color:var(--accent4)">${tokens>999?Math.round(tokens/1000)+'K':tokens}</div><div class="stat-l">Tokenlar</div></div>
-      <div class="stat-i"><div class="stat-v" style="color:var(--green)">${todos.filter(t=>t.done).length}</div><div class="stat-l">Vazifalar</div></div>
+      
     </div>
     <div class="analytics-card">
       <div style="font-size:11px;font-weight:800;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Haftalik faollik</div>
@@ -2364,8 +2359,6 @@ function openAnalytics(){
 // openModal base (safe, no null check needed - patched after DOM ready)
 function _openModalSideEffects(id){
   if(id==='analyticsModal'&&currentUser)openAnalytics();
-  if(id==='todoModal'){loadTodos();renderTodos();}
-  if(id==='reminderModal'){loadReminders();renderReminders();}
   if(id==='pluginsModal'){loadPlugins();renderPlugins();}
   if(id==='shareModal')openShareModal();
 }
@@ -2425,7 +2418,7 @@ function togglePinPanel(){
   const p=document.getElementById('pinPanel');
   p.classList.toggle('open');
   if(p.classList.contains('open')){
-    if(currentUser)pinnedMessages=l('medai_pins_'+currentUser.email,[]);
+    if(currentUser)
     renderPinnedPanel();
   }
 }
@@ -2825,6 +2818,173 @@ function closeDailyTip(){
 
 
 
+
+// ===== AMOLED THEME =====
+let isAmoled=false;
+function setThemeAmoled(){
+  isAmoled=!isAmoled;
+  const tog=document.getElementById('amoledToggle');
+  if(tog)tog.classList.toggle('on',isAmoled);
+  if(isAmoled){
+    document.documentElement.setAttribute('data-theme','amoled');
+    isDark=true;
+    const dtog=document.getElementById('darkToggle');
+    if(dtog)dtog.classList.add('on');
+  } else {
+    document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
+  }
+  s('medai_amoled',isAmoled?'1':'0');
+  notify(isAmoled?'🌑 AMOLED rejim yoqildi':'AMOLED o\'chirildi','info');
+}
+
+// ===== AI PERSONAL PROFILE =====
+let aiProfile={name:'Med AI',personality:'professional',memory:[],avatar:'🤖'};
+const PERSONALITIES={
+  professional:{prompt:'Be professional, precise, and formal.',label:'Professional'},
+  friendly:{prompt:'Be warm, friendly, and encouraging.',label:'Friendly'},
+  motivator:{prompt:'Be energetic, motivating and inspiring.',label:'Motivator'},
+  teacher:{prompt:'Explain things step-by-step like a patient teacher.',label:'Teacher'},
+  funny:{prompt:'Be helpful but add light humor when appropriate.',label:'Funny'},
+  strict:{prompt:'Be direct, concise, and strict. No fluff.',label:'Strict'},
+};
+
+function loadAIProfile(){
+  if(currentUser){
+    const saved=l('medai_aiprofile_'+currentUser.email,null);
+    if(saved)aiProfile=saved;
+    xp=l('medai_xp_'+currentUser.email,0);
+    level=l('medai_level_'+currentUser.email,1);
+  }
+}
+function saveAIProfile(){
+  const nameEl=document.getElementById('aiCustomName');
+  if(nameEl)aiProfile.name=nameEl.value||'Med AI';
+  if(currentUser)s('medai_aiprofile_'+currentUser.email,aiProfile);
+  notify('👤 Profil saqlandi!','success');
+}
+function setPersonality(p){
+  aiProfile.personality=p;
+  document.querySelectorAll('.personality-opt').forEach(el=>el.classList.toggle('active',el.dataset.p===p));
+  saveAIProfile();
+  notify('🎭 Uslub: '+PERSONALITIES[p].label,'info');
+}
+function addMemory(){
+  const inp=document.getElementById('newMemory');const txt=inp.value.trim();if(!txt)return;
+  aiProfile.memory.push({id:Date.now(),text:txt});
+  inp.value='';saveAIProfile();renderMemory();
+  notify('🧠 Eslab qolindi!','success');
+}
+function renderMemory(){
+  const el=document.getElementById('aiMemoryList');if(!el)return;
+  const cnt=document.getElementById('memoryCount');
+  if(cnt)cnt.textContent='('+aiProfile.memory.length+' ta)';
+  if(!aiProfile.memory.length){el.innerHTML='<div style="text-align:center;padding:14px;color:var(--text3);font-size:12px">🧠 Hech narsa saqlanmagan</div>';return;}
+  el.innerHTML=aiProfile.memory.map(m=>`
+    <div class="memory-item">
+      <span class="memory-pin">📌</span>
+      <span style="flex:1">${escHtml(m.text)}</span>
+      <button onclick="removeMemory(${m.id})" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:14px;flex-shrink:0">✕</button>
+    </div>`).join('');
+}
+function removeMemory(id){
+  aiProfile.memory=aiProfile.memory.filter(m=>m.id!==id);
+  saveAIProfile();renderMemory();
+}
+
+
+// ===== FOCUS MUSIC (Web Audio API binaural beats) =====
+let audioCtx=null,musicNodes=[],isPlaying=false,currentTrackIdx=0,musicTimerTimeout=null,isMuted=false,musicVolume=0.6;
+const TRACKS=[
+  {name:'Lo-Fi Hip Hop',type:'🎯 Diqqat & Konsantrasiya',freq1:40,freq2:40.5,carrier:200,color:'#7c6dfa'},
+  {name:'Alpha Waves',type:'🧘 Relaksatsiya',freq1:10,freq2:10.5,carrier:150,color:'#22d3ee'},
+  {name:'Deep Focus',type:'🔬 Chuqur Tahlil',freq1:14,freq2:14.5,carrier:250,color:'#c084fc'},
+  {name:'Theta Healing',type:'💤 Uyqu & Dam olish',freq1:6,freq2:6.5,carrier:100,color:'#fb7185'},
+  {name:'Gamma Boost',type:'⚡ Energiya & Ijodiyot',freq1:40,freq2:41,carrier:300,color:'#f59e0b'},
+];
+
+function renderTrackList(){
+  const el=document.getElementById('trackList');if(!el)return;
+  el.innerHTML=TRACKS.map((t,i)=>`<div class="music-track-item ${i===currentTrackIdx?'active':''}" onclick="selectTrack(${i})"><div class="track-ico" style="width:32px;height:32px;border-radius:8px;background:${t.color}22;display:flex;align-items:center;justify-content:center">${t.type.split(' ')[0]}</div><div class="track-info"><div class="track-nm">${t.name}</div><div class="track-dur">${t.type.split(' ').slice(1).join(' ')}</div></div>${i===currentTrackIdx&&isPlaying?'<span style="color:var(--accent2);font-size:11px;font-weight:700">▶</span>':''}</div>`).join('');
+}
+
+function selectTrack(i){
+  currentTrackIdx=i;
+  const t=TRACKS[i];
+  const nameEl=document.getElementById('currentTrackName');
+  const typeEl=document.getElementById('currentTrackType');
+  if(nameEl)nameEl.textContent=t.name;
+  if(typeEl)typeEl.textContent=t.type;
+  if(isPlaying){stopMusic();startMusic();}
+}
+
+function toggleMusic(){
+  if(isPlaying)stopMusic();else startMusic();
+}
+
+function startMusic(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  const t=TRACKS[currentTrackIdx];
+  const gainNode=audioCtx.createGain();
+  gainNode.gain.value=isMuted?0:musicVolume;
+  gainNode.connect(audioCtx.destination);
+  const osc1L=audioCtx.createOscillator();
+  const osc1R=audioCtx.createOscillator();
+  const merger=audioCtx.createChannelMerger(2);
+  const splitter=audioCtx.createChannelSplitter(2);
+  osc1L.frequency.value=t.carrier+t.freq1;
+  osc1R.frequency.value=t.carrier+t.freq2;
+  osc1L.type='sine';osc1R.type='sine';
+  osc1L.connect(merger,0,0);
+  osc1R.connect(merger,0,1);
+  merger.connect(gainNode);
+  osc1L.start();osc1R.start();
+  musicNodes=[osc1L,osc1R,gainNode,merger];
+  isPlaying=true;
+  const playIcon=document.getElementById('playIcon');
+  if(playIcon)playIcon.outerHTML='<rect x="6" y="4" width="4" height="16" fill="white" id="playIcon"/><rect x="14" y="4" width="4" height="16" fill="white"/>';
+  document.querySelectorAll('.music-bar').forEach(b=>b.classList.add('playing'));
+  addXP(5,'music');
+  notify('🎵 '+t.name+' — yoqildi','info');
+}
+
+function stopMusic(){
+  musicNodes.forEach(n=>{try{n.stop?.();n.disconnect?.();}catch(e){}});
+  musicNodes=[];isPlaying=false;
+  const playBtn=document.getElementById('playBtn');
+  if(playBtn)playBtn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="playIcon"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+  document.querySelectorAll('.music-bar').forEach(b=>b.classList.remove('playing'));
+}
+
+function nextTrack(){selectTrack((currentTrackIdx+1)%TRACKS.length);}
+function prevTrack(){selectTrack((currentTrackIdx-1+TRACKS.length)%TRACKS.length);}
+
+function toggleMute(){
+  isMuted=!isMuted;
+  const gain=musicNodes.find(n=>n.gain);
+  if(gain)gain.gain.value=isMuted?0:musicVolume;
+  notify(isMuted?'🔇 Ovoz o\'chirildi':'🔊 Ovoz yoqildi','info');
+}
+
+function setVolume(val){
+  musicVolume=val/100;
+  const gain=musicNodes.find(n=>n.gain);
+  if(gain&&!isMuted)gain.gain.value=musicVolume;
+}
+
+function setMusicTimer(mins){
+  clearTimeout(musicTimerTimeout);
+  if(!isPlaying)startMusic();
+  const el=document.getElementById('musicTimerDisplay');
+  if(el){el.style.display='block';el.textContent='⏱ '+mins+' daqiqa';}
+  let remaining=mins*60;
+  const interval=setInterval(()=>{
+    remaining--;
+    const m=Math.floor(remaining/60);const s=remaining%60;
+    if(el)el.textContent='⏱ '+m+':'+String(s).padStart(2,'0');
+    if(remaining<=0){clearInterval(interval);stopMusic();if(el)el.style.display='none';notify('⏱ Vaqt tugadi! Muzika to\'xtatildi','info');}
+  },1000);
+}
+
 // ===== PIN MESSAGES =====
 function pinMsg(btn){
   const bubble=btn.closest('.message').querySelector('.bubble');
@@ -2967,6 +3127,45 @@ function exportMsgAsPDF(btn){
   </div>
 </div>
 
+<!-- ===== AI PROFIL MODAL ===== -->
+<div class="overlay" id="aiProfileModal" onclick="overlayClick(event,'aiProfileModal')">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-hdr">
+      <div class="modal-title">
+        <div class="modal-title-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        AI Shaxsiy Profil
+      </div>
+      <button class="close-btn" onclick="closeModal('aiProfileModal')">✕</button>
+    </div>
+    <div class="ai-profile-card">
+      <div class="ai-profile-avatar" id="aiAvatarEmoji">🤖</div>
+      <input class="ai-name-input" id="aiCustomName" value="Med AI" onchange="saveAIProfile()" placeholder="AI ismini kiriting...">
+      <div style="text-align:center;margin-top:6px;font-size:11px;color:var(--text3)">Ismni o'zgartirib shaxsiylashtiring</div>
+    </div>
+    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px">Xarakter uslubi</div>
+    <div class="personality-grid" id="personalityGrid">
+      <div class="personality-opt active" onclick="setPersonality('professional')" data-p="professional">💼 Professional</div>
+      <div class="personality-opt" onclick="setPersonality('friendly')" data-p="friendly">😊 Do'stona</div>
+      <div class="personality-opt" onclick="setPersonality('motivator')" data-p="motivator">🔥 Motivator</div>
+      <div class="personality-opt" onclick="setPersonality('teacher')" data-p="teacher">📚 O'qituvchi</div>
+      <div class="personality-opt" onclick="setPersonality('funny')" data-p="funny">😄 Hazil-mutoyiba</div>
+      <div class="personality-opt" onclick="setPersonality('strict')" data-p="strict">🎯 Qat'iy</div>
+    </div>
+    <div style="margin-top:18px">
+      <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px">AI Xotirasi <span id="memoryCount" style="color:var(--accent2)"></span></div>
+      <div id="aiMemoryList"></div>
+      <div style="display:flex;gap:7px;margin-top:10px">
+        <input class="form-inp" id="newMemory" placeholder="AI ga eslatish kerak bo'lgan narsa..." style="flex:1">
+        <button class="sub-btn" onclick="addMemory()" style="width:auto;padding:9px 14px">+ Saqlash</button>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+      <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px">Yutuqlar</div>
+      <div id="achievementsList" style="display:flex;flex-wrap:wrap;gap:7px"></div>
+    </div>
+  </div>
+</div>
+
 </body></html>`);
   win.document.close();
   setTimeout(()=>{win.print();},500);
@@ -3017,78 +3216,14 @@ function exportChatAsPDF(){
   if(l('medai_anim','1')==='0'){document.getElementById('animToggle').classList.remove('on');toggleAnimations();}
   // Update todo badge
   if(currentUser){
-    loadTodos();updateTodoBadge();
-    loadReminders();updateReminderBadge();
-    pinnedMessages=l('medai_pins_'+currentUser.email,[]);
   }
   loadPlugins();
+  // AMOLED restore
+  if(l('medai_amoled','0')==='1'){isAmoled=true;document.documentElement.setAttribute('data-theme','amoled');const atog=document.getElementById('amoledToggle');if(atog)atog.classList.add('on');}
   setTimeout(showDailyTip, 1500);
+  
 })();
 </script>
-
-<!-- ===== TODO MODAL ===== -->
-<div class="overlay" id="todoModal" onclick="overlayClick(event,'todoModal')">
-  <div class="modal" style="max-width:500px">
-    <div class="modal-hdr">
-      <div class="modal-title">
-        <div class="modal-title-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        Kunlik Vazifalar
-      </div>
-      <button class="close-btn" onclick="closeModal('todoModal')">✕</button>
-    </div>
-    <div style="display:flex;gap:7px;margin-bottom:14px">
-      <input class="form-inp" id="todoInput" placeholder="Yangi vazifa qo'shing..." onkeydown="if(event.key==='Enter')addTodo()" style="flex:1">
-      <select class="form-sel" id="todoPri" style="width:110px">
-        <option value="high">🔴 Yuqori</option>
-        <option value="med" selected>🟡 O'rta</option>
-        <option value="low">🟢 Past</option>
-      </select>
-      <button class="sub-btn" onclick="addTodo()" style="width:44px;padding:0;flex-shrink:0;font-size:18px">+</button>
-    </div>
-    <div style="display:flex;gap:6px;margin-bottom:12px">
-      <button onclick="filterTodo('all')" id="tf-all" style="flex:1;padding:6px;border-radius:8px;border:1px solid var(--accent);background:rgba(124,109,250,.1);color:var(--accent2);font-size:11px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif">Barchasi</button>
-      <button onclick="filterTodo('active')" id="tf-active" style="flex:1;padding:6px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text3);font-size:11px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif">Faol</button>
-      <button onclick="filterTodo('done')" id="tf-done" style="flex:1;padding:6px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text3);font-size:11px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif">Bajarilgan</button>
-    </div>
-    <div id="todoList"></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
-      <span id="todoStats" style="font-size:12px;color:var(--text3)"></span>
-      <button onclick="todoToAI()" style="padding:7px 14px;background:linear-gradient(135deg,var(--accent),#4f43d0);border:none;border-radius:8px;color:#fff;font-family:Inter,sans-serif;font-size:12px;font-weight:700;cursor:pointer">AI bilan rejalashtirish →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===== REMINDER MODAL ===== -->
-<div class="overlay" id="reminderModal" onclick="overlayClick(event,'reminderModal')">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-hdr">
-      <div class="modal-title">
-        <div class="modal-title-icon ic-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-        Eslatmalar
-      </div>
-      <button class="close-btn" onclick="closeModal('reminderModal')">✕</button>
-    </div>
-    <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:10px 13px;font-size:12px;color:var(--text2);margin-bottom:14px;display:flex;gap:8px;align-items:flex-start">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      Brauzer tab ochiq bo'lganda eslatmalar ishlaydi
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-      <div class="form-g"><label class="form-lbl">Matn</label><input class="form-inp" id="reminderText" placeholder="Eslatma matni..."></div>
-      <div class="form-g"><label class="form-lbl">Vaqt</label><input class="form-inp" type="time" id="reminderTime"></div>
-    </div>
-    <div class="form-g">
-      <label class="form-lbl">Takrorlanish</label>
-      <select class="form-sel" id="reminderRepeat">
-        <option value="once">Bir marta</option>
-        <option value="daily">Har kuni</option>
-        <option value="weekdays">Ish kunlari</option>
-      </select>
-    </div>
-    <button class="sub-btn" onclick="addReminder()" style="margin-bottom:14px">Eslatma qo'shish →</button>
-    <div class="modal-sec-lbl" style="font-size:10px;font-weight:800;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px">Joriy eslatmalar</div>
-    <div id="reminderList"><div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">🔔 Eslatmalar yo'q</div></div>
-  </div>
-</div>
 
 <!-- ===== QUIZ MODAL ===== -->
 <div class="overlay" id="quizModal" onclick="overlayClick(event,'quizModal')">
