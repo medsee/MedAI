@@ -678,6 +678,169 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
+
+    /* ===== MOBILE HAMBURGER ===== */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(253,251,248,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      padding: 24px 24px 32px;
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--purple); }
+    .mobile-menu .m-cta {
+      margin-top: 12px;
+      background: var(--purple);
+      color: white !important;
+      text-align: center;
+      padding: 14px;
+      border-radius: 100px;
+      border-bottom: none !important;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .marquee-wrap { margin-top: 60px; }
+
+      /* HERO mobile */
+      #hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 0;
+      }
+      .hero-right {
+        order: -1;
+        padding: 40px 20px 0;
+      }
+      .hero-photo-frame {
+        width: 240px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      .hero-photo-initials { font-size: 72px; }
+      .card-top-left { left: -30px; top: 20px; padding: 10px 14px; }
+      .card-bot-right { right: -20px; bottom: 30px; padding: 10px 14px; }
+      .card-top-right { display: none; }
+      .float-card-label { font-size: 10px; }
+      .float-card-value { font-size: 13px; }
+
+      .hero-left {
+        padding: 28px 20px 60px;
+        text-align: center;
+        align-items: center;
+      }
+      .hero-badge { font-size: 11px; }
+      .hero-title { font-size: clamp(36px, 9vw, 52px); letter-spacing: -1px; }
+      .hero-desc { font-size: 15px; max-width: 100%; }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-outline { justify-content: center; width: 100%; }
+      .hero-stats { justify-content: center; gap: 24px; }
+
+      /* ABOUT mobile */
+      #about {
+        grid-template-columns: 1fr;
+        padding: 60px 20px;
+        gap: 40px;
+      }
+      .about-value-card:nth-child(2),
+      .about-value-card:nth-child(4) { margin-top: 0; }
+
+      /* PORTFOLIO mobile */
+      #portfolio { padding: 60px 20px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 12px;
+      }
+      .portfolio-item { height: 200px; }
+      .portfolio-item:first-child { grid-row: auto; height: 260px; }
+      .portfolio-info { opacity: 1; transform: translateY(0); }
+      .portfolio-overlay { background: rgba(20,10,40,0.45); }
+
+      /* BLOG mobile */
+      #blog { padding: 60px 20px; }
+      .blog-grid { grid-template-columns: 1fr; gap: 16px; }
+
+      /* COLLAB mobile */
+      #collab {
+        grid-template-columns: 1fr;
+        padding: 60px 20px;
+        gap: 40px;
+      }
+      .collab-form-card { padding: 24px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      /* SOCIAL mobile */
+      #social { padding: 60px 20px; text-align: center; }
+      .social-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 32px;
+      }
+      .social-card { padding: 20px 12px; min-width: unset; }
+      .social-handle { font-size: 12px; }
+
+      /* FOOTER mobile */
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 34px; }
+      .section-title { font-size: 28px; }
+      .social-grid { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -695,7 +858,17 @@
     <li><a href="#blog">Blog</a></li>
     <li><a href="#collab" class="nav-cta">Hamkorlik</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menyuni ochish">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">Haqida</a>
+  <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+  <a href="#blog" onclick="closeMobile()">Blog</a>
+  <a href="#collab" class="m-cta" onclick="closeMobile()">Hamkorlik ✦</a>
+</div>
 
 <!-- MARQUEE STRIP -->
 <div style="margin-top: 72px;" class="marquee-wrap">
@@ -1066,6 +1239,18 @@
 </footer>
 
 <script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
   // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
